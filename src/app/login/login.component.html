@@ -1,0 +1,38 @@
+<div class="login">
+    <div class="wrapper" id="login-wrapper">
+        <section class="login-mn">
+            <div class="log-logo m-b-20">
+                <img src="../../assets/images/logo-cricbuzzer.png" style="max-width: 250px; max-height: 100px;">
+            </div>
+            <div class="log-fld">
+                <h2 class="text-center">Sign In</h2>
+                <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="login()" role="form" id="loginform">
+                    <div class="form-group m-b-20">
+                        <input formControlName="userName" placeholder="Username" id="username" name="username" value=""
+                            class="form-control" type="text">
+                        <span id="username-error" class="error"></span>
+                    </div>
+                    <div class="form-group m-b-20">
+                        <input formControlName="password" placeholder="Password" id="Password" name="password" value=""
+                            class="form-control" type="password">
+                        <span id="password-error" class="error"></span>
+                    </div>  
+                    <div class="form-group text-center">
+                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"
+                            value="03AL8dmw9MxvmPGDeVSemi-bXxdUH7NnfNsETYB9-Tzd4Q4IjODyf4EEdqYifFKDZM_fk91UyDhVaTBSZoA-nWu068xZsnkUVlKQbQ26FV49Anqk6-sAS2DGZSfwPz0Csnq45_H30x005rrFXo7KSW571AHKKR8fJe1L_cpIe8Y1M1tWpP0eGYYhkuN_lAckuFGXhUqS7-zp7IbwP-uDQ0oGVruXIppGI5Mf9bEol6n5Jd5k_LoG99ux3fS5A08sas0Ocz-2pMEcafAvzrmw7Jk6OUsgAzCV4LFoRDg9TXiU2MyLUH4OHksi0g91NCsbPP-tIKC-DiBbCpKOpdx32C6kT8HiwDf_k6RVzqK3atEkj_1ogmLefTevp6EZlbXqflgDzi3EYE5aDKb9dMScBPTnN1RenuHfCunfkVeTVQ1H-2lskb0jgDxTotpOu0Com7skMIzmxFAEn_I4Avu9TjWoR8xScIbKMXnuCvINdyVXZQ_hgNaPolzA-SKlcm3JFNafQuzDloqIqGHCkuH-mmJygqjmT6IFZ_6Lrh7Gw0IN7SKDx_wSifvx6n3mzmaNK72hOdC0a8MrhoWMCi_sTWYxSxHQf_ok2sKj-cf19TUzqAIPkaR8lyvJ4">
+                        <input type="hidden" name="_token" value="OE8Vw00Lp3ApEC9WWIKQmM6f7Kt7IJoPcmzYzKES">
+                        <input type="hidden" name="referer" value="">
+                        <button type="submit" class="btn btn-submit btn-login" (ngSubmit)="login()">Login<i
+                                class="fas fa-sign-in-alt"></i></button>
+                    </div>
+                    <span id="errorMsg" class="error" *ngIf="loginForm.invalid || serverError">{{ errorMsg }}
+                    </span>
+                </form>
+            </div>
+            <div class="log-copy">
+                <p>© PEACH
+                </p>
+            </div>
+        </section>
+    </div>
+</div>

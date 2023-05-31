@@ -1,0 +1,15 @@
+<h1>rules works</h1>
+<div *ngIf="!loading && !isNewRulesVisible">
+    <div class="rules_show" [innerHTML]="rules"></div>
+    <div class="btn_box">
+      <button class="btn-send" (click)="isNewRulesVisible = !isNewRulesVisible">Edit</button>
+    </div>
+  </div>
+  <div *ngIf="!loading && isNewRulesVisible">
+    <!-- <ckeditor [editor]="Editor" [(ngModel)]="messageRules"></ckeditor> -->
+    <div class="btn_box" style="margin-top: 16px;">
+      <button class="btn-send" >Save</button>
+      &nbsp;&nbsp;
+      <button class="btn-send" (click)="isNewRulesVisible = !isNewRulesVisible">Cancel</button>
+    </div>
+  </div>

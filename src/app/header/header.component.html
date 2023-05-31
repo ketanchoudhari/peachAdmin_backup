@@ -1,0 +1,161 @@
+<nav class="navbar navbar-expand-lg ">
+
+  <a class="navbar-brand" href="#">
+    <img src="../../assets/images/logo-cricbuzzer.png" height="30px">
+  </a>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"> </span>
+  </button> -->
+
+
+  <div class="side-menu-button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+</div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" style="padding-left: 0em !important; padding-right: 10em;">
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/active-user">List of Clients</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link blink-ipl"  routerLink="/active-running-users">IPL 2023</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/market-nalysis">Market Analysis</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"routerLink="/settings">Settings</a>
+      </li>
+      <li class="nav-item dropdown list-dropdown">
+        <a class="nav-link dropdown-toggle " id="dropdown-menu"routerLink="/market-anaylish" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Live Market
+        </a>
+        <div class="dropdown-menu sub-drop"  aria-labelledby="navbarDropdown">
+          <div *ngFor="let casino of dropdownMenu">
+          <a class="dropdown-item" routerLink="/binary">{{casino.tableName}}</a>
+          <!-- <a class="dropdown-item" href="#">Option 2</a>
+          <a class="dropdown-item" href="#">Option 3</a> -->
+        </div>
+        </div>
+      </li>
+      <li class="nav-item dropdown list-dropdown">
+        <a class="nav-link dropdown-toggle " id="dropdown-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Accounts
+        </a>
+        <div class="dropdown-menu sub-drop" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="account/account-Statement">Account's Statement</a>
+          <a class="dropdown-item" routerLink="account/account-sum">Account Summary</a>
+          <a class="dropdown-item" routerLink="account/account-details">Account Details</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown list-dropdown">
+        <a class="nav-link dropdown-toggle" id="dropdown-menu" href="#" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Management
+        </a>
+        <ul class="dropdown-menu sub-drop" aria-labelledby="navbarDropdown">
+          <li>
+            <a class="dropdown-item" routerLink="management/bet-list">Bet List</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="management/bet-list-live">Bet List Live</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="management/risk-management">Risk Management</a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="management/mmc">MM</a>
+          </li>
+
+
+
+
+
+          <li class="dropdown-submenu " >
+            <a href="#" class="dropdown-item dropdown-toggle">Import</a>
+            <ul class="dropdown-menu">
+              <li ><a class=" dropdown-item"   routerLink="management/race">Race Import</a></li>
+              <li  ><a class="dropdown-item" routerLink="management/sports" >Sport Import</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown-submenu">
+						<a class="dropdown-item dropdown-toggle">Messages</a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="messages/ticker">Ticker</a></li>
+              <li><a class="dropdown-item" routerLink="stakesettings">Stack Setting</a></li>
+              </ul>
+              </li>
+          <!-- <li class="dropdown-item sub-import" routerLink="management/mmc">
+            <a href="#"></a>
+            <ul class="sub-options">
+              <li class="sub-style"  style="margin: 5px 5px 5px 5px;    padding: 5px 5px 10px 5px;"><a href="#">Ticker</a></li>
+              <li class="sub-style" style="margin: 5px 5px 5px 5px;    padding: 5px 5px 10px 5px;"><a href="#" >Stack Setting</a></li>
+            </ul>
+          </li> -->
+        </ul>
+      </li>
+
+
+      <li class="nav-item dropdown list-dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Reports
+        </a>
+        <div class="dropdown-menu sub-drop" id="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="report/pl-downline">Profit/Loss Report by Downline</a>
+          <a class="dropdown-item" routerLink="report/pl-market">Profit/Loss Report by Market</a>
+          <a class="dropdown-item" routerLink="report/pnl-downline">Profit/Loss Report by All Casino</a>
+          <a class="dropdown-item" routerLink="report/pl-dicasino">Profit/Loss Report by Diamond Casino</a>
+          <a class="dropdown-item" routerLink="report/pl-sncasino">Profit/Loss Report by SNCasino</a>
+          <a class="dropdown-item" routerLink="report/pl-slotcasino">Profit/Loss Report by Slot Casino</a>
+          <a class="dropdown-item" routerLink="report/pl-betgames">Profit/Loss Report by Betgames</a>
+          <a class="dropdown-item" routerLink="report/pl-pokerlog">Report By Poker</a>
+          <a class="dropdown-item" routerLink="report/pl-awccasino">Profit/Loss Report by AWC</a>
+          <a class="dropdown-item" routerLink="report/loginlogout">Login Logout Report</a>
+          <a class="dropdown-item" routerLink="report/new-accounts">Recently Created Account</a>
+
+
+        </div>
+      </li>
+    </ul>
+    <div class="d-flex flex-row search-group">
+      <div class="dropdown mr-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{currentUser.userName}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/change-password">Change Password</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <div class="input-group">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-appends">
+            <button class="btn btn-outline-success" type="submit">
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
+        </div>
+      </form> -->
+      <form class="form-inline my-2 my-lg-0">
+        <div class="input-group">
+          <input class="search-control" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-outline-success" type="submit">
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>

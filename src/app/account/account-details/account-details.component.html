@@ -1,0 +1,303 @@
+<nav>
+    <h1 class="accdet">Account Details</h1>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+            role="tab" aria-controls="nav-home" aria-selected="true">Profile</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+            role="tab" aria-controls="nav-profile" aria-selected="false">Active Log</button>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="col-md-12 main-container content-wrapper ng-tns-c141-0">
+            <div class="add-account">
+                <h2 class="m-b-20">Profile</h2>
+                <div class="row">
+                    <div class="col-6">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">About you</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">{{ currentUserProfile?.name }}</th>
+                                </tr>
+                                <tr>
+                                    <ng-template [ngIf]="currentUserProfile?.domainName != ''">
+                                        <th scope="col">Domain</th>
+                                        <th scope="col" class="ng-star-inserted">{{ currentUserProfile?.domainName }}
+                                        </th>
+                                        <!-- <dd>{{ currentUserProfile?.domainName }}</dd> -->
+                                    </ng-template>
+
+                                </tr>
+                                <tr>
+
+                                    <th scope="col">Password</th>
+                                    <th scope="col">
+                                        <dd class="edit-pass">
+                                            <p class="ng-star-inserted" *ngIf="showPassword; else censoredTemp"></p>
+                                            <ng-template #censoredTemp>
+                                                ********************************
+                                            </ng-template>
+                                            <!-- <a data-bs-toggle="modal" data-bs-target="#password" class="favor-set"><i
+                                                    aria-hidden="true" class="fa fa-pencil-square-o"></i>Edit</a> -->
+                                        </dd>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-striped">
+                            <!-- <th scope="col">Limits &amp; Commission</th> -->
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Limits &amp; Commission</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+
+                                    <th scope="col">Exposure Limit</th>
+                                    <th scope="col" id="mainwalletExposureLimit"> {{
+                                        currentUserProfile?.exposureLimit}}
+                                    </th>
+                                </tr>
+
+                                <ng-template [ngIf]="!isClient">
+
+                                    <tr class="ng-star-inserted" *ngIf="currentUserProfile?.sharePercent"> </tr>
+                                    <th scope="col"> Share(%)</th>
+                                    <th scope="col">{{ currentUserProfile?.sharePercent }}%</th>
+
+
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Cricket Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.cricketSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Cricket Fancy Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.cricketFancySharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Soccer Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.soccerSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Soccer Goal Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.soccerGoalsSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Tennis Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.tennisSharing }}%</th>
+                                    </tr>
+                                    <tr class="ng-star-inserted">
+                                        <th scope="col">Indian Casino Share(%)</th>
+                                        <th scope="col">{{ currentUserProfile?.indianCasinoSharing }}%</th>
+                                    </tr>
+                                </ng-template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="col-md-12 main-container content-wrapper ng-tns-c141-0">
+            <div class="listing-grid">
+                <div class="detail-row">
+                    <h2>Activity Log</h2>
+                    <div class="total_all box">
+                        <span>
+                            <label>Last:</label>
+                            <select name="limit" id="limit" (change)="selectNoRows($event.target)">
+                                <option value="100">100 Txn</option>
+                                <option value="50">50 Txn</option>
+                                <option value="25">25 Txn</option>
+                                <option value="10" selected="">10 Txn</option>
+                                <option value="{{listCount}}">Full {{listCount}}</option>
+                            </select>
+                            <a id="getPL" (click)="getloginhistory()" style="color: #FFFFFF;"
+                                class="btn btn-diamond">ShowDefault</a>
+
+                        </span>
+
+                    </div>
+                </div>
+                <div class="table-responsive data-table" style="overflow: auto; white-space: nowrap;">
+                    <table class="custom-table table table-striped" style="width: 100%; text-align: center;">
+                        <thead>
+                            <tr>
+                                <th>Login Date &amp; Time</th>
+                                <th>Login Status</th>
+                                <th>IP Address</th>
+                                <th>ISP</th>
+                                <th>City/State/Country</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content">
+                            <tr id="tempTr" class="odd ng-star-inserted" *ngFor="let log of logList | paginate: { itemsPerPage: n, currentPage: p,totalItems:listCount }
+      ">
+                                <!-- <tr id="tempTr" class="odd ng-star-inserted"> -->
+                                <td id="loginDate"> {{ log.loginTime | date: "yyyy-MM-dd HH:mm:ss":timeFormat }} </td>
+                                <td class="align-L" [ngClass]="{
+                                  success: log.loginStatus === 1
+                                }" id="loginMessage">
+                                    Login Success
+                                </td>
+                                <!-- <td id="loginMessage" ng-reflect-ng-class="[object Object]"> Login Success </td> -->
+                                <td id="ipAddress">{{ log.loginIp }}</td>
+                                <td id="isp">{{ log.ISP }}</td>
+                                <td id="location">{{ log.origin }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                  
+
+
+
+
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <pagination-template class="pagination" aria-label="Page navigation example"
+                            *ngIf="logList && listCount > n" #pagination="paginationApi"
+                            (pageChange)="pageChanged($event)">
+                            <ul class="pagination" id="pageNumberContent" class="pages">
+                                <li class="page-item" >
+                                    <a *ngIf="pagination.isFirstPage(); else prevTemp"
+                                      id="previd" >Previous</a>
+                                    <ng-template #prevTemp>
+                                        <a class="page-link" id="previd" (click)="pagination.previous()" style="color: white;">Previous</a>
+                                    </ng-template>
+                                </li>
+                                <ng-container *ngFor="let page of pagination.pages">
+                                    <li class="page-item" id="pageNumber">
+                                        <a class="page-link" (click)="pagination.setCurrent(page.value)"
+                                            *ngIf="pagination.getCurrent() != page.value" class="btn">{{
+                                            page.value }}
+                                        </a>
+                                        <a class="page-link" *ngIf="pagination.getCurrent() == page.value"
+                                            class="select" style="pointer-events: none">{{ page.value}}
+                                        </a>
+                                    </li>
+                                </ng-container>
+                                <li id="next" class="page-item">
+                                    <a class="page-link" id="previd"
+                                        class="button btn btn-diamond primary_button datatable-pagebuttons previous "
+                                        *ngIf="pagination.isLastPage(); else nextTemp"  >Next</a>
+
+                                </li>
+                                <ng-template #nextTemp>
+                                    <a class="page-link" id="previd" style="color: white;" (click)="pagination.next()"
+                                        >Next</a>
+                                </ng-template>
+                            </ul>
+                        </pagination-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">password</h1>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="changePassForm" (ngSubmit)="changePass()" class="ng-untouched ng-pristine ng-invalid">
+                    <div class="container-fluid">
+                        <div class="row m-b-20">
+                            <div class="col-md-4"><label>New
+                                    Password</label></div>
+                            <div class="col-md-8"><input type="Password" formcontrolname="newpassword" id="new-password"
+                                    required="" maxlength="20" class="text-right ng-untouched ng-pristine ng-invalid"
+                                    ng-reflect-name="newpassword" ng-reflect-maxlength="20">
+                                <div class="errors" *ngIf="changePassForm.get('newpassword')?.invalid &&
+                                    (changePassForm.get('newpassword')?.touched ||
+                                    changePassForm.get('newpassword')?.dirty)">
+
+                                    <div *ngIf="changePassForm.get('newpassword')?.hasError('required')">
+                                        Password is required
+                                    </div>
+
+                                    <div *ngIf="changePassForm.get('newpassword')?.errors">
+                                        Password must be at least 8 characters
+                                    </div>
+
+                                    <div class="error-text"
+                                        *ngIf="changePassForm.get('newpassword')?.hasError('passwordStrength')">
+                                        {{changePassForm.get('newpassword')?.errors}}
+                                    </div>
+                                </div>
+                                <span id="newPasswordErrorText" class="error-text"></span>
+
+                            </div>
+                        </div>
+                        <div class="row m-b-20">
+                            <div class="col-md-4"><label>Confirm
+                                    Password</label></div>
+                            <div class="col-md-8"><input type="Password" formcontrolname="confirm" id="confirm-password"
+                                    required="" maxlength="20" class="text-right ng-untouched ng-pristine ng-invalid"
+                                    ng-reflect-name="confirm" ng-reflect-maxlength="20">
+                                <div class="errors"
+                                    *ngIf="changePassForm.get('confirm')?.invalid &&
+                                          (changePassForm.get('confirm')?.touched || changePassForm.get('confirm')?.dirty)">
+
+                                    <div *ngIf="changePassForm.get('confirm')?.hasError('required')">
+                                        Confirm password is required
+                                    </div>
+                                    <span *ngIf="
+                                          f?.get('confirm')?.invalid &&
+                                          f.get('confirm')?.hasError('isNotMatching')
+                                        " class="error-text">Passwords don't match
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-b-20">
+                            <div class="col-md-4"><label>Transaction
+                                    Password</label></div>
+                            <div class="col-md-8"><input type="Password" formcontrolname="password" name=""
+                                    id="password-mpassword" required="" maxlength="20" ng-reflect-name="password"
+                                    ng-reflect-required="" ng-reflect-maxlength="20"
+                                    class="ng-untouched ng-pristine ng-invalid">
+                                <div class="errors" *ngIf="changePassForm.get('password')?.invalid &&
+                                        (changePassForm.get('password')?.touched ||
+                                        changePassForm.get('password')?.dirty)">
+
+                                    <div *ngIf="changePassForm.get('password')?.hasError('required')">
+                                        Password is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="changePasswordBtn"
+                    (ngSubmit)="changePass()">submit</button>
+            </div>
+        </div>
+    </div>
+</div> -->

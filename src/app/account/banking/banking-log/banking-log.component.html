@@ -1,0 +1,107 @@
+<div class="col-md-12 main-container">
+    <div>
+        <div class="listing-grid">
+            <div class="detail-row">
+                <h2>Banking logs
+                </h2>
+                <div class="m-t-20">
+
+                    <div class="col-md-12">
+                        <form id="casinoreport"
+                            action="https://bmwexch.com/admin/casino-report/d1dd481f2aa47648ffeba6c459995fec1efb9240"
+                            method="post">
+
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive data-table" style="overflow: hidden">
+                    <div id="example_wrapper" class="dataTables_wrapper no-footer">
+
+                        <div class="dataTables_length" id="example_length"><label>Last <select name="example_length"
+                                    aria-controls="example" class="">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> <a id="getPL" class="btn-send">Show Default</a></label></div>
+
+                        <div id="example_filter" class="dataTables_filter">
+                            <a href="https://bmwexch.com/admin/active-users-export/pdf/23581a6aa5fdea56a5e6b9fb2ec1705bb040595a"
+                                class="btn buttons-pdf">PDF</a>
+                            <a href="https://bmwexch.com/admin/active-users-export/excel/23581a6aa5fdea56a5e6b9fb2ec1705bb040595a"
+                                class="btn buttons-excel">Excel</a>
+                            <label>Search:<input type="search" class="form-control datatable-search" placeholder=""
+                                    aria-controls="example"></label>
+                        </div>
+                        <table id="example" class="custom-table table table-striped datatable dataTable no-footer"
+                            style="width: 100%;" role="grid" aria-describedby="example_info">
+                            <thead>
+                                <tr role="row">
+                                    <th width="12%" data-order="asc" data-name="dateTime" class="align-L sort_asc">
+                                        Date/Time</th>
+                                    <th width="13%" data-order="asc" data-name="amount" class="sort_asc">Deposit by
+                                        Upline</th>
+                                    <th width="13%" data-order="asc" data-name="amount" class="sort_asc">Deposit to
+                                        Downline</th>
+                                    <th width="13%" data-order="asc" data-name="amount" class="sort_asc">Withdraw by
+                                        Upline</th>
+                                    <th width="13%" data-order="asc" data-name="amount" class="sort_asc">Withdraw from
+                                        Downline</th>
+                                    <th width="13%" data-order="asc" data-name="balance" class="sort_asc">Balance</th>
+                                    <th width="13%" data-order="asc" data-name="description" class="sort_asc">Remark
+                                    </th>
+                                    <th width="20%" data-order="asc" data-name="withUname" class="sort_asc">From/To</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="PPDiamond" id="{{ user.userName }}" *ngFor="let user of usersLog | paginate: { itemsPerPage: n, currentPage: p,totalItems:listCount }; let i = index">
+                                    <td class="td-uid">{{ user.dateTime | date: 'yyyy-MM-dd HH:mm:ss':'+530' }}</td>
+                                    <td id="siteCol" class="text-right">-</td>
+                                    <td id="siteCol" class="text-right">-</td>
+                                    <td id="currencyTypeCol" class="text-right" style="color: red;"> 92,37,980.12 </td>
+                                    <td id="currencyTypeCol" style="color: red;" class="text-right"> - </td>
+                                    <td id="balance" class="text-right">0.00</td>
+                                    <td id="availableBalance" class="text-right">Fund Transfer</td>
+                                    <td style="white-space: nowrap;"><span id="from">Upline</span><img
+                                            src="assets/images/transparent.gif" class="fromto"><span
+                                            id="to">PPDiamond</span></td><!---->
+                                </tr>
+                                <tr id="PPDiamond">
+                                    <td class="td-uid"> 2023-02-24 14:02:07 </td>
+                                    <td id="siteCol" class="text-right">-</td>
+                                    <td id="siteCol" class="text-right">100.00</td>
+                                    <td id="currencyTypeCol" style="color: red;" class="text-right"> - </td>
+                                    <td id="currencyTypeCol" style="color: red;" class="text-right"> - </td>
+                                    <td id="balance" class="text-right">92,41,961.09</td>
+                                    <td id="availableBalance" class="text-right">fund transfer - null</td>
+                                    <td style="white-space: nowrap;"><span id="from">PPDiamond</span><img
+                                            src="assets/images/transparent.gif" class="fromto"><span
+                                            id="to">AGdemo</span></td><!---->
+                                </tr>
+                                <tr class="odd">
+                                    <td valign="top" colspan="8" class="dataTables_empty">No data available in table
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 0 to 0
+                            of 0 entries</div>
+                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <nav class="pagination" aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link"
+                                            style="color: white; background-color: #444444;">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link"
+                                            style="color:white;background-color: #444444;  ">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

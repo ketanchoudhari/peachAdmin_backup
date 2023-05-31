@@ -1,0 +1,504 @@
+
+<div class="sec-hedding">
+    <div class="headdings">
+<h2 style="font-size: 23px; padding: 20px;">Login Details</h2>
+</div>
+<div class="headding-btn" style="float: right;">
+<button class="btn-report">Show Default</button> 
+</div>
+</div>
+<div class="margin-1">
+<ul ngbNav #nav="ngbNav" class="nav-tabs" >
+	<li [ngbNavItem]="1">
+		<button ngbNavLink>Login</button>
+		<ng-template ngbNavContent>
+			<div>
+                <div class="col-md-12 main-container" data-select2-id="10">
+                    <div data-select2-id="9">
+                        <div class="listing-grid" data-select2-id="8">
+                            <div class="detail-row" data-select2-id="7">
+                               
+                               
+                            </div>
+                            <div class="table-responsive data-table" id="tbldata">
+                                <div id="example_wrapper" class="dataTables_wrapper no-footer">
+                                    
+                                    <div  class="dt-buttons"> 
+                                        <div class="dataTables_length" id="example_length" *ngIf="tableLength"><label>Show <select
+                                            name="example_length" aria-controls="example" class="">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> entries</label></div>
+                                        <button *ngIf="docButton" class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                                            aria-controls="example" type="button"><span>PDF</span></button> 
+                                        <button *ngIf="docButton"
+                                            class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example"
+                                            type="button"><span>Excel</span></button> </div>
+                
+                                            
+                                    <div id="example_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control datatable-search" placeholder="" aria-controls="example"></label>
+                                    </div>
+                                    <table id="example" class="table table-striped table-bordered datatable dataTable no-footer"
+                                        style="width: 100%;" role="grid" aria-describedby="example_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                    style="width: 400px;">User Name</th>
+                                                <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                    style="width: 400px;">Login Date & Time</th>
+                                                <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Debit"
+                                                    style="width: 292px;">Login Status</th>
+                                                <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Closing"
+                                                    style="width: 295px;">IP Address</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Description"
+                                                    style="width: 176px;">ISP</th>
+                                                <th width="15%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                    style="width: 0px;">City/State/Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                
+                
+                
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">
+                                                    AFF014
+                                                </td>
+                                                <td >2023-05-03</td>
+                                                <td >Login Successfully</td>
+                                                <td  > 49.34.79.224</td>
+                                                <td >Reliance Jio Infocomm Limited</td>
+                                                <td>
+                                                    Ahmedabad/Gujarat/India
+                                                </td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 1 of 1
+                                        entries</div>
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
+                                            class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                                            aria-controls="example" data-dt-idx="0" tabindex="0"
+                                            id="example_previous">Previous</a><span><a
+                                                class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                                                aria-controls="example" data-dt-idx="1" tabindex="0">1</a></span><a
+                                            class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                                            aria-controls="example" data-dt-idx="2" tabindex="0" id="example_next">Next</a></div>
+                                </div>
+                
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal fade" id="ReportMatchbetModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="ReportMatchbetHeading">Client Ledger</h4>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                </div>
+                
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="">
+                                                <form>
+                                                    <input type="hidden" value="" id="marketidgamereport">
+                                                    <div class="account-radio">
+                                                        <input type="radio" value="all" name="cnt-lgr" id="cnt-lgr1"
+                                                            class="clientledger" checked=""><label for="cnt-lgr1">All</label>
+                                                        <input type="radio" value="matched" name="cnt-lgr" id="cnt-lgr2"
+                                                            class="clientledger"><label for="cnt-lgr2">Matched</label>
+                                                        <input type="radio" value="deleted" name="cnt-lgr" id="cnt-lgr3"
+                                                            class="clientledger"><label for="cnt-lgr3">Deleted</label>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <table id="ReportMatchbettable" class="table table-bordered" border="0" cellpadding="0"
+                                                cellspacing="0">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="modal-footer">
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</ng-template>
+	</li>
+	<li [ngbNavItem]="2">
+		<button ngbNavLink>Logout</button>
+		<ng-template ngbNavContent>
+			<div>
+                <div class="col-md-12 main-container" data-select2-id="10">
+                    <div data-select2-id="9">
+                        <div class="listing-grid" data-select2-id="8">
+                            <div class="detail-row" data-select2-id="7">
+                            </div>
+                            <div class="table-responsive data-table" id="tbldata">
+                                <div id="example_wrapper" class="dataTables_wrapper no-footer">
+                                    
+                                    <div  class="dt-buttons"> 
+                                        <div class="dataTables_length" id="example_length" *ngIf="tableLength"><label>Show <select
+                                            name="example_length" aria-controls="example" class="">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> entries</label></div>
+                                        <button *ngIf="docButton" class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                                            aria-controls="example" type="button"><span>PDF</span></button> 
+                                        <button *ngIf="docButton"
+                                            class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example"
+                                            type="button"><span>Excel</span></button> </div>
+                
+                                            
+                                    <div id="example_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control datatable-search" placeholder="" aria-controls="example"></label>
+                                    </div>
+                                    <table id="example" class="table table-striped table-bordered datatable dataTable no-footer"
+                                        style="width: 100%;" role="grid" aria-describedby="example_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                    style="width: 400px;"> User Name</th>
+                                                <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                    style="width: 400px;">Login Date & Time</th>
+                                                <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Debit"
+                                                    style="width: 292px;">Login Status</th>
+                                                <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Closing"
+                                                    style="width: 295px;">IP Address</th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Description"
+                                                    style="width: 176px;">ISP</th>
+                                                <th width="15%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                    style="width: 0px;">City/State/Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                
+                
+                
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">
+                                                    AFF104
+                                                </td>
+                
+                
+                
+                                                <td >  2023-05-03</td>
+                                                <td >Logout</td>
+                                                <td > 49.34.79.224</td>
+                                                <td>
+                                                    Reliance Jio Infocomm Limited
+                                                </td>
+                                                <td>Ahmedabad/Gujarat/India </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 1 of 1
+                                        entries</div>
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
+                                            class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                                            aria-controls="example" data-dt-idx="0" tabindex="0"
+                                            id="example_previous">Previous</a><span><a
+                                                class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                                                aria-controls="example" data-dt-idx="1" tabindex="0">1</a></span><a
+                                            class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                                            aria-controls="example" data-dt-idx="2" tabindex="0" id="example_next">Next</a></div>
+                                </div>
+                
+                                <script type="text/javascript">
+                
+                                    function loaddetail(marketid, tab, dserver) {
+                                        if (marketid == 1) {
+                                            alert("You can view casino report from Casino Report Panel.");
+                                            return false;
+                                        }
+                                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                                        $("div#divLoading").addClass('show');
+                                        $("#marketidgamereport").val(marketid);
+                                        if (tab == "all") {
+                
+                                            $("input[name='cnt-lgr'][value='all']").prop("checked", true);
+                                        }
+                                        var types = $("input[name='cnt-lgr']:checked").val();
+                                        // alert(type);
+                
+                                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                                        $("#ReportMatchbettable").html('');
+                                        $("#ttl_w").text("");
+                                        $("#ttl_count").text("");
+                                        $("#ttl_soda").text("");
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "https://bmwexch.com/admin/report_match_bet/0b012f5ac14b6b92a36165b01c0ed2ca2cba4a9a",
+                                            data: {
+                                                "marketid": marketid,
+                                                "type": types,
+                                                "uid": '00000000-0000-0000-0000-000000000000',
+                                                "dserver": dserver
+                                            },
+                                            dataType: "json",
+                                            success: function (response) {
+                                                if (response.success == true) {
+                                                    $("#ReportMatchbettable").html(response.html);
+                                                    $("#ReportMatchbetHeading").html(response.heading);
+                                                    $("#ReportMatchbetModal").modal("show");
+                                                    $('[data-toggle="tooltip"]').tooltip();
+                                                }
+                                                // var arr =  response.split("^^") 
+                                                // if(typeof arr[0] !='undefined') { $("#ReportMatchbettable").html(arr[0]); }
+                                                // if(typeof arr[1] !='undefined') { $("#ttl_w").text(" (Total Win Loss : " + arr[1]+")"); }
+                                                //  if(typeof arr[2] !='undefined') { $("#ttl_count").text(" (Total Count : " + arr[2]+")"); }
+                                                //  if(typeof arr[3] !='undefined') { $("#ttl_soda").text(" (Total Soda : " + arr[3]+")"); }
+                
+                                            },
+                                            complete: function () {
+                
+                                                $("div#divLoading").removeClass('show');
+                
+                                            }
+                                        }, 'Json');
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal fade" id="ReportMatchbetModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="ReportMatchbetHeading">Client Ledger</h4>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                </div>
+                
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="">
+                                                <form>
+                                                    <input type="hidden" value="" id="marketidgamereport">
+                                                    <div class="account-radio">
+                                                        <input type="radio" value="all" name="cnt-lgr" id="cnt-lgr1"
+                                                            class="clientledger" checked=""><label for="cnt-lgr1">All</label>
+                                                        <input type="radio" value="matched" name="cnt-lgr" id="cnt-lgr2"
+                                                            class="clientledger"><label for="cnt-lgr2">Matched</label>
+                                                        <input type="radio" value="deleted" name="cnt-lgr" id="cnt-lgr3"
+                                                            class="clientledger"><label for="cnt-lgr3">Deleted</label>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <table id="ReportMatchbettable" class="table table-bordered" border="0" cellpadding="0"
+                                                cellspacing="0">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="modal-footer">
+                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</ng-template>
+	</li>
+	<li [ngbNavItem]="3">
+		<button ngbNavLink>Unsuccessfull</button>
+		<ng-template ngbNavContent>
+			<div>
+                <div>
+                    <div class="col-md-12 main-container" data-select2-id="10">
+                        <div data-select2-id="9">
+                            <div class="listing-grid" data-select2-id="8">
+                                <div class="detail-row" data-select2-id="7">
+                                </div>
+                                <div class="table-responsive data-table" id="tbldata">
+                                    <div id="example_wrapper" class="dataTables_wrapper no-footer">
+                                        
+                                        <div  class="dt-buttons"> 
+                                            <div class="dataTables_length" id="example_length" *ngIf="tableLength"><label>Show <select
+                                                name="example_length" aria-controls="example" class="">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                            <button *ngIf="docButton" class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                                                aria-controls="example" type="button"><span>PDF</span></button> 
+                                            <button *ngIf="docButton"
+                                                class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example"
+                                                type="button"><span>Excel</span></button> </div>
+                    
+                                                
+                                        <div id="example_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                    class="form-control datatable-search" placeholder="" aria-controls="example"></label>
+                                        </div>
+                                        <table id="example" class="table table-striped table-bordered datatable dataTable no-footer"
+                                            style="width: 100%;" role="grid" aria-describedby="example_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                        style="width: 400px;"> User Name</th>
+                                                    <th width="25%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                        style="width: 400px;">Login Date & Time</th>
+                                                    <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Debit"
+                                                        style="width: 292px;">Login Status</th>
+                                                    <th width="10%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Closing"
+                                                        style="width: 295px;">IP Address</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Description"
+                                                        style="width: 176px;">ISP</th>
+                                                    <th width="15%" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Fromto"
+                                                        style="width: 0px;">City/State/Country</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                    
+                    
+                    
+                                                <tr role="row" class="odd">
+                                                    <td class="sorting_1">
+                                                        AFF105
+                                                    </td>
+                                                    <td >2023-05-09 20:12:00</td>
+                                                    <td >Login Failed</td>
+                                                    <td >2402:3a80:1245:7426:0:f:dede:dc01</td>
+                                                    <td>
+                                                        Vodafone Idea Ltd.
+                                                    </td>
+                                                  <td>Rajkot/Gujarat/India</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 1 of 1
+                                            entries</div>
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a
+                                                class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                                                aria-controls="example" data-dt-idx="0" tabindex="0"
+                                                id="example_previous">Previous</a><span><a
+                                                    class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                                                    aria-controls="example" data-dt-idx="1" tabindex="0">1</a></span><a
+                                                class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                                                aria-controls="example" data-dt-idx="2" tabindex="0" id="example_next">Next</a></div>
+                                    </div>
+                    
+                                    <script type="text/javascript">
+                    
+                                        function loaddetail(marketid, tab, dserver) {
+                                            if (marketid == 1) {
+                                                alert("You can view casino report from Casino Report Panel.");
+                                                return false;
+                                            }
+                                            //$('input[id=cnt-lgr1]').attr('checked',true);
+                                            $("div#divLoading").addClass('show');
+                                            $("#marketidgamereport").val(marketid);
+                                            if (tab == "all") {
+                    
+                                                $("input[name='cnt-lgr'][value='all']").prop("checked", true);
+                                            }
+                                            var types = $("input[name='cnt-lgr']:checked").val();
+                                            // alert(type);
+                    
+                                            //$('input[id=cnt-lgr1]').attr('checked',true);
+                                            $("#ReportMatchbettable").html('');
+                                            $("#ttl_w").text("");
+                                            $("#ttl_count").text("");
+                                            $("#ttl_soda").text("");
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: "https://bmwexch.com/admin/report_match_bet/0b012f5ac14b6b92a36165b01c0ed2ca2cba4a9a",
+                                                data: {
+                                                    "marketid": marketid,
+                                                    "type": types,
+                                                    "uid": '00000000-0000-0000-0000-000000000000',
+                                                    "dserver": dserver
+                                                },
+                                                dataType: "json",
+                                                success: function (response) {
+                                                    if (response.success == true) {
+                                                        $("#ReportMatchbettable").html(response.html);
+                                                        $("#ReportMatchbetHeading").html(response.heading);
+                                                        $("#ReportMatchbetModal").modal("show");
+                                                        $('[data-toggle="tooltip"]').tooltip();
+                                                    }
+                                                    // var arr =  response.split("^^") 
+                                                    // if(typeof arr[0] !='undefined') { $("#ReportMatchbettable").html(arr[0]); }
+                                                    // if(typeof arr[1] !='undefined') { $("#ttl_w").text(" (Total Win Loss : " + arr[1]+")"); }
+                                                    //  if(typeof arr[2] !='undefined') { $("#ttl_count").text(" (Total Count : " + arr[2]+")"); }
+                                                    //  if(typeof arr[3] !='undefined') { $("#ttl_soda").text(" (Total Soda : " + arr[3]+")"); }
+                    
+                                                },
+                                                complete: function () {
+                    
+                                                    $("div#divLoading").removeClass('show');
+                    
+                                                }
+                                            }, 'Json');
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="modal fade" id="ReportMatchbetModal">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                    
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="ReportMatchbetHeading">Client Ledger</h4>
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                    
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="">
+                                                    <form>
+                                                        <input type="hidden" value="" id="marketidgamereport">
+                                                        <div class="account-radio">
+                                                            <input type="radio" value="all" name="cnt-lgr" id="cnt-lgr1"
+                                                                class="clientledger" checked=""><label for="cnt-lgr1">All</label>
+                                                            <input type="radio" value="matched" name="cnt-lgr" id="cnt-lgr2"
+                                                                class="clientledger"><label for="cnt-lgr2">Matched</label>
+                                                            <input type="radio" value="deleted" name="cnt-lgr" id="cnt-lgr3"
+                                                                class="clientledger"><label for="cnt-lgr3">Deleted</label>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <table id="ReportMatchbettable" class="table table-bordered" border="0" cellpadding="0"
+                                                    cellspacing="0">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="modal-footer">
+                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</ng-template>
+	</li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

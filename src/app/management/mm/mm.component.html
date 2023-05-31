@@ -1,0 +1,1702 @@
+<div class="sec-hedding">
+
+  <div class="headdings">
+    <!-- <h2 style="font-size: 23px; padding: 20px;">Profit/Loss Report by Downline</h2> -->
+  </div>
+  <!-- <div class="headding-btn" style="float: right;">
+<button class="btn-report">Show Default</button>
+</div> -->
+</div>
+<div class="margin-1">
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Import</button>
+      <ng-template ngbNavContent>
+        <div>
+          <div class="col-md-12 main-container" data-select2-id="10">
+            <div data-select2-id="9">
+              <div class="listing-grid" data-select2-id="8">
+                <div class="detail-row" data-select2-id="7">
+                  <form
+                    method="post"
+                    class="ajaxFormSubmit"
+                    data-select2-id="6"
+                  >
+                    <div class="m-t-20" data-select2-id="5">
+                      <div class="row" data-select2-id="4">
+                        <div class="col-md-2" data-select2-id="3">
+                          <div class="form-group">
+                            <label for="list-ac">Search</label>
+                            <ng-select
+                              class="custom-ng-select"
+                              [items]="myItems"
+                              bindLabel="label"
+                              bindValue="id"
+                              placeholder="Select an option"
+                              [searchable]="true"
+                              typeToSearchText="Type to search"
+                              class="custom-ng-select"
+                            ></ng-select>
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-2">
+                                              <div class="form-group">
+                                                  <label for="type">Account Type</label>
+                                                  <select name="type" id="accounttype" class="form-control">
+                                                      <option value="all">All</option>
+
+                                                  </select>
+                                              </div>
+                                          </div> -->
+                        <div class="col-md-2" data-select2-id="3">
+                          <div class="form-group">
+                            <label for="list-ac">Search</label>
+                            <!-- <div id="example_filter" class="dataTables_filter">
+                                                  <ng-select  bindLabel="label" bindValue="id" placeholder="Select an option" [searchable]="true" typeToSearchText="Type to search"
+                                                  ></ng-select>
+                                                </div> -->
+                            <div id="example_filter" class="dataTables_filter">
+                              <input
+                                type="search"
+                                class="form-control datatable-search"
+                                placeholder=""
+                                aria-controls="example"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          class="col-md-2"
+                          id="col-md-2"
+                          style="
+                            display: flex;
+                            margin-left: 35px;
+                            margin-top: 35px;
+                          "
+                        >
+                          <!-- <input type="hidden" name="_token" value="MH0vsR380MPF4zxMTH3wTRgG5zxqDlArMLjlyc0K">
+                                          <label style="width: 100%">&nbsp;</label>
+                                          <button type="submit" class="btn btn-diamond" id="loaddata">Load</button> -->
+
+                          <label>Activate Selected: </label>
+                          <div class="cbox">
+                            <input type="checkbox" id="toggle-btn" />
+                            <label for="toggle-btn"></label>
+                          </div>
+                        </div>
+
+                        <div class="col-md-2" id="col-md-2">
+                          <!-- <input type="hidden" name="_token" value="MH0vsR380MPF4zxMTH3wTRgG5zxqDlArMLjlyc0K">
+                                              <label style="width: 100%">&nbsp;</label>
+                                              <button type="submit" class="btn btn-diamond" id="loaddata">Load</button> -->
+
+                          <button class="btn-report">Refresh</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="table-responsive data-table" id="tbldata">
+                  <div
+                    id="example_wrapper"
+                    class="dataTables_wrapper no-footer"
+                  >
+
+                  <div class="dataTables_length1" id="example_length" *ngIf="tableLength"><label>Show <select
+                    name="example_length" aria-controls="example" class="">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select> entries</label></div>
+                    <!-- <div class="dt-buttons">
+                      <div
+                        class="dataTables_length"
+                        id="example_length"
+                        *ngIf="tableLength"
+                      >
+                        <label
+                          >Show
+                          <select
+                            name="example_length"
+                            aria-controls="example"
+                            class=""
+                          >
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                          </select>
+                          entries</label
+                        >
+                      </div>
+                      <button
+                        *ngIf="docButton"
+                        class="dt-button buttons-pdf buttons-html5"
+                        tabindex="0"
+                        aria-controls="example"
+                        type="button"
+                      >
+                        <span>PDF</span>
+                      </button>
+                      <button
+                        *ngIf="docButton"
+                        class="dt-button buttons-excel buttons-html5"
+                        tabindex="0"
+                        aria-controls="example"
+                        type="button"
+                      >
+                        <span>Excel</span>
+                      </button>
+                    </div> -->
+
+                    <table
+                      id="example"
+                      class="table table-striped table-bordered datatable dataTable no-footer"
+                      style="width: 100%"
+                      role="grid"
+                      aria-describedby="example_info"
+                    >
+                      <thead class="header">
+                        <tr>
+                          <th rowspan="2">
+                            <input
+                              type="checkbox"
+                              name="selectAll"
+                              id="selectAll"
+                              class="ng-untouched ng-pristine ng-valid"
+                            />
+                          </th>
+                          <th colspan="" rowspan="2" class="header align-C">
+                            SportName
+                          </th>
+                          <th colspan="" rowspan="2" class="header align-C">
+                            Tournament
+                          </th>
+                          <th
+                            width="20%"
+                            colspan=""
+                            rowspan="2"
+                            class="header align-C"
+                          >
+                            Matches
+                          </th>
+                          <th
+                            colspan="4"
+                            class="header align-C"
+                            style="text-align: center"
+                          >
+                            Bets
+                          </th>
+                        </tr>
+                        <tr class="ng-scope">
+                          <td class="align-C">Match Date</td>
+                          <td class="align-C">Status</td>
+                          <td class="align-C">BF status</td>
+                        </tr>
+                      </thead>
+
+                      <!-- <thead>
+                        <tr role="row">
+                          <th
+                            width="25%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Fromto"
+                            style="width: 400px"
+                          >
+                            Provider P/L
+                          </th>
+                          <th
+                            width="25%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Fromto"
+                            style="width: 400px"
+                          >
+                            Player P/L
+                          </th>
+                          <th
+                            width="10%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Debit"
+                            style="width: 292px"
+                          >
+                            Downline P/L
+                          </th>
+                          <th
+                            width="10%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Closing"
+                            style="width: 295px"
+                          >
+                            Total Stake
+                          </th>
+                          <th
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Description"
+                            style="width: 176px"
+                          >
+                            Upline P/L
+                          </th>
+                          <th
+                            width="15%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Fromto"
+                            style="width: 0px"
+                          ></th>
+                        </tr>
+                      </thead> -->
+                      <tbody>
+                        <!-- <tr role="row" class="odd">
+                          <td class="sorting_1">2023-05-03</td>
+
+                          <td class="text-right"></td>
+                          <td class="text-right"></td>
+                          <td class="text-right">0.00</td>
+                          <td>Opening</td>
+                          <td></td>
+                        </tr> -->
+                        <tr>
+                          <td width="2%" class="align-C">
+                            <input
+                              type="checkbox"
+                              class="ng-untouched ng-pristine ng-valid"
+                            />
+                          </td>
+                          <td class="align-C">Cricket</td>
+                          <td class="align-C">
+                            County Championship Division 1
+                          </td>
+                          <td class="align-C" width="22%">
+                            <a
+                              class="expand-close fa fa-plus-square"
+                              (click)="isvalid()"
+                            ></a>
+                            Hampshire v Northamptonshire
+                          </td>
+                          <td width="13%" class="align-C">
+                            2023-05-20 15:30:00
+                          </td>
+                          <td class="align-C" id="status_32326954" width="9%">
+                            <div class="cbox" style="margin-bottom: -15px">
+                              <input type="checkbox" id="toggle-btn1" /><label
+                                for="toggle-btn1"
+                              ></label>
+                            </div>
+                          </td>
+                          <td>open</td>
+                        </tr>
+
+                        <tr
+                          *ngIf="subtable"
+                          class="expand first import"
+                          style="display: table-row"
+                          id="sub_32353853"
+                        >
+                          <td colspan="1"></td>
+                          <td colspan="13">
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td class="align-C">
+                                    <input
+                                      type="checkbox"
+                                      class="ng-untouched ng-pristine ng-valid"
+                                    />
+                                  </td>
+                                  <td width="100%" class="align-L">
+                                    <a
+                                      class="expand-open fa fa-plus-square"
+                                      (click)="isvalid1()"
+                                    ></a>
+                                    <span>Match Odds</span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div
+                              *ngIf="subsubtable"
+                              class="markets"
+                              id="market_32353853_0"
+                            >
+                              <div class="market sub_market">
+                                Hampshire
+                                <span
+                                  class="spacer"
+                                  style="
+                                    flex: 1;
+                                    flex-grow: 1;
+                                    flex-shrink: 1;
+                                    flex-basis: 0%;
+                                  "
+                                ></span>
+                                <button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <!-- <div class="market sub_market">
+                                Northamptonshire
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                The Draw
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div
+                      class="dataTables_info"
+                      id="example_info"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      Showing 1 to 1 of 1 entries
+                    </div>
+                    <div
+                      class="dataTables_paginate paging_simple_numbers"
+                      id="example_paginate"
+                    >
+                      <a
+                        class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                        aria-controls="example"
+                        data-dt-idx="0"
+                        tabindex="0"
+                        id="example_previous"
+                        >Previous</a
+                      ><span
+                        ><a
+                          class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                          aria-controls="example"
+                          data-dt-idx="1"
+                          tabindex="0"
+                          >1</a
+                        ></span
+                      ><a
+                        class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                        aria-controls="example"
+                        data-dt-idx="2"
+                        tabindex="0"
+                        id="example_next"
+                        >Next</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="ReportMatchbetModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="ReportMatchbetHeading">
+                      Client Ledger
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="">
+                          <form>
+                            <input
+                              type="hidden"
+                              value=""
+                              id="marketidgamereport"
+                            />
+                            <div class="account-radio">
+                              <input
+                                type="radio"
+                                value="all"
+                                name="cnt-lgr"
+                                id="cnt-lgr1"
+                                class="clientledger"
+                                checked=""
+                              /><label for="cnt-lgr1">All</label>
+                              <input
+                                type="radio"
+                                value="matched"
+                                name="cnt-lgr"
+                                id="cnt-lgr2"
+                                class="clientledger"
+                              /><label for="cnt-lgr2">Matched</label>
+                              <input
+                                type="radio"
+                                value="deleted"
+                                name="cnt-lgr"
+                                id="cnt-lgr3"
+                                class="clientledger"
+                              /><label for="cnt-lgr3">Deleted</label>
+                            </div>
+                          </form>
+                        </div>
+                        <table
+                          id="ReportMatchbettable"
+                          class="table table-bordered"
+                          border="0"
+                          cellpadding="0"
+                          cellspacing="0"
+                        ></table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>Inplay</button>
+      <ng-template ngbNavContent>
+        <div>
+          <div class="col-md-12 main-container" data-select2-id="10">
+            <div data-select2-id="9">
+              <div class="listing-grid" data-select2-id="8">
+                <div class="detail-row" data-select2-id="7">
+                  <form
+                    method="post"
+                    class="ajaxFormSubmit"
+                    data-select2-id="6"
+                  >
+                    <div class="m-t-20" data-select2-id="5">
+                      <div class="row" data-select2-id="4">
+                        <div class="col-md-2" data-select2-id="3">
+                          <div class="form-group">
+                            <label for="list-ac">Search</label>
+                            <ng-select
+                              class="custom-ng-select"
+                              [items]="myItems"
+                              bindLabel="label"
+                              bindValue="id"
+                              placeholder="Select an option"
+                              [searchable]="true"
+                              typeToSearchText="Type to search"
+                              class="custom-ng-select"
+                            ></ng-select>
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-2">
+                                              <div class="form-group">
+                                                  <label for="type">Account Type</label>
+                                                  <select name="type" id="accounttype" class="form-control">
+                                                      <option value="all">All</option>
+
+                                                  </select>
+                                              </div>
+                                          </div> -->
+                        <div class="col-md-2" data-select2-id="3">
+                          <div class="form-group">
+                            <label for="list-ac">Search</label>
+                            <!-- <div id="example_filter" class="dataTables_filter">
+                                                  <ng-select  bindLabel="label" bindValue="id" placeholder="Select an option" [searchable]="true" typeToSearchText="Type to search"
+                                                  ></ng-select>
+                                                </div> -->
+                            <div id="example_filter" class="dataTables_filter">
+                              <input
+                                type="search"
+                                class="form-control datatable-search"
+                                placeholder=""
+                                aria-controls="example"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          class="col-md-2"
+                          id="col-md-2"
+                          style="
+                            display: flex;
+                            margin-left: 35px;
+                            margin-top: 35px;
+                          "
+                        >
+                          <!-- <input type="hidden" name="_token" value="MH0vsR380MPF4zxMTH3wTRgG5zxqDlArMLjlyc0K">
+                                          <label style="width: 100%">&nbsp;</label>
+                                          <button type="submit" class="btn btn-diamond" id="loaddata">Load</button> -->
+
+                          <label>Activate Selected: </label>
+                          <div class="cbox">
+                            <input type="checkbox" id="toggle-btn" />
+                            <label for="toggle-btn"></label>
+                          </div>
+                        </div>
+
+                        <div class="col-md-2" id="col-md-2">
+                          <!-- <input type="hidden" name="_token" value="MH0vsR380MPF4zxMTH3wTRgG5zxqDlArMLjlyc0K">
+                                              <label style="width: 100%">&nbsp;</label>
+                                              <button type="submit" class="btn btn-diamond" id="loaddata">Load</button> -->
+
+                          <button class="btn-report">Refresh</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="table-responsive data-table" id="tbldata">
+                  <div
+                    id="example_wrapper"
+                    class="dataTables_wrapper no-footer"
+                  >
+                    <div class="dt-buttons">
+                      <div
+                        class="dataTables_length1"
+                        id="example_length"
+                        *ngIf="tableLength"
+                      >
+                        <label
+                          >Show
+                          <select
+                            name="example_length"
+                            aria-controls="example"
+                            class=""
+                          >
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                          </select>
+                          entries</label
+                        >
+                      </div>
+                      <button
+                        *ngIf="docButton"
+                        class="dt-button buttons-pdf buttons-html5"
+                        tabindex="0"
+                        aria-controls="example"
+                        type="button"
+                      >
+                        <span>PDF</span>
+                      </button>
+                      <button
+                        *ngIf="docButton"
+                        class="dt-button buttons-excel buttons-html5"
+                        tabindex="0"
+                        aria-controls="example"
+                        type="button"
+                      >
+                        <span>Excel</span>
+                      </button>
+                    </div>
+
+                    <!-- <div id="example_filter" class="dataTables_filter">
+                      <label
+                        >Search:<input
+                          type="search"
+                          class="form-control datatable-search"
+                          placeholder=""
+                          aria-controls="example"
+                      /></label>
+                    </div> -->
+                    <table
+                      id="example"
+                      class="table table-striped table-bordered datatable dataTable no-footer"
+                      style="width: 100%"
+                      role="grid"
+                      aria-describedby="example_info"
+                    >
+                      <thead>
+                        <!-- <tr role="row">
+                          <th
+                            width="25%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Fromto"
+                            style="width: 400px"
+                          >
+                            UID
+                          </th>
+                          <th
+                            width="25%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Fromto"
+                            style="width: 400px"
+                          >
+                            Player P/L
+                          </th>
+                          <th
+                            width="10%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Debit"
+                            style="width: 292px"
+                          >
+                            Downline P/L
+                          </th>
+                          <th
+                            width="10%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Closing"
+                            style="width: 295px"
+                          >
+                            Agent Comm.
+                          </th>
+                          <th
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Description"
+                            style="width: 176px"
+                          >
+                            Upline P/L
+                          </th>
+                          <th
+                            width="15%"
+                            class="sorting_disabled"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Fromto"
+                            style="width: 0px"
+                          ></th>
+                        </tr> -->
+
+                        <tr id="head">
+                          <th width="2%" class="align-C">
+                            <input
+                              type="checkbox"
+                              name="select_all"
+                              id="select_all"
+                              class="ng-untouched ng-pristine ng-valid"
+                            />
+                          </th>
+                          <th id="market_info" class="align-C">Market Info</th>
+                          <th width="5%" class="align-C">Status</th>
+                          <th width="6%" class="align-C">Inplay</th>
+
+                          <th width="5%" class="align-C">TV</th>
+                          <th width="5%" class="align-C"></th>
+                          <th width="8%" class="align-C">User Online</th>
+                          <th width="8%" class="align-C">No of bets</th>
+                          <th width="8%" class="align-C">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <tr role="row" class="odd">
+                          <td class="sorting_1">2023-05-03</td>
+
+                          <td class="text-right"></td>
+                          <td class="text-right"></td>
+                          <td class="text-right">0.00</td>
+                          <td>Opening</td>
+                          <td></td>
+                        </tr> -->
+
+                        <tr id="event_28127348">
+                          <td class="align-C">
+                            <input
+                              type="checkbox"
+                              name="select"
+                              id="select"
+                              class="ng-untouched ng-pristine ng-valid"
+                            />
+                          </td>
+                          <td class="align-L">
+                            <a
+                              class="expand-close fa fa-plus-square"
+                              (click)="isvalid3()"
+                            ></a>
+                            Indian Premier League
+                            <b> - [ Indian Premier League ]</b>
+                          </td>
+                          <td class="align-C" id="status_28127348" width="9%">
+                            <div class="cbox1" style="margin-bottom: -15px">
+                              <input type="checkbox" id="toggle-btn1" />
+                              <label for="toggle-btn1"></label>
+                            </div>
+                          </td>
+                          <td class="align-C" id="isinplay_28127348">
+                            <input type="checkbox" checked="checked" id="bet" />
+                          </td>
+
+                          <td class="align-C" id="tv_28127348">
+                            <span class="red">-</span>
+                          </td>
+                          <td class="align-C" id="time_28127348" width="13%">
+                            <span class="red">2022-03-26 17:30:00 </span>
+                          </td>
+                          <td class="align-C" id="user_online_28127348">0</td>
+                          <td class="align-C" id="no_bet_28127348">0</td>
+                          <td class="align-C" id="action_28127348">
+                            <button title="Bet Suspend" class="btn">BS</button>
+                          </td>
+                        </tr>
+
+                        <tr
+                          *ngIf="insubtab"
+                          class="expand first"
+                          style="display: table-row"
+                          id="sub_28127348"
+                        >
+                          <td colspan="1"></td>
+                          <td colspan="14">
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td class="align-C">
+                                    <input
+                                      type="checkbox"
+                                      class="ng-untouched ng-pristine ng-valid"
+                                    />
+                                  </td>
+                                  <td width="100%" class="align-L">
+                                    <a
+                                      class="expand-open fa fa-plus-square"
+                                      (click)="isvalid4()"
+                                    ></a>
+                                    <span>Match Odds</span>
+                                    <!-- <span class="spacer"></span>
+                                    <label class=" cbox">
+                                      <input
+                                          type="checkbox"
+                                          id="toggle-btn"
+                                        /><label
+                                          for="toggle-btn"
+                                        ></label>
+                                    </label> -->
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <!-- <div class="market">
+                              <a class="expand-open fa fa-plus-square" (click)="isvalid4()"></a>
+                              Winner
+                              <span class="spacer"></span
+                              ><label class="xyz"
+                                ><input
+                                  type="checkbox"
+                                  class="ng-valid ng-dirty ng-touched" /><span
+                                  class=""
+                                ></span
+                              ></label>
+                            </div> -->
+
+                            <div
+                              *ngIf="insubsubtab"
+                              class="markets"
+                              id="market_28127348_0"
+                            >
+                              <div class="market sub_market">
+                                <!-- Mumbai Indians -->
+                                Hampshire
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+
+                              <!-- <div class="market sub_market">
+                                Royal Challengers Bangalore
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Rajasthan Royals
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Delhi Capitals
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Lucknow Super Giants
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Gujarat Titans
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Chennai Super Kings
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Punjab Kings
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Kolkata Knight Riders
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Sunrisers Hyderabad
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Gujarat Titans
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Lucknow Super Giants
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Kolkata Knight Riders
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Chennai Super Kings
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Royal Challengers Bangalore
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Rajasthan Royals
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Punjab Kings
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Delhi Capitals
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Mumbai Indians
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div>
+                              <div class="market sub_market">
+                                Sunrisers Hyderabad
+                                <span class="spacer"></span
+                                ><button class="btn">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fa fa-plus-circle"
+                                  ></i>
+                                </button>
+                              </div> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div
+                      class="dataTables_info"
+                      id="example_info"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      Showing 1 to 1 of 1 entries
+                    </div>
+                    <div
+                      class="dataTables_paginate paging_simple_numbers"
+                      id="example_paginate"
+                    >
+                      <a
+                        class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                        aria-controls="example"
+                        data-dt-idx="0"
+                        tabindex="0"
+                        id="example_previous"
+                        >Previous</a
+                      ><span
+                        ><a
+                          class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                          aria-controls="example"
+                          data-dt-idx="1"
+                          tabindex="0"
+                          >1</a
+                        ></span
+                      ><a
+                        class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                        aria-controls="example"
+                        data-dt-idx="2"
+                        tabindex="0"
+                        id="example_next"
+                        >Next</a
+                      >
+                    </div>
+                  </div>
+
+                  <script type="text/javascript">
+                    function loaddetail(marketid, tab, dserver) {
+                      if (marketid == 1) {
+                        alert(
+                          "You can view casino report from Casino Report Panel."
+                        );
+                        return false;
+                      }
+                      //$('input[id=cnt-lgr1]').attr('checked',true);
+                      $("div#divLoading").addClass("show");
+                      $("#marketidgamereport").val(marketid);
+                      if (tab == "all") {
+                        $("input[name='cnt-lgr'][value='all']").prop(
+                          "checked",
+                          true
+                        );
+                      }
+                      var types = $("input[name='cnt-lgr']:checked").val();
+                      // alert(type);
+
+                      //$('input[id=cnt-lgr1]').attr('checked',true);
+                      $("#ReportMatchbettable").html("");
+                      $("#ttl_w").text("");
+                      $("#ttl_count").text("");
+                      $("#ttl_soda").text("");
+                      $.ajax(
+                        {
+                          type: "POST",
+                          url: "https://bmwexch.com/admin/report_match_bet/0b012f5ac14b6b92a36165b01c0ed2ca2cba4a9a",
+                          data: {
+                            marketid: marketid,
+                            type: types,
+                            uid: "00000000-0000-0000-0000-000000000000",
+                            dserver: dserver,
+                          },
+                          dataType: "json",
+                          success: function (response) {
+                            if (response.success == true) {
+                              $("#ReportMatchbettable").html(response.html);
+                              $("#ReportMatchbetHeading").html(
+                                response.heading
+                              );
+                              $("#ReportMatchbetModal").modal("show");
+                              $('[data-toggle="tooltip"]').tooltip();
+                            }
+                            // var arr =  response.split("^^")
+                            // if(typeof arr[0] !='undefined') { $("#ReportMatchbettable").html(arr[0]); }
+                            // if(typeof arr[1] !='undefined') { $("#ttl_w").text(" (Total Win Loss : " + arr[1]+")"); }
+                            //  if(typeof arr[2] !='undefined') { $("#ttl_count").text(" (Total Count : " + arr[2]+")"); }
+                            //  if(typeof arr[3] !='undefined') { $("#ttl_soda").text(" (Total Soda : " + arr[3]+")"); }
+                          },
+                          complete: function () {
+                            $("div#divLoading").removeClass("show");
+                          },
+                        },
+                        "Json"
+                      );
+                    }
+                  </script>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="ReportMatchbetModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="ReportMatchbetHeading">
+                      Client Ledger
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                      ×
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="">
+                          <form>
+                            <input
+                              type="hidden"
+                              value=""
+                              id="marketidgamereport"
+                            />
+                            <div class="account-radio">
+                              <input
+                                type="radio"
+                                value="all"
+                                name="cnt-lgr"
+                                id="cnt-lgr1"
+                                class="clientledger"
+                                checked=""
+                              /><label for="cnt-lgr1">All</label>
+                              <input
+                                type="radio"
+                                value="matched"
+                                name="cnt-lgr"
+                                id="cnt-lgr2"
+                                class="clientledger"
+                              /><label for="cnt-lgr2">Matched</label>
+                              <input
+                                type="radio"
+                                value="deleted"
+                                name="cnt-lgr"
+                                id="cnt-lgr3"
+                                class="clientledger"
+                              /><label for="cnt-lgr3">Deleted</label>
+                            </div>
+                          </form>
+                        </div>
+                        <table
+                          id="ReportMatchbettable"
+                          class="table table-bordered"
+                          border="0"
+                          cellpadding="0"
+                          cellspacing="0"
+                        ></table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <button ngbNavLink>Upcoming</button>
+      <ng-template ngbNavContent>
+        <div>
+          <div>
+            <div class="col-md-12 main-container" data-select2-id="10">
+              <div data-select2-id="9">
+                <div class="listing-grid" data-select2-id="8">
+                  <div class="detail-row" data-select2-id="7">
+                    <form
+                      method="post"
+                      class="ajaxFormSubmit"
+                      data-select2-id="6"
+                    >
+                      <div class="m-t-20" data-select2-id="5">
+                        <div class="row" data-select2-id="4">
+                          <div class="col-md-2" data-select2-id="3">
+                            <div class="form-group">
+                              <label for="list-ac">Search</label>
+                              <ng-select
+                                class="custom-ng-select"
+                                [items]="myItems"
+                                bindLabel="label"
+                                bindValue="id"
+                                placeholder="Select an option"
+                                [searchable]="true"
+                                typeToSearchText="Type to search"
+                                class="custom-ng-select"
+                              ></ng-select>
+                            </div>
+                          </div>
+                          <!-- <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="type">Account Type</label>
+                                                    <select name="type" id="accounttype" class="form-control">
+                                                        <option value="all">All</option>
+
+                                                    </select>
+                                                </div>
+                                            </div> -->
+                          <div class="col-md-2" data-select2-id="3">
+                            <div class="form-group">
+                              <label for="list-ac">Search</label>
+                              <!-- <div id="example_filter" class="dataTables_filter">
+                                                    <ng-select  bindLabel="label" bindValue="id" placeholder="Select an option" [searchable]="true" typeToSearchText="Type to search"
+                                                    ></ng-select>
+                                                  </div> -->
+                              <div
+                                id="example_filter"
+                                class="dataTables_filter"
+                              >
+                                <input
+                                  type="search"
+                                  class="form-control datatable-search"
+                                  placeholder=""
+                                  aria-controls="example"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            class="col-md-2"
+                            id="col-md-2"
+                            style="
+                              display: flex;
+                              margin-left: 35px;
+                              margin-top: 35px;
+                            "
+                          >
+                            <!-- <input type="hidden" name="_token" value="MH0vsR380MPF4zxMTH3wTRgG5zxqDlArMLjlyc0K">
+                                            <label style="width: 100%">&nbsp;</label>
+                                            <button type="submit" class="btn btn-diamond" id="loaddata">Load</button> -->
+
+                            <label>Activate Selected: </label>
+                            <div class="cbox">
+                              <input type="checkbox" id="toggle-btn" />
+                              <label for="toggle-btn"></label>
+                            </div>
+                          </div>
+
+                          <div class="col-md-2" id="col-md-2">
+                            <!-- <input type="hidden" name="_token" value="MH0vsR380MPF4zxMTH3wTRgG5zxqDlArMLjlyc0K">
+                                                <label style="width: 100%">&nbsp;</label>
+                                                <button type="submit" class="btn btn-diamond" id="loaddata">Load</button> -->
+
+                            <button class="btn-report">Refresh</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="table-responsive data-table" id="tbldata">
+                    <div
+                      id="example_wrapper"
+                      class="dataTables_wrapper no-footer"
+                    >
+                      <div class="dt-buttons">
+                        <div
+                          class="dataTables_length1"
+                          id="example_length"
+                          *ngIf="tableLength"
+                        >
+                          <label
+                            >Show
+                            <select
+                              name="example_length"
+                              aria-controls="example"
+                              class=""
+                            >
+                              <option value="10">10</option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                            </select>
+                            entries</label
+                          >
+                        </div>
+                        <button
+                          *ngIf="docButton"
+                          class="dt-button buttons-pdf buttons-html5"
+                          tabindex="0"
+                          aria-controls="example"
+                          type="button"
+                        >
+                          <span>PDF</span>
+                        </button>
+                        <button
+                          *ngIf="docButton"
+                          class="dt-button buttons-excel buttons-html5"
+                          tabindex="0"
+                          aria-controls="example"
+                          type="button"
+                        >
+                          <span>Excel</span>
+                        </button>
+                      </div>
+
+                      <!-- <div id="example_filter" class="dataTables_filter">
+                        <label
+                          >Search:<input
+                            type="search"
+                            class="form-control datatable-search"
+                            placeholder=""
+                            aria-controls="example"
+                        /></label>
+                      </div> -->
+                      <table
+                        id="example"
+                        class="table table-striped table-bordered datatable dataTable no-footer"
+                        style="width: 100%"
+                        role="grid"
+                        aria-describedby="example_info"
+                      >
+                        <thead>
+                          <!-- <tr role="row">
+                            <th
+                              width="25%"
+                              class="sorting_disabled"
+                              rowspan="1"
+                              colspan="1"
+                              aria-label="Fromto"
+                              style="width: 400px"
+                            >
+                              Sports Name
+                            </th>
+                            <th
+                              width="25%"
+                              class="sorting_disabled"
+                              rowspan="1"
+                              colspan="1"
+                              aria-label="Fromto"
+                              style="width: 400px"
+                            >
+                              Total Profit/Loss
+                            </th>
+                            <th
+                              width="10%"
+                              class="sorting_disabled"
+                              rowspan="1"
+                              colspan="1"
+                              aria-label="Debit"
+                              style="width: 400px"
+                            >
+                              Total Stake
+                            </th>
+                          </tr> -->
+                          <tr id="head">
+                            <th width="2%" class="align-C">
+                              <input
+                                type="checkbox"
+                                name="select_all"
+                                id="select_all"
+                                class="ng-untouched ng-pristine ng-valid"
+                              />
+                            </th>
+                            <th id="market_info" class="align-C">
+                              Market Info
+                            </th>
+                            <th width="5%" class="align-C">Status</th>
+                            <th width="8%" class="align-C ng-star-inserted">
+                              Is Inplay
+                            </th>
+
+                            <th width="5%" class="align-C">Time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- <tr role="row" class="odd">
+                            <td class="sorting_1">2023-05-03</td>
+
+                            <td class="text-right">0.00</td>
+                            <td>Opening</td>
+                          </tr> -->
+
+                          <tr id="event_32326954" class="ng-star-inserted">
+                            <td class="align-C">
+                              <input
+                                type="checkbox"
+                                name="select"
+                                id="select"
+                                class="ng-untouched ng-pristine ng-valid"
+                              />
+                            </td>
+                            <td class="align-L">
+                              <a
+                                class="expand-close fa fa-plus-square"
+                                (click)="isvalid5()"
+                              ></a>
+                              Girona v Villarreal
+                              <b class="ng-star-inserted">
+                                - [ Spanish La Liga ]</b
+                              >
+                            </td>
+                            <td class="align-C" id="status_32326954" width="9%">
+                              <div class="cbox" style="margin-bottom: -15px">
+                                <input type="checkbox" id="toggle-btn1" /><label
+                                  for="toggle-btn1"
+                                ></label>
+                              </div>
+                            </td>
+                            <td
+                              class="align-C ng-star-inserted"
+                              id="isinplay_32326954"
+                            >
+                              <input type="checkbox" id="bet" />
+                            </td>
+
+                            <td class="align-C" id="time_32326954" width="13%">
+                              <span class="red">2023-05-20 17:30:00 </span>
+                            </td>
+                          </tr>
+
+                          <tr
+                            *ngIf="upsubtable"
+                            class="expand first import"
+                            style="display: table-row"
+                            id="sub_32353853"
+                          >
+                            <td colspan="1"></td>
+                            <td colspan="13">
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <td class="align-C">
+                                      <input
+                                        type="checkbox"
+                                        class="ng-untouched ng-pristine ng-valid"
+                                      />
+                                    </td>
+                                    <td width="100%" class="align-L">
+                                      <a
+                                        class="expand-close fa fa-plus-square"
+                                        (click)="isvalid6()"
+                                      ></a>
+                                      <span>Match Odds</span>
+                                      <!-- <span
+                                      class="spacer"></span>
+                                      <div class="cbox">
+                                        <input type="checkbox" id="toggle-btn" />
+                                        <label for="toggle-btn"></label>
+                                      </div> -->
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <div
+                                *ngIf="upsubsubtab"
+                                class="markets"
+                                id="market_32353853_0"
+                              >
+                                <div class="market sub_market">
+                                  Hampshire
+                                  <span class="spacer"></span>
+                                  <button class="btn">
+                                    <i
+                                      aria-hidden="true"
+                                      class="fa fa-plus-circle"
+                                    ></i>
+                                  </button>
+                                </div>
+                                <!-- <div class="market sub_market">
+                                  Northamptonshire
+                                  <span class="spacer"></span
+                                  ><button class="btn">
+                                    <i
+                                      aria-hidden="true"
+                                      class="fa fa-plus-circle"
+                                    ></i>
+                                  </button>
+                                </div>
+                                <div class="market sub_market">
+                                  The Draw
+                                  <span class="spacer"></span
+                                  ><button class="btn spacer">
+                                    <i
+                                      aria-hidden="true"
+                                      class="fa fa-plus-circle"
+                                    ></i>
+                                  </button>
+                                </div> -->
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div
+                        class="dataTables_info"
+                        id="example_info"
+                        role="status"
+                        aria-live="polite"
+                      >
+                        Showing 1 to 1 of 1 entries
+                      </div>
+                      <div
+                        class="dataTables_paginate paging_simple_numbers"
+                        id="example_paginate"
+                      >
+                        <a
+                          class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                          aria-controls="example"
+                          data-dt-idx="0"
+                          tabindex="0"
+                          id="example_previous"
+                          >Previous</a
+                        ><span
+                          ><a
+                            class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                            aria-controls="example"
+                            data-dt-idx="1"
+                            tabindex="0"
+                            >1</a
+                          ></span
+                        ><a
+                          class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                          aria-controls="example"
+                          data-dt-idx="2"
+                          tabindex="0"
+                          id="example_next"
+                          >Next</a
+                        >
+                      </div>
+                    </div>
+
+                    <script type="text/javascript">
+                      function loaddetail(marketid, tab, dserver) {
+                        if (marketid == 1) {
+                          alert(
+                            "You can view casino report from Casino Report Panel."
+                          );
+                          return false;
+                        }
+                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                        $("div#divLoading").addClass("show");
+                        $("#marketidgamereport").val(marketid);
+                        if (tab == "all") {
+                          $("input[name='cnt-lgr'][value='all']").prop(
+                            "checked",
+                            true
+                          );
+                        }
+                        var types = $("input[name='cnt-lgr']:checked").val();
+                        // alert(type);
+
+                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                        $("#ReportMatchbettable").html("");
+                        $("#ttl_w").text("");
+                        $("#ttl_count").text("");
+                        $("#ttl_soda").text("");
+                        $.ajax(
+                          {
+                            type: "POST",
+                            url: "https://bmwexch.com/admin/report_match_bet/0b012f5ac14b6b92a36165b01c0ed2ca2cba4a9a",
+                            data: {
+                              marketid: marketid,
+                              type: types,
+                              uid: "00000000-0000-0000-0000-000000000000",
+                              dserver: dserver,
+                            },
+                            dataType: "json",
+                            success: function (response) {
+                              if (response.success == true) {
+                                $("#ReportMatchbettable").html(response.html);
+                                $("#ReportMatchbetHeading").html(
+                                  response.heading
+                                );
+                                $("#ReportMatchbetModal").modal("show");
+                                $('[data-toggle="tooltip"]').tooltip();
+                              }
+                              // var arr =  response.split("^^")
+                              // if(typeof arr[0] !='undefined') { $("#ReportMatchbettable").html(arr[0]); }
+                              // if(typeof arr[1] !='undefined') { $("#ttl_w").text(" (Total Win Loss : " + arr[1]+")"); }
+                              //  if(typeof arr[2] !='undefined') { $("#ttl_count").text(" (Total Count : " + arr[2]+")"); }
+                              //  if(typeof arr[3] !='undefined') { $("#ttl_soda").text(" (Total Soda : " + arr[3]+")"); }
+                            },
+                            complete: function () {
+                              $("div#divLoading").removeClass("show");
+                            },
+                          },
+                          "Json"
+                        );
+                      }
+                    </script>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="ReportMatchbetModal">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="ReportMatchbetHeading">
+                        Client Ledger
+                      </h4>
+                      <button type="button" class="close" data-dismiss="modal">
+                        ×
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="">
+                            <form>
+                              <input
+                                type="hidden"
+                                value=""
+                                id="marketidgamereport"
+                              />
+                              <div class="account-radio">
+                                <input
+                                  type="radio"
+                                  value="all"
+                                  name="cnt-lgr"
+                                  id="cnt-lgr1"
+                                  class="clientledger"
+                                  checked=""
+                                /><label for="cnt-lgr1">All</label>
+                                <input
+                                  type="radio"
+                                  value="matched"
+                                  name="cnt-lgr"
+                                  id="cnt-lgr2"
+                                  class="clientledger"
+                                /><label for="cnt-lgr2">Matched</label>
+                                <input
+                                  type="radio"
+                                  value="deleted"
+                                  name="cnt-lgr"
+                                  id="cnt-lgr3"
+                                  class="clientledger"
+                                /><label for="cnt-lgr3">Deleted</label>
+                              </div>
+                            </form>
+                          </div>
+                          <table
+                            id="ReportMatchbettable"
+                            class="table table-bordered"
+                            border="0"
+                            cellpadding="0"
+                            cellspacing="0"
+                          ></table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+
+    <li class="spacer1" style="flex: 1;"></li>
+    <li class="web" style="margin-top: 8px; ">OnlineUsers:1 &nbsp;</li>
+    <li class="web" style="margin-top: 8px; ">TotalUsers: 22</li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

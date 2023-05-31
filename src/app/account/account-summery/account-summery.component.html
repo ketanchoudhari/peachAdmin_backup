@@ -1,0 +1,35 @@
+<!-- <h1 class="accsum">Accont Summary </h1>
+<div class="function-wrap clearfix">
+    <dl class="banking-head float-L">
+        <dt>Your Balance </dt>
+        <dd id="yourBalance"><span> <ng-container *ngIf="showCurrency"  >
+            <ng-container *ngIf="!fixCurrency">
+                {{ currentUser.currencyCode }}
+              </ng-container>
+              <ng-container *ngIf="fixCurrency">
+                {{ fixCurrency }}
+              </ng-container>
+            </ng-container>
+        </span>       {{ balance | indianCurrency }}
+    </dd>
+    </dl>
+   
+</div> -->
+<h1 class="accsum">Accont Summary </h1>
+<div  class="function-wrap clearfix">
+    <dl  class="banking-head float-L">
+      <dt>YourBalances</dt>
+      <dd  id="yourBalance">
+        <span > <ng-container *ngIf="showCurrency">
+          <ng-container *ngIf="!fixCurrency">
+            {{ currentUser.currencyCode }}
+          </ng-container>
+          <ng-container *ngIf="fixCurrency">
+            {{ fixCurrency }}
+          </ng-container>
+        </ng-container>
+        </span> 
+        {{ balance | indianCurrency}}</dd>
+    </dl>
+   
+</div>

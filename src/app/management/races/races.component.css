@@ -1,0 +1,42 @@
+nav.racenav {
+    padding-left: 30px;
+    margin-top: 32px;
+}
+tr.odd{
+    text-align: center;
+}
+tr.even{
+    text-align: center;
+}
+thead {
+    text-align: center;
+}
+li.import-button1{
+    margin-bottom: 10px;
+
+
+}
+button.btn-send1{
+    padding: 11px 26px 9px 26px;
+    border-radius: 3px solid gray;
+background-color: #1e2040;
+color: white;
+border-radius: 6px;
+
+}
+.race1{
+    background: #1e2040;
+    margin-left: 26px;
+    border: 2px solid;
+    width: 12%;
+    color: white;
+    border-radius: 14px;
+    margin-top: 20px;
+    text-align: center;
+    padding: 2px 4px 4px 4px;
+
+}
+
+.nav-tabs {
+    border-bottom: 5px solid #dee2e6;
+}

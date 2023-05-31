@@ -1,0 +1,486 @@
+<!-- <app-header></app-header> -->
+<div class="col-md-12 main-container">
+    <style type="text/css">
+        .back2 {
+            background-color: rgba(114,187,239,.5);
+        }
+        .back1 {
+            background-color: rgba(114,187,239,.75);
+        }
+        .lay1 {
+            background-color: rgba(250,169,186,.75);
+        }
+        .lay2 {
+            background-color: rgba(250,169,186,.5);
+        }
+        .bookmaker-container .box-w1
+        {
+            width: 60px;
+            min-width: 60px;
+            max-width: 60px;
+        }
+        #bm-section .suspended::after{
+            width: 360px;
+            font-size: 14px;
+        }
+        #bm1-section .suspended::after{
+            width: 120px;
+            font-size: 14px;
+        }
+        .coupon-table button span {
+            font-size: 10px;
+        }
+        span.odd{
+            display: block;
+        }
+        #matched-bet th, #unmatched-bet th{
+            min-width: 100px;
+        }
+        .mtree table td, .mtree table th{
+            width: 33.3%;
+        }
+        #openFancyBook{
+    
+        }
+        .fancyBookModal .modal-body {
+            background: none;
+            padding-right: 15px;
+        }
+        #playStopButton {
+            height:30px;
+            width:70px;
+            font-weight:bold;
+            border-radius:8px;
+            border:none;
+            color:black;
+            background-color:lightsteelblue;
+            outline:none;
+            cursor:pointer;
+            font-size:12px;
+            font:Arial, Helvetica, sans-serif;
+        }
+        /*Scorecard Design*/
+        .scorecard {
+            background-color: #f2f2f2;
+            /* box-shadow: 0px 1px 5px rgba(0,0,0,0.5); */
+            width: 100%;
+            /* border: 2px solid #C3C3C3; */
+            padding: 5px;
+            font-size: 12px;
+    
+            background-image: url('https://dzm0kbaskt4pv.cloudfront.net/v11/static/img/scorecard-bg.png');
+            position: relative;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color:#fff; 
+        }
+        .scorecard:before
+        {
+            content: "";
+            background-color: rgba(0,0,0,0.55);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .ball-runs {
+            background: #0088CC;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+    
+        .ball-runs.four {
+            background: #087F23;
+        }
+    
+        .ball-runs.six {
+            background: #883997;
+        }
+    
+        .ball-runs.wicket {
+            background: #ff0000;
+        }
+        .bookmaker-market .suspended::after{
+            width: 170px;
+        }
+        .coupon-table button{
+            min-height: 30px;
+        }
+    
+    </style>
+    <div class="listing-grid">
+    <div class="table-top-buttons row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6 float-right text-right">
+    <form>
+    <ul class="d-inline-block">
+    <li class="form-group active-button m-l-20 d-inline-block BetActives">
+    <a href="#" class="btn btn-back active">Bet Lock</a>
+    <ul class="sub-button">
+    <li>
+    <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; Masterallactive('betactive',0)">All Deactive</a>
+    </li>
+    <li>
+    <a href="javascript:void(0)" onclick="if (!window.__cfRLUnblockHandlers) return false; userTypeWiseActive(1.199812143,'betactive')">Userwise</a>
+    </li>
+    </ul>
+    </li>
+    <li class="form-group active-button m-l-20 d-inline-block FancyActive">
+    <a href="#" class="btn btn-back active">Fancy Lock</a>
+    <ul class="sub-button">
+    <li>
+    <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; Masterallactive('fancyactive',0)">All Deactive</a>
+    </li>
+    <li>
+    <a href="javascript:void(0)" onclick="if (!window.__cfRLUnblockHandlers) return false; userTypeWiseActive(1.199812143,'fancybetactive')">Userwise</a>
+    </li>
+    </ul>
+    </li>
+    <li class="form-group active-button m-l-20 d-inline-block">
+    <a href="javascript:void(0)" onclick="if (!window.__cfRLUnblockHandlers) return false; userBook('1.199812143','Match')" class="btn btn-back active">User Book</a>
+    </li>
+    <li class="form-group active-button m-l-20 d-inline-block">
+    <a href="javascript:void(0)" onclick="if (!window.__cfRLUnblockHandlers) return false; userBook('1.199812143','Match1')" class="btn btn-back active">Bookmarkers Book</a>
+    </li>
+    </ul>
+    </form>
+    </div>
+    </div>
+    <div class="coupon-card row">
+    <div class="col-md-8 main-content">
+    <div class="game-heading m-b-5">
+    <span class="card-header-title"><span>Indian Premier League -&gt;</span>
+    <span>Indian Premier League -&gt;</span>
+    <span>TOURNAMENT_WINNER -&gt;</span>
+    <span>3/31/2023 12:00:00 AM</span></span>
+    </div>
+    <div class="card-content">
+    <div id="div_gamedata" class="table-responsive m-b-10 main-market">
+    </div>
+    <div>
+    <div class="row row5 bookmaker-container">
+    <div class="fancy-marker-title col-12" id="bm-head" style="">
+    <h4>Bookmaker Market 0% commission fast bet confirm</h4>
+    <div class="m-b-10 bookmaker-market">
+    <div id="bm-section"><table class="table coupon-table table table-bordered m-t-10 " border="0">    <thead>        <tr>            <th><span class="text-info p-r-5">Min:100</span><span class="text-info">Max:50000</span></th>            <th class="box-w1"></th>            <th class="box-w1"></th>            <th class="back box-w1">Back</th>            <th class="lay box-w1">lay</th>            <th class="box-w1"></th>            <th class="box-w1"></th>        </tr>    </thead>    <tbody>        <tr class="bet-info sec-1  " data-title="ACTIVE">            <td>                <span class="team-name">Gujarat Titans</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">280</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">310</span>                <span>50K</span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-2  " data-title="ACTIVE">            <td>                <span class="team-name">Rajasthan Royals</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">500</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">540</span>                <span>50K</span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-3 suspended " data-title="SUSPENDED">            <td>                <span class="team-name">Mumbai Indians</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-4  " data-title="ACTIVE">            <td>                <span class="team-name">Royal Challengers Bangalore</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">650</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">750</span>                <span>50K</span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-5  " data-title="ACTIVE">            <td>                <span class="team-name">Delhi Capitals</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">2000</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-6 suspended " data-title="SUSPENDED">            <td>                <span class="team-name">Chennai Super Kings</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-7  " data-title="ACTIVE">            <td>                <span class="team-name">Lucknow Super Giants</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">750</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">850</span>                <span>50K</span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-8  " data-title="ACTIVE">            <td>                <span class="team-name">Sunrisers Hyderabad</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">5000</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-9  " data-title="ACTIVE">            <td>                <span class="team-name">Punjab Kings</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">2000</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>        <tr class="bet-info sec-10  " data-title="ACTIVE">            <td>                <span class="team-name">Kolkata Knight Riders</span>                <p class="box-w4">                    <span class="float-left profit">0</span>                </p>            </td>            <td class="back2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">2000</span>                <span>50K</span>                </button>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay1 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>            <td class="lay2 box-w1">                <button>                <span class="odd"></span>                <span></span>                </button>            </td>        </tr>    </tbody></table></div>
+    </div>
+    </div>
+    <div class="fancy-marker-title col-xl-4" id="bm1-head" style="display:none;">
+    <h4>Bookmaker Market</h4>
+    <div class="m-b-10 bookmaker-market">
+    <div id="bm1-section">
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6 fancy-market" id="fancy-market" style="">
+    <div class="fancy-marker-title">
+    <h4>Fancy Market</h4>
+     </div>
+    <div id="div_fancy"></div>
+    </div>
+    <div class="col-md-6 fancy-market">
+    <div class="fancy-marker-title" id="ballsection-market" style="">
+    <h4>Ball by Ball Session Market</h4>
+    <div id="div_ballsection"><table class="table coupon-table table table-bordered m-t-10 ">    <thead>        <tr>            <th></th>            <th class="text-center box-w1 lay">No</th>            <th class="text-center back box-w1">Yes</th>            <th class="box-w2"></th>        </tr>    </thead>    <tbody>        <tr data-title="" class="bet-info sec-1  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="1" data-gametype="Fancy" data-run="474">Total Match 1st over run in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">469</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">474</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-2  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="2" data-gametype="Fancy" data-run="3870">Total 1st 6 over run in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">3820</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">3870</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-4  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="4" data-gametype="Fancy" data-run="100">Lowest innings run in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">97</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">100</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-5  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="5" data-gametype="Fancy" data-run="162">Highest Partnership in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">158</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">162</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-9  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="9" data-gametype="Fancy" data-run="33">Highest wicket in IPL(PURPLE CAP)                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">31</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">33</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-32  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="32" data-gametype="Fancy" data-run="233">Highest innings run in IPL 2                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">230</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">233</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-10  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="10" data-gametype="Fancy" data-run="2185">Total 4's in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">2155</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">2185</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-11  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="11" data-gametype="Fancy" data-run="1115">Total 6's in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">1100</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">1115</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-12  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="12" data-gametype="Fancy" data-run="146">Total 50's in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">143</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">146</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-13  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="13" data-gametype="Fancy" data-run="6">Total 100's in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">5</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">6</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-14  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="14" data-gametype="Fancy" data-run="965">Total Wickets in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">950</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">965</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-15  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="15" data-gametype="Fancy" data-run="780">Total Wides in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">770</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">780</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-16  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="16" data-gametype="Fancy" data-run="1285">Total Extras in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">1270</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">1285</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-17  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="17" data-gametype="Fancy" data-run="653">Total Caught out in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">643</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">653</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-18  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="18" data-gametype="Fancy" data-run="155">Total bowled in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">152</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">155</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-19  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="19" data-gametype="Fancy" data-run="62">Total LBW in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">59</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">62</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-20  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="20" data-gametype="Fancy" data-run="61">Total Run-out in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">58</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">61</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-21  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="21" data-gametype="Fancy" data-run="97">Total No ball in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">94</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">97</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-22  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="22" data-gametype="Fancy" data-run="2">Total Hatricks Wickets in IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">2</span>                <span>200</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">2</span>                <span>130</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-30  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="30" data-gametype="Fancy" data-run="16">Highest 1st over run in IPL 2                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">15</span>                <span>100</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">16</span>                <span>100</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>        <tr data-title="" class="bet-info sec-29  ">            <td>                <a href="javascript:void(0)" class="modal-book" data-mid="1.199812143" data-sid="29" data-gametype="Fancy" data-run="6">Most Wickets by a Bowler in a match&nbsp;of&nbsp;IPL                </a>                <p class="client">0</p>            </td>            <td class="lay box-w1">                <button class="lay">                <span class="odd">6</span>                <span>500</span>                </button>            </td>            <td class="back box-w1">                <button class="back">                <span class="odd">6</span>                <span>300</span>                </button>            </td>            <td class="text-right p-r-10 box-w2">                <span class="d-block text-info">Min:100</span>                <span class="d-block text-info">Max:50000</span>            </td>        </tr>    </tbody></table></div>
+    </div>
+    <div class="fancy-marker-title" id="meter-market" style="display: none;">
+    <h4>Meter Market</h4>
+    <div id="div_metersection"></div>
+    </div>
+    <div class="fancy-marker-title" id="khado-market" style="display: none;">
+    <h4>Khado Market</h4>
+    <div id="div_khadosection"></div>
+    </div>
+    <div class="fancy-marker-title" id="fancy1-market" style="display: none;">
+    <h4>Fancy1 Market</h4>
+    <div id="div_fancy1"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 sidebar-right" id="sidebar-right">
+    <div class="card m-b-10">
+    <div class="card-header" data-toggle="collapse" data-target=".video-tv" id="showtv">
+    <h6 class="card-title">
+    Live Match
+    </h6>
+    </div>
+    <div id="video-tv" class="video-tv collapse ">
+    </div>
+    </div>
+    <div class="card m-b-10" id="scoreboard-main">
+    <div class="card-header">
+    <h6 class="card-title">Score Card</h6>
+    </div>
+    <div class="card-body scoreboard-detail collapse" id="scoreboard-box">
+    </div>
+    </div>
+    <div class="card m-b-10 my-bet">
+    <div class="card-header">
+    <ul class="nav nav-tabs d-inline-block" role="tablist ">
+    <li class="nav-item d-inline-block">
+    <a class="nav-link active " data-toggle="tab" href="#matched-bet">Matched <span id="matchedCount"></span></a>
+    </li>
+    <li class="nav-item d-inline-block">
+    <a class="nav-link " data-toggle="tab" href="#unmatched-bet">Unmatched <span id="unmatchedCount"></span></a>
+    </li>
+    </ul>
+    <a href="javascript:void(0)" class="btn btn-back float-right" onclick="if (!window.__cfRLUnblockHandlers) return false; matchedBets(true,'1.199812143')">View More</a>
+    </div>
+    <div class="card-body">
+    <div class="tab-content">
+    <div id="matched-bet" class="tab-pane active">
+    <div class="table-responsive">
+    <table id="matched" class="table coupon-table table-bordered table-stripted">
+    <thead>
+    <tr>
+    <th style="min-width: 50px">UserName</th>
+    <th style="min-width: 200px">Nation</th>
+    <th style="min-width: 50px">Rate</th>
+    <th style="min-width: 70px;">Amount</th>
+    <th>PlaceDate</th>
+    <th>MatchDate</th>
+    <th style="min-width:70px">Gametype</th>
+    
+    </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+    </div>
+    </div>
+    <div id="unmatched-bet" class="tab-pane ">
+    <div class="table-responsive">
+    <table id="unmatched" class="table coupon-table table-bordered table-stripted">
+    <thead>
+    <tr>
+    <th>UserName</th>
+    <th style="min-width: 200px">Nation</th>
+    <th style="min-width: 50px">Rate</th>
+    <th style="min-width: 70px;">Amount</th>
+    <th>MatchDate</th>
+    <th>Gametype</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="modal fade fancyBookModal" id="fancyBookModal">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    
+    <div class="modal-header">
+    <h4 class="modal-title">Books</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    </div>
+    <div class="modal-body">
+    <div class="book-pop">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="modal fade" id="userwise">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    
+    <div class="modal-header">
+    <h4 class="modal-title">Active User</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    </div>
+    
+    <div class="modal-body">
+    <div class="usertypewiseactive-container"></div>
+    </div>
+    
+    <div class="modal-footer">
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="modal fade" id="user-book" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+    <div class="modal-header">
+    <h4 class="modal-title">User Book</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    </div>
+    
+    <div class="modal-body ">
+    <div class="userBookContainer"><ul class="mtree transit bubba mtree-header">
+        <li class="mtree-node mtree-closed">
+            <a href="#">
+                <table class="table m-b-0">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                                                </tr>
+                    </thead>
+                </table>
+            </a>
+        </li>
+    </ul>
+    
+    <script src="https://dzm0kbaskt4pv.cloudfront.net/v11/static/backend/js/mtree.js"></script></div>
+    </div>
+    
+    <div class="modal-footer">
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="modal fade" id="view-more" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+    <div class="modal-header">
+    <h4 class="modal-title">View More Bet</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    </div>
+    
+    <div class="modal-body">
+    <div class="viewMoreMatchedDataModal"><ul class="nav nav-tabs d-inline-block" role="tablist ">
+      <li class="nav-item d-inline-block">
+        <a class="nav-link  active " data-toggle="tab" href="#matched-bet2" id="matchedDataLink">Matched Bets</a>
+      </li>
+      <li class="nav-item d-inline-block">
+        <a class="nav-link " data-toggle="tab" href="#unmatched-bet2" id="unMatchedDataLink">Unmatched Bets</a>
+      </li>
+      <li class="nav-item d-inline-block">
+        <a class="nav-link " data-toggle="tab" href="#deleted-bet2" id="deletedMatchedDataLink">Deleted Bets</a>
+      </li>
+    </ul>
+    <div class="tab-content m-t-20">
+      <div id="matched-bet2" class="tab-pane  active ">
+            
+          <form method="POST" action="https://bmwexch.com/admin/view_more_matched/23581a6aa5fdea56a5e6b9fb2ec1705bb040595a" accept-charset="UTF-8" id="viewMoreMatchForm"><input name="_token" type="hidden" value="EJXXqw2DxQcMB4bE4QNI6ZoRCWh0nT4ikElDMjqD">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group m-t-20">
+                <label class="d-inline-block">Enter Code</label>
+                <!-- <input type="text" name="userid" id="userid"  class="form-control d-inline-block"> -->
+                <select name="list" id="userid" class="select-2-clientlist form-control select2-hidden-accessible" data-select2-id="userid" tabindex="-1" aria-hidden="true"></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 200px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-userid-container"><span class="select2-selection__rendered" id="select2-userid-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder"></span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+    
+                
+              </div>
+              <div class="form-group m-t-20">
+                <label class="d-inline-block">IP Address</label>
+                <input type="text" name="ipaddress" id="ipaddress" class="form-control d-inline-block">
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group m-t-20">
+                <label class="d-inline-block">Amount</label>
+                <input type="text" name="amount1" id="amount1" class="form-control d-inline-block">
+                <input type="text" name="amount2" id="amount2" class="form-control d-inline-block">
+              </div>
+              <div class="form-group m-t-20">
+                <label class="d-inline-block">Type</label>
+                <select name="bettype" class="form-control d-inline-block" id="bettype"> 
+                  <option value="">All</option>
+                  <option value="back">Back</option>
+                  <option value="lay">Lay</option>
+                </select>
+                <button class="btn btn-back">Search</button>
+                <button type="button" class="btn btn-back viewAllMatched">View All</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        
+        <div class="table-responsive" id="view-more-matched-tbl">
+            <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>UserName</th>
+                <th>Nation</th>
+                <th>Bet Type</th>
+                <th>Amount</th>
+                <th>User Rate</th>
+                <th>Place Date</th>
+                            <th>Match Date</th>
+                            <th>IP</th>
+                <th>Browser Details</th>
+            </tr>
+        </thead>
+        <tbody>
+                    <tr><td colspan="10">No records found</td></tr>
+                </tbody>
+    </table>
+        </div>
+          </div>
+      <div id="unmatched-bet2" class="tab-pane  ">
+        <div class="table-responsive">
+              </div>
+      </div>
+      <div id="deleted-bet2" class="tab-pane  ">
+        <div class="table-responsive">
+              </div>
+      </div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        var pathUrl = "https://bmwexch.com/admin/user-search-account-statement/23581a6aa5fdea56a5e6b9fb2ec1705bb040595a";
+    
+        $('.select-2-clientlist').select2({
+            ajax: {
+                url: pathUrl,
+                dataType: 'json',
+                processResults: function (data) {
+                    return {
+                        results: data.results
+                    };
+                }
+            },
+            minimumInputLength:3,
+            allowClear:true,
+            placeholder: {
+                id: "",
+                placeholder: "Leave blank to ..."
+            },
+        });
+    
+        $(".viewAllMatched").click(function(){
+           matchedBets(true,'1.199812143');
+        });
+    
+    
+    </script></div>
+    </div>
+    
+    <div class="modal-footer">
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    </div>

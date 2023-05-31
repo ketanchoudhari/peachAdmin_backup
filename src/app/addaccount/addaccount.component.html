@@ -1,0 +1,415 @@
+<!-- <app-header></app-header> -->
+<div class="col-md-12 main-container">
+  <div>
+    <div class="add-account">
+      <h2 class="m-b-20">Add Account</h2>
+      <form id="account_createForm">
+        <div class="row">
+          <div class="col-md-6 personal-detail">
+            <h4 class="m-b-20 col-md-12">Personal Detail</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="username">Client Name:</label>
+                  <input
+                    placeholder="Client Name"
+                    id="username"
+                    name="username"
+                    value=""
+                    onchange="if (!window.__cfRLUnblockHandlers) return false; checkUserName(this.value)"
+                    type="text"
+                    class="form-control"
+                    required=""
+                  />
+                  <span id="username-error" class="error" style="display: none"
+                    >Username already taken</span
+                  >
+                  <span id="username-required" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="password">User password:</label>
+                  <input
+                    maxlength="45"
+                    placeholder="Transaction Password"
+                    id="password"
+                    name="password"
+                    value=""
+                    type="password"
+                    class="form-control"
+                    required=""
+                  />
+                  <span id="password-error" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="password_confirmation">Retype password:</label>
+                  <input
+                    maxlength="45"
+                    placeholder="Retype Password"
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    value=""
+                    type="password"
+                    class="form-control"
+                    required=""
+                  />
+                  <span id="password_confirmation-error" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="fullname">Full Name:</label>
+                  <input
+                    placeholder="Full Name"
+                    name="fullname"
+                    id="fullname"
+                    value=""
+                    type="text"
+                    class="form-control"
+                    required=""
+                  />
+                  <span id="fullname-error" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="city">City:</label>
+                  <input
+                    maxlength="15"
+                    placeholder="City"
+                    name="city"
+                    id="city"
+                    value=""
+                    type="text"
+                    class="form-control"
+                  />
+                  <span id="city-error" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phone">Phone:</label>
+                  <input
+                    maxlength="10"
+                    placeholder="Phone"
+                    name="phone"
+                    id="phone"
+                    value=""
+                    type="number"
+                    class="form-control"
+                  />
+                  <span id="phone-error" class="error"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 account-detail">
+            <h4 class="m-b-20 col-md-12">Account Detail</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account_type">Acount Type:</label>
+                  <select
+                    name="accounttype"
+                    id="accounttype"
+                    class="form-control"
+                    required=""
+                  >
+                    <option value="">- Select Your A/c. Type -</option>
+                    <option value="Agent">{{member}}</option>
+                    <option value="User">User</option>
+                  </select>
+                  <span id="accounttype-error" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="credit_ref">Credit Reference:</label>
+                  <input
+                    class="form-control"
+                    placeholder="Credit Reference"
+                    name="credit_ref"
+                    id="credit_ref"
+                    value=""
+                    required=""
+                    type="number"
+                  />
+                  <span id="creit-error" class="error"></span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" id="exposer-limit">
+                  <label for="exposerlimit">Exposer Limit:</label>
+                  <input
+                    placeholder="Exposer Limit"
+                    id="exposerlimit"
+                    name="exposelimit"
+                    value=""
+                    type="number"
+                    class="form-control"
+                    required=""
+                  />
+                  <span id="exposerlimit-error" class="error"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row m-t-20" id="commission-div">
+          <div class="col-md-12">
+            <h4 class="m-b-20 col-md-12">Commission Settings</h4>
+            <table class="table table-striped table-bordered">
+              <tbody>
+                <tr>
+                  <td>Upline</td>
+                  <td id="taxcommition0-upline">0</td>
+                </tr>
+                <tr>
+                  <td>Downline</td>
+                  <td>
+                    <input
+                      name="commission[]"
+                      class="tdcommission"
+                      id="taxcommition0"
+                      placeholder="0"
+                      value=""
+                      disabled="disabled"
+                      type="number"
+                    />
+                    <span class="error"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Our</td>
+                  <td id="taxcommition0-d">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row m-t-20" id="partnership-div">
+          <div class="col-md-12">
+            <h4 class="m-b-20 col-md-12">Partnership</h4>
+            <table class="table table-striped table-bordered">
+              <tbody>
+                <tr>
+                  <td>Upline</td>
+                  <th id="taxpartnership0-upline">0</th>
+                </tr>
+                <tr>
+                  <td>Downline</td>
+                  <td>
+                    <input
+                      class="partnership"
+                      name="partnership[]"
+                      id="taxpartnership0"
+                      placeholder="0"
+                      value=""
+                      disabled="disabled"
+                      type="number"
+                    />
+                    <span class="error"></span>
+                    <input
+                      type="hidden"
+                      name="partnership_text[]"
+                      value="Cricket"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Our</td>
+                  <td id="taxpartnership0-d">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row m-t-20" id="min-max-bet-div">
+          <div class="col-md-12">
+            <h4 class="m-b-20 col-md-12">Min Max Bet</h4>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>
+                    <input
+                      type="hidden"
+                      name="minmaxGamename[0]"
+                      value="Cricket"
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="2">Min Bet</td>
+                  <td>100</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input
+                      id="minbettext0"
+                      class="minbet"
+                      name="minbettext[]"
+                      placeholder="100"
+                      value="100"
+                      type="number"
+                    />
+                    <span class="error"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Max Bet</td>
+                  <td>5000000</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input
+                      id="maxbettext0"
+                      class="maxbet"
+                      name="maxbettext[]"
+                      placeholder="5000000"
+                      value="5000000"
+                      type="number"
+                    />
+                    <span class="error"></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Delay</td>
+                  <td>5.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input
+                      id="delaytext0"
+                      class="delay"
+                      name="delaytext[]"
+                      placeholder="5.00"
+                      value="5.00"
+                      type="number"
+                    />
+                    <span class="error"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="col-md-12">
+            <div class="form-group col-md-3 float-right">
+              <label for="m_pwd">Transaction Password:</label>
+              <input
+                required=""
+                maxlength="15"
+                placeholder="Transaction Password"
+                name="m_pwd"
+                id="m_pwd"
+                value=""
+                type="password"
+                class="form-control"
+              />
+              <span id="m_pwd-error" class="error"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-t-20">
+          <div class="col-md-12">
+            <div class="float-right">
+              <input
+                type="hidden"
+                name="_token"
+                value="Z4nSKb2gKcEph3DxSwU53ZEf7xzPlL0rJ8G7buKZ"
+              />
+              <button class="btn btn-submit" (click)="run()" type="submit">
+                Create Account
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var csrf = $("meta[name=csrf-token]").attr("content");
+    var path = $("meta[name=path]").attr("content");
+    var token = $("meta[name=token]").attr("content");
+    function checkUserName(username) {
+      $.ajax({
+        url: path + "/check-username/" + token,
+        type: "post",
+        data: { username: username, _token: csrf },
+        success: function (data) {
+          if (data == 0) {
+            $("#username").val("");
+            $("#username").focus();
+            $("#username-error").show();
+          } else {
+            $("#username-error").hide();
+          }
+        },
+      });
+    }
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      $("#accounttype").on("change", function (event) {
+        if ($("#accounttype").val() != "User") {
+          $("#taxpartnership0").attr("required", true);
+          $("#taxpartnership0").attr("max", "0");
+          $("#taxpartnership0").attr("min", "0");
+
+          $("#taxcommition0").attr("required", true);
+          $("#taxcommition0").attr("max", "0");
+          $("#taxcommition0").attr("min", "0");
+        } else {
+          $("#minbettext0").attr("required", true);
+          $("#minbettext0").attr("max", "5000000");
+          $("#minbettext0").attr("min", "100");
+
+          $("#maxbettext0").attr("required", true);
+          $("#maxbettext0").attr("max", "5000000");
+          $("#maxbettext0").attr("min", "100");
+
+          $("#delaytext0").attr("required", true);
+          $("#delaytext0").attr("min", "5.00");
+        }
+        return;
+        event.preventDefault();
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    $(".partnership, .tdcommission").bind("keyup mouseup", function () {
+      var id = $(this).attr("id");
+      var upline = parseInt($("#" + id + "-upline").text());
+      if ($(this).val() == "" || $(this).val() < 0 || $(this).val() > upline) {
+        $(this).val("");
+      }
+      $("#" + id + "-d").text(upline - $(this).val());
+    });
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      $("#accounttype").change(function () {
+        acctype = $("#accounttype").val();
+        if (acctype == "User") {
+          $("#commission-div").find(":input").prop("disabled", "disabled");
+          $("#partnership-div").find(":input").prop("disabled", "disabled");
+          $("#min-max-bet-div").show();
+          $("#exposer-limit").show();
+        } else {
+          $("#commission-div").find(":input").prop("disabled", false);
+          $("#partnership-div").find(":input").prop("disabled", false);
+          $("#min-max-bet-div").hide();
+          $("#exposerlimit").val(0);
+          $("#exposer-limit").hide();
+        }
+      });
+    });
+  </script>
+</div>

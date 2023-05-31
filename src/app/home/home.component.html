@@ -1,0 +1,733 @@
+<div class="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="master-balance">
+        <div class="text-center" (click)="openbox()" data-bs-toggle="collapse" href="#master-balance-detail" role="button"
+          aria-expanded="false" aria-controls="collapseExample">
+          <span class="" [ngClass]="status ? 'far fa-arrow-alt-circle-up' : 'far fa-arrow-alt-circle-down'" id="user-balance" ></span>
+          <span class="far fa-arrow-alt-circle-up" style="display: none;"></span>
+        </div>
+        <div class="master-balance-detail m-t-20 collapse" id="master-balance-detail">
+          <ul class="row">
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Upper Level Credit Referance:</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Down level Occupy Balance:</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Down Level Credit Referance:</label>
+              <span class="text-right col-md-4">43</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Total Master Balance</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Upper Level:</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Down Level Profit/Loss :</label>
+              <span class="text-right col-md-4">43</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Available Balance:</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">Available Balance With Profit/Loss:</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+            <li class="col-md-4">
+              <label class="col-md-8 text-left">My Profit/Loss:</label>
+              <span class="text-right col-md-4">0</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 main-container">
+        <div class="listing-grid">
+          <div class="detail-row">
+            <h2 class="d-inline-block">Account List</h2>
+            <div class="float-right m-b-10">
+              <p class="text-right">
+                <a routerLink="/add-account" class="btn btn-diamond">Add Account </a>
+              </p>
+            </div>
+          </div>
+          <div class="mb-2 mt-2">
+            <ul class="nav nav-tabs client-list-nav" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#activeuser"
+                  type="button" role="tab" aria-controls="activeuser" aria-selected="true">Active Users</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#deactiveuser"
+                  type="button" role="tab" aria-controls="deactiveuser" aria-selected="false">Deactive Users</a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="activeuser" role="tabpanel" aria-labelledby="home-tab"
+              tabindex="0">
+              <div class="table-responsive data-table" id="">
+                <div id="clientListTable_wrapper" class="dataTables_wrapper no-footer">
+                  <div class="dt-buttons"> <button class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                      aria-controls="clientListTable" type="button"><span>PDF</span></button> <button
+                      class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="clientListTable"
+                      type="button"><span>Excel</span></button> </div>
+                  <div id="clientListTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                        class="form-control datatable-search" placeholder="" aria-controls="clientListTable"></label>
+                  </div>
+                  <table id="clientListTable" class="table table-striped table-bordered dataTable no-footer"
+                    style="width: 100%;" role="grid" aria-describedby="clientListTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="User Name: activate to sort column ascending" style="width: 104px;">User Name</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Credit Referance: activate to sort column ascending" style="width: 88px;">Credit
+                          Referance</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Balance: activate to sort column ascending" style="width: 45px;">Balance</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Client (P/L): activate to sort column ascending" style="width: 61px;">Client (P/L)
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Exposure: activate to sort column ascending" style="width: 51px;">Exposure</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Available Balance: activate to sort column ascending" style="width: 93px;">
+                          Available
+                          Balance</th>
+                        <th class="noExport sorting" tabindex="0" aria-controls="clientListTable" rowspan="1"
+                          colspan="1" aria-label="U St: activate to sort column ascending" style="width: 42px;">U St
+                        </th>
+                        <th class="noExport sorting" tabindex="0" aria-controls="clientListTable" rowspan="1"
+                          colspan="1" aria-label="B St: activate to sort column ascending" style="width: 42px;">B St
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Exposure Limit: activate to sort column ascending" style="width: 92px;">Exposure
+                          Limit
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Default %: activate to sort column ascending" style="width: 92px;">Default %</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Account Type: activate to sort column ascending" style="width: 92px;">Account Type
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Casino Total: activate to sort column ascending" style="width: 66px;">Casino Total
+                        </th>
+                        <th class="noExport sorting" tabindex="0" aria-controls="clientListTable" rowspan="1"
+                          colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 262px;">
+                          Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+
+                      <tr role="row" class="odd">
+                        <td></td>
+                        <td class="text-right"><b>43</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td class="text-right"><b>-43</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="width: 200px">
+                        </td>
+                        <td></td>
+                      </tr>
+                      <tr role="row" class="even">
+                        <td class="uname">
+                          <a href="javascript:void(0)" title="roman">01roman</a>
+                        </td>
+                        <td class="crf text-right">0</td>
+                        <td class="general text-right">0</td>
+                        <td class="crf text-right">0</td>
+                        <td class="expose text-right">0</td>
+                        <td class="abalance text-right">0</td>
+                        <td class="ustatus">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox"  checked="'checked'">
+                            <span class="checkmark"></span>
+                          </label>
+                        </td>
+                        <td class="bstatus">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" checked="'checked'">
+                            <span class="checkmark"></span>
+                          </label>
+                        </td>
+                        <td class="exlimit text-right">0</td>
+                        <td class="comm">
+                          <p>0</p>
+                        </td>
+                        <td class="atype">User</td>
+                        <td class="text-right">
+                          0.00
+                        </td>
+                        <td class="actions text-left">
+                          <a data-bs-toggle="modal" data-bs-target="#modal-deposit">D</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-withdraw">W</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-exposure-limit">L</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-credit">C</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-password">P</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-status">S</a>
+
+                        </td>
+                      </tr>
+
+
+                    </tbody>
+                  </table>
+                  <div class="dataTables_info" id="clientListTable_info" role="status" aria-live="polite">Showing 1 to
+                    1 of
+                   1 entries</div>
+                  <div class="dataTables_paginate paging_simple_numbers" id="clientListTable_paginate"><a
+                      class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                      aria-controls="clientListTable" data-dt-idx="0" tabindex="0"
+                      id="clientListTable_previous">Previous</a><span><a
+                        class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                        aria-controls="clientListTable" data-dt-idx="1" tabindex="0">1</a></span><a
+                      class="button btn btn-diamond primary_button datatable-pagebuttons next"
+                      aria-controls="clientListTable" data-dt-idx="4" tabindex="0" id="clientListTable_next">Next</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="deactiveuser" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+              <div class="table-responsive data-table">
+                <div id="clientListTable_wrapper" class="dataTables_wrapper no-footer">
+                  <div class="dt-buttons"> <button class="dt-button buttons-pdf buttons-html5" tabindex="0"
+                      aria-controls="clientListTable" type="button"><span>PDF</span></button> <button
+                      class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="clientListTable"
+                      type="button"><span>Excel</span></button> </div>
+                  <div id="clientListTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                        class="form-control datatable-search" placeholder="" aria-controls="clientListTable"></label>
+                  </div>
+                  <table id="clientListTable" class="table table-striped table-bordered dataTable no-footer"
+                    style="width: 100%;" role="grid" aria-describedby="clientListTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="User Name: activate to sort column ascending" style="width: 120px;">User Name</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Credit Referance: activate to sort column ascending" style="width: 96px;">Credit
+                          Referance</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Balance: activate to sort column ascending" style="width: 46px;">Balance</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Client (P/L): activate to sort column ascending" style="width: 67px;">Client (P/L)
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Exposure: activate to sort column ascending" style="width: 53px;">Exposure</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Available Balance: activate to sort column ascending" style="width: 102px;">
+                          Available Balance</th>
+                        <th class="noExport sorting" tabindex="0" aria-controls="clientListTable" rowspan="1"
+                          colspan="1" aria-label="U St: activate to sort column ascending" style="width: 42px;">U St
+                        </th>
+                        <th class="noExport sorting" tabindex="0" aria-controls="clientListTable" rowspan="1"
+                          colspan="1" aria-label="B St: activate to sort column ascending" style="width: 42px;">B St
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Exposure Limit: activate to sort column ascending" style="width: 92px;">Exposure
+                          Limit</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Default %: activate to sort column ascending" style="width: 92px;">Default %</th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Account Type: activate to sort column ascending" style="width: 92px;">Account Type
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="clientListTable" rowspan="1" colspan="1"
+                          aria-label="Casino Total: activate to sort column ascending" style="width: 72px;">Casino Total
+                        </th>
+                        <th class="noExport sorting" tabindex="0" aria-controls="clientListTable" rowspan="1"
+                          colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 262px;">
+                          Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr role="row" class="odd">
+                        <td></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td class="text-right"><b>0</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="width: 200px">
+                        </td>
+                        <td></td>
+                      </tr>
+                      
+                      <tr role="row" class="odd">
+                        <td class="uname">
+                          <a href="javascript:void(0)" title="kldsjfdsjjk">holmes001</a>
+                        </td>
+                        <td class="crf text-right">0</td>
+                        <td class="general text-right">0</td>
+                        <td class="crf text-right">0</td>
+                        <td class="expose text-right">0</td>
+                        <td class="abalance text-right">0</td>
+                        <td class="ustatus">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" >
+                            <span class="checkmark"></span>
+                          </label>
+                        </td>
+                        <td class="bstatus">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" >
+                            <span class="checkmark"></span>
+                          </label>
+                        </td>
+                        <td class="exlimit text-right">0</td>
+                        <td class="comm">
+                          <p>0</p>
+                        </td>
+                        <td class="atype">User</td>
+                        <td class="text-right">
+                          0.00
+                        </td>
+                        <td class="actions text-left">
+                          <a data-bs-toggle="modal" data-bs-target="#modal-deposit">D</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-withdraw">W</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-exposure-limit">L</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-credit">C</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-password">P</a>
+                          <a data-bs-toggle="modal" data-bs-target="#modal-status">S</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="dataTables_info" id="clientListTable_info" role="status" aria-live="polite">Showing 1 to 3
+                    of 3 entries</div>
+                  <div class="dataTables_paginate paging_simple_numbers" id="clientListTable_paginate"><a
+                      class="button btn btn-diamond primary_button datatable-pagebuttons previous disabled"
+                      aria-controls="clientListTable" data-dt-idx="0" tabindex="0"
+                      id="clientListTable_previous">Previous</a><span><a
+                        class="button btn btn-diamond primary_button datatable-pagebuttons current"
+                        aria-controls="clientListTable" data-dt-idx="1" tabindex="0">1</a></span><a
+                      class="button btn btn-diamond primary_button datatable-pagebuttons next disabled"
+                      aria-controls="clientListTable" data-dt-idx="2" tabindex="0" id="clientListTable_next">Next</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+
+        <div class="modal fade" id="modal-deposit">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Deposit</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+              <form id="DepositForm" method="post" autocomplete="off">
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label class="deposite-user-first">Loading..</label>
+                      </div>
+                      <div class="col-md-8">
+                        <span class="popup-box" id="deposite-first">Loading..</span>
+                        <span class="popup-box" id="deposite-first-diff"></span>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label class="deposite-user-second">Loading..</label>
+                      </div>
+                      <div class="col-md-8">
+                        <span class="popup-box" id="deposite-second">Loading..</span>
+                        <span class="popup-box" id="deposite-second-diff"></span>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Amount</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="text-right maxlength10" id="deposite-amount"
+                          onkeyup="if (!window.__cfRLUnblockHandlers) return false; changeSetDepositAmount()"
+                          required="" min="0" max="9999999999" step=".01">
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Remark</label>
+                      </div>
+                      <div class="col-md-8">
+                        <textarea value="" id="deposit-remark"></textarea>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Transaction Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" name="mpassword" id="mpassword" required="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <input type="hidden" name="uid" id="uid">
+                  <button type="button" class="btn btn-back" data-bs-dismiss="modal"><i
+                      class="fas fa-undo"></i>Back</button>
+                  <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-withdraw">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Withdraw</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+              <form action="" id="WithdrawForm" method="post" autocomplete="off"
+                onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label class="withdraw-user-first">Loading..</label>
+                      </div>
+                      <div class="col-md-8">
+                        <span class="popup-box" id="withdraw-first">Loading..</span>
+                        <span class="popup-box" id="withdraw-first-diff"></span>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label class="withdraw-user-second">Loading..</label>
+                      </div>
+                      <div class="col-md-8">
+                        <span class="popup-box" id="withdraw-second">Loading..</span>
+                        <span class="popup-box" id="withdraw-second-diff"></span>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Amount</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="text-right maxlength10" id="withdraw-amount"
+                          onkeyup="if (!window.__cfRLUnblockHandlers) return false; changeSetWithdrawAmount()" min="0"
+                          max="9999999999" step=".01">
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Remark</label>
+                      </div>
+                      <div class="col-md-8">
+                        <textarea value="" id="withdraw-remark"></textarea>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Transaction Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" name="" id="withdraw-mpassword" required="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <input type="hidden" name="uid" id="withdraw-uid">
+                  <button type="button" class="btn btn-back" data-bs-dismiss="modal"><i
+                      class="fas fa-undo"></i>Back</button>
+                  <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-exposure-limit">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Exposure Limit</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+              <form action="" id="LimitForm" method="post" autocomplete="off"
+                onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Old Limit</label>
+                      </div>
+                      <div class="col-md-8">
+                        <span class="popup-box popup-box-full" id="old-limit">Loading..</span>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>New Limit</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="text-right maxlength10" id="new-limit" required="" min="0"
+                          max="9999999999">
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Transaction Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" name="" id="mpasswprd-limit" required="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <input type="hidden" name="uid" id="limit-uid">
+                  <button type="button" class="btn btn-back" data-bs-dismiss="modal"><i
+                      class="fas fa-undo"></i>Back</button>
+                  <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-credit">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Credit</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+              <form action="" id="CreditForm" method="post" autocomplete="off"
+                onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Old Credit</label>
+                      </div>
+                      <div class="col-md-8">
+                        <span class="popup-box popup-box-full" id="old-credit">Loading..</span>
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>New Credit</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="text-right maxlength12" id="new-credit" required="" min="0"
+                          max="999999999999">
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Transaction Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" name="" id="credit-mpassword" required="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <input type="hidden" id="credit-uid">
+                  <button type="button" class="btn btn-back" data-bs-dismiss="modal"><i
+                      class="fas fa-undo"></i>Back</button>
+                  <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-password">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Password</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+
+              <div class="modal-body">
+                <form action="" id="PasswordForm" method="post" autocomplete="off"
+                  onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
+                  <div class="container-fluid">
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>New Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" class="text-right" id="new-password" required="" maxlength="20">
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Confirm Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" class="text-right" id="confirm-password" required="" maxlength="20">
+                      </div>
+                    </div>
+                    <div class="row m-b-20">
+                      <div class="col-md-4">
+                        <label>Transaction Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" name="" id="password-mpassword" required="" maxlength="20">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <input type="hidden" id="password-uid">
+                <button type="button" class="btn btn-back" data-bs-dismiss="modal"><i class="fas fa-undo"></i>Back</button>
+                <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-status">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Change Status</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+              <div class="m-t-20">
+                <div class="col-md-12">
+                  <div class="user-name">
+                    <p id="status-username">Loading...</p>
+                  </div>
+                  <div class="float-right user-status">
+                    <p class="text-success" id="user-active-diff-s" style="display: none">Active</p>
+                    <p class="text-danger" id="user-active-diff-f" style="display: none">Inactive</p>
+                  </div>
+                </div>
+              </div>
+              <ul class="status col-md-12 text-center m-t-20">
+                <div class="row">
+                  <li class="col-md-6">
+                    <h4>User Active</h4>
+                    <label class="switch">
+                      <input name="useractive" id="status-user-active-s" type="checkbox">
+                      <div id="s_usr" class="slider">
+                        <span>On</span>
+                        <span>Off</span>
+                      </div>
+                    </label>
+                  </li>
+                  <li class="col-md-6">
+                    <h4>Bet Active</h4>
+                    <label class="switch">
+                      <input name="useractive" id="status-bet-active-s" type="checkbox">
+                      <div id="s_bet" class="slider">
+                        <span>On</span>
+                        <span>Off</span>
+                      </div>
+                    </label>
+                  </li>
+                </div>
+              </ul>
+
+              <div class="modal-body m-t-20">
+                <form action="" id="StatusForm" method="post" autocomplete="off"
+                  onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
+                  <div class="container-fluid">
+                    <input name="useractive" id="status-bet-active" value="on" type="hidden">
+                    <input name="useractive" id="status-user-active" value="on" type="hidden">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Transaction Password</label>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="Password" name="" id="status-mpassword" required="">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <input type="hidden" id="status-uid">
+                <button type="button" class="btn btn-back" data-bs-dismiss="modal"><i class="fas fa-undo"></i>Back</button>
+                <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-casinogame">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Casino Game Details</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+              </div>
+
+              <div class="modal-body" id="casino-game-details">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

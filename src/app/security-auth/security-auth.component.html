@@ -1,0 +1,110 @@
+<!-- <app-header></app-header> -->
+
+
+<div class="col-md-12 main-container">
+    <div>
+        <div class="listing-grid">
+            <div id="app">
+                <div class="detail-row">
+                    <h2>Secure Auth Verification</h2>
+                    <div class="card-body security-auth">
+                        <div class="row justify-content-center mt-5 mb-5">
+                            <div class="col-6">
+                                <div class="setting-box"><span class="mr-3">Secure Auth Verification Status:</span>
+                                    <span class="badge badge-danger">Disabled</span>
+                                </div>
+                                <div class="mt-2 text-center" id="myTab" role="tablist">
+                                    <fieldset class="form-group">
+                                        <legend tabindex="-1" class="bv-no-focus-ring col-form-label pt-0">Please select
+                                            below option to enable secure auth
+                                            verification</legend>
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#home-tab-pane" type="button" role="tab"
+                                                    aria-controls="home-tab-pane" aria-selected="true">
+                                                    <div role="radiogroup" tabindex="-1"
+                                                        class="btn-group-toggle btn-group btn-group-lg bv-no-focus-ring">
+                                                        <label class="btn btn-outline-success btn-lg"><input
+                                                                id="radio-group-1__BV_option_0_" type="radio"
+                                                                name="auth-options" autocomplete="off" class=""
+                                                                value="1">Enable Using
+                                                            Mobile App</label>
+                                                    </div>
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                                    aria-controls="profile-tab-pane" aria-selected="false">
+                                                    <div role="radiogroup" tabindex="-1"
+                                                        class="btn-group-toggle btn-group btn-group-lg bv-no-focus-ring">
+                                                        <label class="btn btn-outline-success btn-lg"><input
+                                                                id="radio-group-1__BV_option_1_" type="radio"
+                                                                name="auth-options" autocomplete="off" class=""
+                                                                value="2"><span>Enable Using
+                                                                Telegram</span></label>
+                                                    </div>
+                                                </button>
+                                            </li>
+
+                                        </ul>
+                                    </fieldset>
+
+                                </div> <!----> <!---->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="text-center mt-3"><!---->
+            <h6 class="mb-2">Please enter below auth code in your 'Secure Auth Verification App'.</h6>
+            <div class="text-center row mt-2 mb-2 align-items-center">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <div class="verify-code d-inline-block">858306</div>
+                </div>
+            </div>
+            <h4 class="mb-2">If you haven't downloaded,<br> please download 'Secure Auth Verification App' from below
+                link. </h4>
+            <h6 class="mb-2">Using this app you will receive auth code during login authentication</h6> <a
+                href="https://dzm0kbaskt4pv.cloudfront.net/v2/static/img/SecureAuthApp-1.7.apk"
+                class="btn btn-download btn-lg mt-3">
+                <div class="row5 row align-items-center">
+                    <div class="col-4 text-center"><i class="fab fa-android"></i></div>
+                    <div class="col-8 text-left">
+                        <h4 class="mb-0">Download</h4>
+                        <div class="mt-0 dtext">on the android</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="text-center mt-3" id="seq"><!---->
+            <div>
+                <p class="mb-3">Please enter your Transaction Password to continue</p>
+                <form class="form-inline"><label for="inline-form-input-name" class="sr-only">Password</label> <input
+                        id="inline-form-input-name" type="password" placeholder="Enter Transaction Password"
+                        class="mb-2 mr-sm-2 mb-sm-0 form-control"> <button type="button" class="btn btn-primary">Get
+                        Connection Id</button></form> <!---->
+            </div>
+        </div>
+    </div>

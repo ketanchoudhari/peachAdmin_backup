@@ -1,0 +1,639 @@
+<div class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 main-container">
+                <div class="setting">
+                    <form method="post" [formGroup]="settingForm" (ngSubmit)="submit()" class="ajaxFormSubmit">
+                        <div class="listing-grid">
+                            <div class="detail-row">
+                                <h2>Settings</h2>
+                                <div class="m-t-20">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <div class="col-md-12 function-wrap">
+                                                    <div class=" row input-select">
+
+                                                        <ul class="input-list diaplayflex" >
+                                                            <li  class="selinput">
+                                                                <input autocomplete="off" type="radio" name="typeWise"
+                                                                    value="default" id="typeWiseDefault" id="same"
+                                                                    (change)="setTypeWise($event.target)"
+                                                                    formControlName="typeWise" />
+                                                                <label for="typeWiseDefault">Default</label>
+                                                                <input autocomplete="off" type="radio" name="typeWise"
+                                                                    value="sport" id="sport" id="ALl"
+                                                                    (change)="setTypeWise($event.target)"
+                                                                    formControlName="typeWise" />
+                                                                <label for="sport">SportWise</label>
+                                                                <input autocomplete="off" type="radio" name="typeWise"
+                                                                    value="competition" id="competition" id="ALl"
+                                                                    (change)="setTypeWise($event.target)"
+                                                                    formControlName="typeWise" />
+                                                                <label class="space"  for="competition">CompetitionWise</label>
+                                                                <input autocomplete="off" type="radio" name="typeWise"
+                                                                    value="event" id="event" id="ALl"
+                                                                    (change)="setTypeWise($event.target)"
+                                                                    formControlName="typeWise" />
+                                                                <label class="space"  for="event">EventWise</label>
+                                                                <input autocomplete="off" type="radio" name="typeWise"
+                                                                    value="market" id="market" id="ALl"
+                                                                    (change)="setTypeWise($event.target)"
+                                                                    formControlName="typeWise" />
+                                                                <label class="space"  for="market">MarketWise</label>
+                                                            </li>
+                                                        </ul>
+
+                                                       
+                                                        <ul class="input-list diaplayflex">
+                                                            <li  class="selinput">
+                                                                <input autocomplete="off" type="radio" value="0"
+                                                                    name="usersWise" id="usersWise" checked="true"
+                                                                    (change)="setUsersWise($event)"  id="same">
+                                                                <label for="usersWise" >Default</label>
+                                                                <ng-container *ngFor="let level of hierarchyList" >
+                                                                    <input  
+                                                                    #userWise
+                                                                      autocomplete="off"
+                                                                      type="radio"
+                                                                      name="usersWise"
+                                                                      value="{{ level.name }}"
+                                                                      id="{{ level.name }}"
+                                                                      (change)="setUsersWise($event, level.name + 'Select')"
+                                                                    />
+                                                                    <label   for="{{ level.name}}">{{ level.name |titlecase }} Wise</label>
+
+                                                                </ng-container>
+
+
+                                                        </ul>
+                                                         <ul class="input-list">
+                                                            <li>
+                                                                <ng-select autocomplete="off" name="value" formControlName="value"
+                                                                (change)="selectSport($event, 'teenpatti')" *ngIf="settingForm.value.typeWise === 'sport'">
+                                                                    *ngIf="settingForm.value.typeWise === 'sport'">
+                                                                    <ng-option value="0">Select Sport</ng-option>
+                                                                    <ng-option  *ngFor="let sport of sportsEventIds" [value]="sport.id">{{sport.name | titlecase}}
+                                                                    </ng-option>
+                                                                    <!-- <ng-option *ngFor="let table of casinoTablesList" [value]="table.tableName">{{table.tableName}} </ng-option> -->
+
+                                                                </ng-select>
+                                                                <ng-select autocomplete="off" name="value"
+                                                                    formControlName="value"
+                                                                    (change)="selectCompetition($event,'teenpatti')"
+                                                                    *ngIf="settingForm.value.typeWise === 'competition'">
+                                                                    <ng-option value="0">Select Competition</ng-option>
+                                                                    <ng-option *ngFor="let comp of competitionList"
+                                                                        [value]="comp.competitionId"> {{ comp.sportsName
+                                                                        | titlecase }} > {{ comp.competitionName
+                                                                        }}</ng-option>
+                                                                </ng-select>
+
+                                                                <ng-select id="selectEvent" class="ng-select" [multiple]="false" placeholder="Select Event"
+                                                                formControlName="value" (change)="selectEvent($event)" *ngIf="settingForm.value.typeWise === 'event'">
+                                                                    <ng-option value="0">Select Event</ng-option>
+                                                                    <ng-option *ngFor="let event of eventsList" [value]="event.eventId.toString()">{{ event.sportsName | titlecase }} > {{ event.eventName }}
+                                                                    </ng-option>
+                                                                </ng-select>
+
+                                                                <ng-select class="ng-select" autocomplete="off" name="value" formControlName="value"
+                                                                (change)="selectMarket($event, '')" *ngIf="settingForm.value.typeWise === 'market'">
+                                                                    <ng-option value="0">Select Market</ng-option>
+                                                                    <ng-option *ngFor="let market of marketList" [value]="market.gameId.toString()">{{ market.sportsName | titlecase }} > {{ market.eventName }} > {{ market.marketName }}
+                                                                    </ng-option>
+                                                                    <!-- <ng-option *ngFor="let market of casinoMarketsList" [value]="market.gameId.toString()">{{
+                                                            market.tableName }} > {{ market.marketName }}
+                                                          </ng-option> -->
+                                                                </ng-select>
+
+                                                                <ng-container *ngFor="let level of hierarchyList">
+                                                                    <ng-select autocomplete="off" name="userId"
+                                                                        formControlName="userId" class="user-wise"
+                                                                        id="{{ level?.name }}SelectInput"
+                                                                        style="display: none; box-shadow: none;"
+                                                                        (change)="selectUser($event)">
+                                                                        <ng-option value="0">Select {{ level.name |
+                                                                            titlecase }}</ng-option>
+                                                                        <ng-option [value]="u.userId.toString()"
+                                                                            *ngFor="let u of usersListMap[level.id]">{{ u.userName }}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </ng-container>
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row container settings-container">
+                                <div class="col-md-4 limitSetting" *ngIf="showLimitSettings"
+                                    formGroupName="limitSetting">
+                                    <h2 class="m-b-20 col-md-12">Limit Setting</h2>
+                                    <div class="grid">
+                                        <div formGroupName="exposureLimit" class="input-group">
+                                            <label for="exposure-limit">Exposure Limit: </label>
+                                            <input autocomplete="off" type="number" name="value" formControlName="value"
+                                                placeholder="Enter exposure limit" (input)="
+                                          limitSetting
+                                            .get('exposureLimit')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly />
+                                            <label class="form-check-label">
+                                                <input type="checkbox" tabindex="-1" formcontrolname="inherited"
+                                                    class="ng-valid ng-dirty ng-touched">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="bookmakingCommission" class="input-group">
+                                            <label for="">Bookmaking commission: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Bookmaking commission" (input)="
+                                          limitSetting
+                                            .get('bookmakingCommission')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited" class="ng-valid ng-dirty ng-touched">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="matchOddsCommission" class="input-group">
+                                            <label for="">Exchange Commission: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Match Odds Commission" (input)="
+                                          limitSetting
+                                            .get('matchOddsCommission')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="betDelay" class="input-group">
+                                            <label for="">Bet Delay[Second]: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Bet Delay" (input)="
+                                          limitSetting
+                                            .get('betDelay')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="noMinutesBeforeInplay" class="input-group">
+                                            <label for="">No. of Minutes Before Inplay: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter No. of Minutes Before Inplay" (input)="
+                                                limitSetting
+                                                  .get('noMinutesBeforeInplay')
+                                                  .get('inherited')
+                                                  .setValue(false)
+                                              " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 marketSetting" *ngIf="showMarketSettings"
+                                    formGroupName="marketSetting">
+                                    <h2 class="m-b-20 col-md-12">Market Setting</h2>
+                                    <div class="grid">
+                                        <div formGroupName="betMinRate" class="input-group">
+                                            <label for="">Bet Min Rate: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Bet Min Rate" (input)="
+                                          marketSetting
+                                            .get('betMinRate')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="betMaxRate" class="input-group">
+                                            <label for="">Bet Max Rate: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Bet Max Rate" (input)="
+                                          marketSetting
+                                            .get('betMaxRate')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="volMultiplier" class="input-group">
+                                            <label for="">Volume Multiplier: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Volume Multiplier" numberOnly (input)="
+                                          marketSetting
+                                            .get('volMultiplier')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="minStake" class="input-group">
+                                            <label for="">Min Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Min Stake" (input)="
+                                          marketSetting
+                                            .get('minStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="maxStake" class="input-group">
+                                            <label for="">Max Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Stake" (input)="
+                                          marketSetting
+                                            .get('maxStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="maxProfit" class="input-group">
+                                            <label for="">Max Profit: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Profit" (input)="
+                                          marketSetting
+                                            .get('maxProfit')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="maxLoss" class="input-group">
+                                            <label for="">Max Loss: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Loss" (input)="
+                                          marketSetting
+                                            .get('maxLoss')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div *ngIf="showPremiumSettings" formGroupName="premiumSetting">
+                                    <h2>Premium Settings</h2>
+                                    <div class="grid">
+                                      <div formGroupName="betDelay" class="input-group">
+                                        <label for="">BetDelay1: </label>
+                                        <input
+                                          autocomplete="off"
+                                          type="number"
+                                          formControlName="value"
+                                          placeholder="Enter Bet Delay"
+                                          (input)="premiumSetting.get('betDelay').get('inherited').setValue(false)"
+                                          numberOnly
+                                          allowNull='false'
+                                          tabindex=""
+                                        />
+                                        <input type="checkbox" tabindex="-1" formControlName="inherited" />
+                                      </div>
+                                      <div formGroupName="minStake" class="input-group">
+                                        <label for="">MinStake: </label>
+                                        <input
+                                          autocomplete="off"
+                                          type="number"
+                                          formControlName="value"
+                                          placeholder="Enter Min Stake"
+                                          (input)="premiumSetting.get('minStake').get('inherited').setValue(false)"
+                                          numberOnly
+                                          allowNull='false'
+                                          tabindex=""
+                                        />
+                                        <input type="checkbox" tabindex="-1" formControlName="inherited" />
+                                      </div>
+                                      <div formGroupName="maxStake" class="input-group">
+                                        <label for="">MaxStake: </label>
+                                        <input
+                                          autocomplete="off"
+                                          type="number"
+                                          formControlName="value"
+                                          placeholder="Enter Max Stake"
+                                          (input)="premiumSetting.get('maxStake').get('inherited').setValue(false)"
+                                          numberOnly
+                                          allowNull='false'
+                                          tabindex=""
+                                        />
+                                        <input type="checkbox" tabindex="-1" formControlName="inherited" />
+                                      </div>
+                          
+                                      <div formGroupName="maxProfit" class="input-group">
+                                        <label for="">MaxProfit: </label>
+                                        <input
+                                          autocomplete="off"
+                                          type="number"
+                                          formControlName="value"
+                                          placeholder="Enter Max Profit"
+                                          (input)="premiumSetting.get('maxProfit').get('inherited').setValue(false)"
+                                          numberOnly
+                                          allowNull='false'
+                                          tabindex=""
+                                        />
+                                        <input type="checkbox" tabindex="-1" formControlName="inherited" />
+                                      </div>
+                          
+                          
+                                    </div>
+                                  </div>
+                                <div class="col-md-4 sessionSetting" *ngIf="showSessionSettings"
+                                    formGroupName="sessionSetting">
+                                    <h2 class="m-b-20 col-md-12">Session Setting</h2>
+                                    <div class="grid">
+                                        <div formGroupName="minStake" class="input-group">
+                                            <label for="">Min Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Min Stake" (input)="
+                                          sessionSetting
+                                            .get('minStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="maxStake" class="input-group">
+                                            <label for="">Max Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Stake" (input)="
+                                          sessionSetting
+                                            .get('maxStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="maxLoss" class="input-group">
+                                            <label for="">Max Loss: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Loss" (input)="
+                                          sessionSetting
+                                            .get('maxLoss')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="maxProfit" class="input-group">
+                                            <label for="">Max Profit: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Profit" (input)="
+                                          sessionSetting
+                                            .get('maxProfit')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="perRateMaxStake" class="input-group">
+                                            <label for="">Per Rate Max Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Per Rate Max Stake" (input)="
+                                          sessionSetting
+                                            .get('perRateMaxStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="commission" class="input-group">
+                                            <label for="">Commission(%): </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Commission" (input)="
+                                          sessionSetting
+                                            .get('commission')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+
+                                        <div formGroupName="betDelay" class="input-group">
+                                            <label for="">Bet Delay: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter betDelay"
+                                                (input)="sessionSetting.get('betDelay').get('inherited').setValue(false)"
+                                                numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input type="checkbox" tabindex="-1" formControlName="inherited" />
+
+                                                <!-- <input class="form-check-input" type="checkbox" tabindex="-1" formControlName="inherited"> -->
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="showBookSettings" class="row container settings-container">
+                                <div formGroupName="bookSettings" class="col-md-12 bookSetting">
+                                    <h2 class="m-b-20 col-md-12">Bookmaking Setting</h2>
+                                    <div class="grid-bookmaking">
+                                        <div formGroupName="betDelay" class="input-group">
+                                            <label for="">Bet Delay: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Bet Delay" (input)="
+                                          marketSetting
+                                            .get('betDelay')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="minStake" class="input-group">
+                                            <label for="">Min Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Min Stake" (input)="
+                                          marketSetting
+                                            .get('minStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="maxStake" class="input-group">
+                                            <label for="">Max Stake: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Stake" (input)="
+                                          marketSetting
+                                            .get('maxStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        <div formGroupName="maxProfit" class="input-group">
+                                            <label for="">Max Profit: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Profit" (input)="
+                                          marketSetting
+                                            .get('maxProfit')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="maxLoss" class="input-group">
+                                            <label for="">Max Loss: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Loss" (input)="
+                                          marketSetting
+                                            .get('maxLoss')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div formGroupName="perRateMaxStake" class="input-group">
+                                            <label for="">Max Stake Per Rate: </label>
+                                            <input autocomplete="off" type="number" formControlName="value"
+                                                placeholder="Enter Max Stake Per Rate" (input)="
+                                          marketSetting
+                                            .get('perRateMaxStake')
+                                            .get('inherited')
+                                            .setValue(false)
+                                        " numberOnly tabindex="" />
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" tabindex="-1"
+                                                    formControlName="inherited">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn_box">
+                                <button type="submit" class="btn btn-diamond" style="margin-right: 5px">
+                                    Save
+                                </button>
+                                <button type="button" class="btn  btn-send btn-diamond">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

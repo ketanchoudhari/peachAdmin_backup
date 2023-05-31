@@ -1,0 +1,28 @@
+/* .custom-ng-select{
+    margin-top: 0px;
+    height: 40px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 11px;
+
+}
+.ng-select-bottom{
+    line-height: 25px;
+    padding-top: 8px;
+    background-color: #fff !important;
+    margin-right: 11px;
+    margin-left: -6px;
+    border-radius: 4px;
+}
+.ng-dropdown-panel {
+    box-sizing: border-box;
+    position: absolute;
+    opacity: 0;
+    background-color: #fff;
+    width: 100%;
+    z-index: 1050;
+    -webkit-overflow-scrolling: touch;
+} */
+.custom-ng-select{
+    height: 41px;
+}

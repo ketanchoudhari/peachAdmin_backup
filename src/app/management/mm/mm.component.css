@@ -1,0 +1,205 @@
+.dataTables_length select, .dataTables_filter input{
+  width: 100% !important;
+}
+/* #col-md-2 {
+margin-top: 40px;
+} */
+
+
+
+.cbox input {
+  display : none;
+}
+ .cbox label {
+  position: relative;
+  cursor: pointer;
+  display :block;
+  width: 57px;
+  margin-top: -7px;
+  margin-left: 8px;
+  height: 30px;
+  background: #cccccc;
+  border-radius: 50px;
+  transition: 300ms linear;
+}
+
+.cbox label:before {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  content: "";
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: left 300ms linear;
+}
+
+.cbox input:checked + label {
+  background: #000000;
+}
+
+ .cbox input:checked + label:before {
+  left: 31px;
+}
+
+
+.cbox1 input {
+  display : none;
+}
+ .cbox1 label {
+  position: relative;
+  cursor: pointer;
+  display :block;
+  width: 57px;
+  margin-top: -7px;
+  margin-left: 8px;
+  height: 30px;
+  background: #cccccc;
+  border-radius: 50px;
+  transition: 300ms linear;
+}
+
+.cbox1 label:before {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  content: "";
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: left 300ms linear;
+}
+
+.cbox1 input:checked + label {
+  background: #000000;
+}
+
+ .cbox1 input:checked + label:before {
+  left: 31px;
+}
+ .spacer{
+
+margin-right: 1419px;
+
+}
+
+
+
+a:not([href]):not([tabindex]){
+color: black !important;
+}
+
+.data-table table td a{
+  background: none !important;
+}
+
+
+@media screen and (max-width: 375px) {
+  #example_wrapper{
+    margin-top:13px
+  }
+  .btn-report{
+    margin-left: 181px;
+    margin-top: -73px;
+  width: 80px;  }
+  .dataTables_filter {
+    text-align: left !important;
+    margin-top: 11px
+}
+.web{
+  margin-top: 25px !important;
+  margin-left: 15px;
+}
+#col-md-3{
+  margin-left: 7.9em;
+  margin-top: -45px;
+}
+#col-md-2{
+  margin-left: 15px;
+}
+ .row{
+  display: flex;
+  flex-direction: column;
+}
+#col-md-2{
+  width: 155px !important;
+  display: flex;
+    flex-direction: column;
+}
+}
+@media screen and (max-width: 550px) {
+  #example_wrapper{
+    margin-top:13px
+  }
+  .btn-report{
+    /* margin-left: 170px; */
+  }
+  .dataTables_filter {
+    text-align: left !important;
+    margin-top: 11px
+}
+.web{
+  margin-top: 25px !important;
+  margin-left: 24px;
+}
+#col-md-3{
+  margin-left: 7.9em;
+  margin-top: -45px;
+}
+#col-md-2{
+  margin-left: 15px;
+}
+ .row{
+  display: flex;
+  flex-direction: column;
+}
+#col-md-2{
+  width: 155px !important;
+  display: flex;
+    flex-direction: column;
+}
+}
+
+.table-pt .expand-close {
+  width: 15px;
+  padding-left: 0;
+}
+.table01 .expand-open, .table01 .expand-close, .table-s .expand-open,
+.table-s.expand-close, .table_one,.expand-open, .table_one
+ .expand-close {
+  /* float: left; */
+  height: 15px;
+  padding-right: 0;
+  margin-right: 4px;
+}
+.table.dataTable, table.dataTable th, table.dataTable td{
+text-align: unset;
+}
+.expand-close > a:after {
+
+  font-family: FontAwesome;
+  content:"-";
+  padding-right: 5px;
+}
+.expand-close > a.collapsed:after {
+
+  content:"+";
+}
+.expand-close > a:hover,
+.expand-close > a:active,
+.expand-close > a:focus  {
+  text-decoration:none;
+}
+
+.market{
+  margin-left: 58px;
+}
+/* .btn{
+  float: right;
+} */

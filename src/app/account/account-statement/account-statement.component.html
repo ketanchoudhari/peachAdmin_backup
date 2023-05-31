@@ -1,0 +1,279 @@
+<div class="col-md-12 main-container">
+    <div>
+        <div class="listing-grid">
+            <div class="detail-row">
+                <h2>Account Statement</h2>
+                <div class="total_all box">
+                    <span>
+                      <label>Last:</label>
+                      <select name="limit" id="limit" (change)="selectNoRows($event.target)" >
+                        <option value="100">100 Txn</option>
+                        <option value="50">50 Txn</option>
+                        <option value="25">25 Txn</option>
+                        <option value="10" selected="">10 Txn</option>
+                        <option value="{{listCount}}">Full {{listCount}}</option>
+                      </select>
+                      <a id="getPL" (click)="getaccount()" style="color: #FFFFFF;" class="btn btn-diamond" >ShowDefault</a>
+
+                    </span>
+
+            </div>
+            <div class="table-responsive data-table" id="tbldata">
+                <div  id="example_wrapper" class="dataTables_wrapper no-footer">
+                    <div class="download-reports push" id="example_filter" class="dataTables_filter">
+                        <a class="btn buttons-pdf " title="Export Pdf"  (click)="exportPdf()">PDF</a>
+                        <a class="btn buttons-excel" title="Export Excel" (click)="exportExcel()">Excel</a>
+                        <!-- <label>Search:<input type="search" class="form-control datatable-search" placeholder=""
+                                aria-controls="example"></label> -->
+                    </div>
+                    <table id="example" class="table table-striped table-bordered datatable dataTable no-footer"
+                        style="width:100%; text-align:  center;" role="grid" aria-describedby="example_info">
+                        <thead >
+                            <tr role="row">
+                                <th role="row" width="12%"   class="align-L sort_asc"     data-order="asc" data-name="dateTime"
+                                    >Date/Time </th>
+                                <th role="row"  width="13%"  data-order="asc" data-name="amount" class="sort_asc">Deposit
+                                    by Upline</th>
+                                <th role="row" width="13%"   data-order="asc" data-name="amount" class="sort_asc">Deposit
+                                    to Downline </th>
+                                <th role="row" width="13%"   data-order="asc" data-name="amount" class="sort_asc">Withdraw
+                                    by Upline </th>
+                                <th role="row" width="13%"   data-order="asc" data-name="amount" class="sort_asc">Withdraw
+                                    from Downline </th> 
+                                <th role="row" width="13%"   data-order="asc" data-name="balance" class="sort_asc">Balance
+                                </th>
+                                <th role="row" width="13%"   data-order="asc" data-name="description" class="sort_asc">
+                                    Remark</th>
+                                <th role="row" width=""   data-order="asc" data-name="from" class="sort_asc">
+                                    From/To</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center ;">
+                            <tr *ngFor="let log of userLogs | paginate: { itemsPerPage: n, currentPage: p,totalItems:listCount } ">
+                                <td id="createDate" class="align-L">{{ log.dateTime | date: "yyyy-MM-dd HH:mm:ss":timeFormat }} </td>
+                                <td class="text-center">{{ log.type == transactionType.DEPOSIT_UPLINE ? (log.amount | indianCurrency) : "-" }}
+                                </td>
+                                <td class="text-center">{{ log.type == transactionType.DEPOSIT_DOWNLINE ? (log.amount | indianCurrency) : "-" }}
+                                </td>
+                                <td class="text-center"><span class="red">{{
+                                    log.type == transactionType.WITHDRAW_UPLINE ? (log.amount | indianCurrency) : "-"
+                                    }}</span></td>
+                                <td class="text-center"><span class="red">{{
+                                    log.type == transactionType.WITHDRAW_DOWNLINE ? (log.amount | indianCurrency) : "-"
+                                    }}</span></td>
+                                <td id="balance" class="text-center">{{ log.balance | indianCurrency }}</td>
+                                <td id="remark" class="text-center">{{ log.description }}</td>
+                                <td class="text-center"><span id="from">{{ log.from }}</span>
+                                  <!-- <i class="fa fa-arrow-right" aria-hidden="true"></i> -->
+                                  <img
+                                        src="assets/images/fomton.png" class="fromto">
+                                        <span id="to">{{ log.to }}</span>
+                                </td>
+                            </tr>
+                            <tr class="total">
+                                <td class="align-L">Total</td>
+                                <td id="_totalDepositbyUpline">
+                                  <span *ngIf="totalDepositUpline < 0; else upLinePLTotal" class="red">
+                                    ({{ totalDepositUpline | indianCurrency }})
+                                  </span>
+                                  <ng-template #upLinePLTotal>
+                                    <span>
+                                      {{ totalDepositUpline | indianCurrency }}
+                                    </span>
+                                  </ng-template>
+                                </td>
+                                <td id="_totalDepositbyDownline">
+                                  <span *ngIf="totalDepositDownline < 0; else downLinePLTotal" class="red">
+                                    ({{ totalDepositDownline  | indianCurrency}})
+                                  </span>
+                                  <ng-template #downLinePLTotal>
+                                    <span>
+                                      {{ totalDepositDownline | indianCurrency }}
+                                    </span>
+                                  </ng-template>
+                                </td>
+                                <td id="_totalWithdrawUpline">
+                                  <span *ngIf="totalWithdrawUpline < 0; else withdrawUpLinePLTotal" class="red">
+                                    ({{ totalWithdrawUpline | indianCurrency }})
+                                  </span>
+                                  <ng-template #withdrawUpLinePLTotal>
+                                    <span>
+                                      {{ totalWithdrawUpline | indianCurrency }}
+                                    </span>
+                                  </ng-template>
+                                </td>
+                                <td id="_totalWithdrawDownline">
+                                  <span *ngIf="totalWithdrawDownline < 0; else withdrawDownLinePLTotal" class="red">
+                                    ({{ totalWithdrawDownline | indianCurrency }})
+                                  </span>
+                                  <ng-template #withdrawDownLinePLTotal>
+                                    <span>  
+                                      {{ totalWithdrawDownline | indianCurrency }}
+                                    </span>
+                                  </ng-template>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+
+
+
+                        </tbody>
+                    </table>
+                    <!-- <pagination-template *ngIf="userLogs && listCount > n" #pagination="paginationApi" (pageChange)="pageChanged($event)">
+                        <ul id="pageNumberContent" class="pages">
+                          <li id="prev">
+                            <a *ngIf="pagination.isFirstPage(); else prevTemp" class="disable">{{Update?.Previous}}</a>
+                            <ng-template #prevTemp>
+                              <a (click)="pagination.previous()">{{Update?.Previous}}</a>
+                            </ng-template>
+                          </li>
+                          <ng-container *ngFor="let page of pagination.pages">
+                            <li id="pageNumber">
+                              <a (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() != page.value" class="btn">{{
+                                page.value }}
+                              </a>
+                              <a *ngIf="pagination.getCurrent() == page.value" class="select" style="pointer-events: none">{{ page.value
+                                }}
+                              </a>
+                            </li>
+                          </ng-container>
+                          <li id="next">
+                            <a *ngIf="pagination.isLastPage(); else nextTemp" class="disable">{{Update?.Next}}</a>
+                            <ng-template #nextTemp>
+                              <a (click)="pagination.next()">{{Update?.Next}}</a>
+                            </ng-template>
+                          </li>
+                        </ul>
+                      </pagination-template> -->
+                    <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 1 of 1
+                        entries</div> -->
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <pagination-template class="pagination" aria-label="Page navigation example"*ngIf="userLogs && listCount > n" #pagination="paginationApi" (pageChange)="pageChanged($event)">
+                            <ul class="pagination" id="pageNumberContent" class="pages">
+                                <li class="page-item" id="prev">
+                                    <a *ngIf="pagination.isFirstPage(); else prevTemp" id="previd" >Previous</a>
+                                    <ng-template #prevTemp>
+                                        <a class="page-link" id="previd"  (click)="pagination.previous()" style="color: white;">Previous</a>
+                                      </ng-template>
+                                    </li>
+                                    <ng-container *ngFor="let page of pagination.pages">
+                                <li class="page-item" id="pageNumber">
+                                    <a  class="page-link" (click)="pagination.setCurrent(page.value)" *ngIf="pagination.getCurrent() != page.value" class="btn">{{
+                                        page.value }}
+                                      </a>
+                                      <a  class="page-link" *ngIf="pagination.getCurrent() == page.value" class="select" style="pointer-events: none">{{ page.value
+                                        }}
+                                      </a>
+                                </li>
+                                </ng-container>
+                                <li id="next" class="page-item">
+                                    <a  class="page-link" class="button btn btn-diamond primary_button datatable-pagebuttons previous "*ngIf="pagination.isLastPage(); else nextTemp" id="previd" >Next</a>
+
+                                   </li>
+                                   <ng-template #nextTemp>
+                                    <a class="page-link" style="color: white;" (click)="pagination.next()" id="previd">Next</a>
+                                  </ng-template>
+                            </ul>
+                        </pagination-template>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+
+                    function loaddetail(marketid, tab, dserver) {
+                        if (marketid == 1) {
+                            alert("You can view casino report from Casino Report Panel.");
+                            return false;
+                        }
+                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                        $("div#divLoading").addClass('show');
+                        $("#marketidgamereport").val(marketid);
+                        if (tab == "all") {
+
+                            $("input[name='cnt-lgr'][value='all']").prop("checked", true);
+                        }
+                        var types = $("input[name='cnt-lgr']:checked").val();
+                        // alert(type);
+
+                        //$('input[id=cnt-lgr1]').attr('checked',true);
+                        $("#ReportMatchbettable").html('');
+                        $("#ttl_w").text("");
+                        $("#ttl_count").text("");
+                        $("#ttl_soda").text("");
+                        $.ajax({
+                            type: 'POST',
+                            url: "https://bmwexch.com/admin/report_match_bet/fc175fa39f8b379a2b116ff63e6853a36df0e8ff",
+                            data: {
+                                "marketid": marketid,
+                                "type": types,
+                                "uid": '00000000-0000-0000-0000-000000000000',
+                                "dserver": dserver
+                            },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.success == true) {
+                                    $("#ReportMatchbettable").html(response.html);
+                                    $("#ReportMatchbetHeading").html(response.heading);
+                                    $("#ReportMatchbetModal").modal("show");
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                }
+                                // var arr =  response.split("^^") 
+                                // if(typeof arr[0] !='undefined') { $("#ReportMatchbettable").html(arr[0]); }
+                                // if(typeof arr[1] !='undefined') { $("#ttl_w").text(" (Total Win Loss : " + arr[1]+")"); }
+                                //  if(typeof arr[2] !='undefined') { $("#ttl_count").text(" (Total Count : " + arr[2]+")"); }
+                                //  if(typeof arr[3] !='undefined') { $("#ttl_soda").text(" (Total Soda : " + arr[3]+")"); }
+
+                            },
+                            complete: function () {
+
+                                $("div#divLoading").removeClass('show');
+
+                            }
+                        }, 'Json');
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ReportMatchbetModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ReportMatchbetHeading">Client Ledger</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="">
+                                <form>
+                                    <input type="hidden" value="" id="marketidgamereport">
+                                    <div class="account-radio">
+                                        <input type="radio" value="all" name="cnt-lgr" id="cnt-lgr1"
+                                            class="clientledger" checked=""><label for="cnt-lgr1">All</label>
+                                        <input type="radio" value="matched" name="cnt-lgr" id="cnt-lgr2"
+                                            class="clientledger"><label for="cnt-lgr2">Matched</label>
+                                        <input type="radio" value="deleted" name="cnt-lgr" id="cnt-lgr3"
+                                            class="clientledger"><label for="cnt-lgr3">Deleted</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <table id="ReportMatchbettable" class="table table-bordered" border="0" cellpadding="0"
+                                cellspacing="0">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

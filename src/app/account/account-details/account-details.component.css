@@ -1,0 +1,64 @@
+div#example_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+}
+.col-md-12 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+div#nav-tab{
+    margin-top: 40px;
+    padding-left: 23px;
+
+}
+h1.accdet {
+    margin-top: 11px;
+    font-size: 1.6rem;
+    padding-left: 20px;
+}
+.text-right {
+    text-align: left!important;
+}
+a.page-link {
+    background: #1e2040;
+}
+
+a:not([href]):not([tabindex]) {
+    display: inherit;
+    color: black;
+    text-decoration: none;
+}
+/* .pages {
+    margin: 25px 0;
+} */
+.pages li {
+    display: inline;
+    list-style: none;
+    line-height: 50px;
+    margin-right: 5px;
+}
+ .pages a.select, .pages a.select{
+    color: white;
+    background: #1e2040;
+    border-radius: 8px;
+}
+.pages a {
+    display: inline;
+    font-weight: normal;
+    margin: 0;
+    padding: 10px;
+}
+.total_all.box {
+    padding: 35px 1px 36px 1px;
+}
+a#getPL {
+    margin-bottom: 8px;
+    margin-left: 21px;
+}
+#previd{
+    background-color: #1e2040;
+    color: white;
+    border-radius: 10px;
+
+}

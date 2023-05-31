@@ -1,0 +1,5 @@
+.login, .login .wrapper {
+    background-image: linear-gradient(var(#1e2040), var(#00a358));
+    height: 100vh;
+}
+

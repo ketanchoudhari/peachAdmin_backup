@@ -1,0 +1,33 @@
+a#getPL{
+    background: #444444;
+    color: white;
+    border-color: #000;
+    border-radius:4px;
+    margin-left:
+    10px ;
+    padding: 5px 10px;
+}
+a#getPL:hover{
+cursor: pointer;
+    color: black;
+    text-decoration: underline;
+}
+div#example_length{
+    margin-top: 8px;
+}
+a.btn.buttons-pdf{
+    padding-top: 6px;
+    float: left;
+}
+a.btn.buttons-excel{
+    padding-top: 6px;
+    float: left;
+}
+div#example_filter
+{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.pagination{
+    margin-top: 10px;
+}

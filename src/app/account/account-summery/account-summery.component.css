@@ -1,0 +1,43 @@
+.function-wrap {
+    position: relative;
+    padding: 30px 14px 0;
+    margin: 15px 30px 1px 30px;
+    background-color: #e0e6e6;
+    border-bottom: 1px solid #7e97a7;
+    margin-bottom: 10px;
+    display: flex;
+    flex-flow: column;
+}
+
+dl.banking-head.float-L{
+    display: flex;
+    font-size: 20px;
+}
+tr.tr1{
+    background: #ececec;
+}
+.banking-head dt {
+    padding-top: 5px;
+
+    font-size: 20px;
+    font-weight: 900;
+    color: #3b5160;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: -5px;
+    border-right: 1px solid #7e97a7 !important;
+}
+dd#yourBalance{
+    font-size: 20px;
+    padding-left: 10px;
+}
+.accsum{
+    padding-left: 33px;
+    margin-top: 18px;
+    font-size: 1.6rem;
+
+}
+.banking-head dd {
+    line-height: 26px;
+    vertical-align: top;
+}

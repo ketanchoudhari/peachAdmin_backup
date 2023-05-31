@@ -1,0 +1,32 @@
+#seq{
+    display: flex;
+    justify-content: center;
+}
+.mb-5, .my-5 {
+    margin-bottom: 0rem!important;
+}
+.verify-code.d-inline-block 
+    {
+    border: 1px solid #f2f2f2;
+    width: auto;
+    font-size: 45px;
+    line-height: 1;
+    color: #585858;
+    background: #e4e4e4;
+    padding: 10px;
+}
+.nav-tabs {
+    border-bottom: 0px solid #dee2e6;
+}
+.nav-tabs .nav-link {
+    border: none;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem 1px;
+}
+ul#myTab{
+    display: flex;
+    justify-content: center;
+    
+}
