@@ -84,11 +84,11 @@
                             
                             
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName)">D</button>
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#withdrawamount" data-bs-whatever="@getbootstrap">W</button>
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#ex-limit" data-bs-whatever="@getbootstrap">L</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId);selectTxType(user, 1,user.userId)">D</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId);selectTxType(user, 2,user.userId)">W</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#ex-limit" data-bs-whatever="@getbootstrap" (click)="getuserid(user.userId)">L</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#credit" data-bs-whatever="@getbootstrap">C</button>
-                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#password" data-bs-whatever="@getbootstrap">P</button>
+                            <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#password" data-bs-whatever="@getbootstrap" (click)="getuserid(user.userId)">P</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#status" data-bs-whatever="@getbootstrap"  (click)="openChangeStatusModal(user)">S</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#Casinodetails" data-bs-whatever="@getbootstrap">MORE</button>
                             
@@ -118,172 +118,112 @@
 
   
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div  class="modal-dialog">
-            <div  class="modal-content">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div  class="modal-dialog">
+           <div  class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Deposit</h4>
-                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
-                    <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
-                </div>
-                <form id="DepositForm" [formGroup]="transferForm" (ngSubmit)="transfer()">
+               <div class="modal-header">
+                   <h4 class="modal-title">{{titletext}}</h4>
+                   <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
+                   <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
+               </div>
+               <form id="DepositForm" [formGroup]="transferForm" (ngSubmit)="transfer()" >
 
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row m-b-20" >
-                                <div class="col-md-4">
-                                    <label class="deposite-user-first">{{userName}}</label>
-                                </div>
-                                <div class="col-md-8" style="display: flex;">
-                                    <span class="popup-box" id="deposite-second">0.0</span>
-                                    <span class="popup-box" id="deposite-second-diff">{{-amountInput}}</span>
-                                    <!-- <input [value]="-amountInput" class="popup-box" id="deposite-first"/> -->
-                                </div>
+                   <div class="modal-body">
+                       <div class="container-fluid">
+                           <div class="row m-b-20" >
+                               <div class="col-md-4">
+                                   <label class="deposite-user-first">{{userName}}</label>
+                               </div>
+                               <div class="col-md-8" style="display: flex;">
+                                   <span class="popup-box" id="deposite-second">0.0</span>
+                                   <span class="popup-box" id="deposite-second-diff">{{-amountInput}}</span>
+                                   <!-- <input [value]="-amountInput" class="popup-box" id="deposite-first"/> -->
+                               </div>
+                           </div>
+                           <div class="row m-b-20">
+                               <div class="col-md-4">
+                                   <label class="deposite-user-second">{{subUserName}}</label>
+                               </div>
+                               <div class="col-md-8">
+                                   <span class="popup-box" id="deposite-second">0.0</span>
+                                   <span class="popup-box" id="deposite-second-diff">{{amountInput}}</span>
+                               </div>
+                           </div>
+                           <div class="row m-b-20">
+                            <div class="col-md-4">
+                              <label>Amount</label>
                             </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label class="deposite-user-second">{{subUserName}}</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span class="popup-box" id="deposite-second">0.0</span>
-                                    <span class="popup-box" id="deposite-second-diff">{{amountInput}}</span>
-                                </div>
+                            <div class="col-md-8">
+                              <input
+                              name="amount"
+                              class=""
+                              formControlName="amount"
+                              type="number"
+                              formControlName="amount"
+                              placeholder="0"
+                              #amount
+                              numberOnly
+                              (input)="onInputChange($event)"
+                            />
+                            <div class="text-warning"   *ngIf="
+                            transferForm?.get('amount').invalid &&
+                            (transferForm?.get('amount').touched ||
+                            transferForm?.get('amount').dirty)
+                          "
+              
+                        >
+                        <div *ngIf="transferForm?.get('amount').hasError('required')">
+                          Amount is required
+                        </div>
                             </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Amount</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input name="amount" formControlName="amount" type="number" formControlName="amount" placeholder="0" #amount
-                                    numberOnly class="text-right maxlength10" id="deposite-amount" (input)="onInputChange($event)" >
-                                </div>
-                                <!-- <div class="text-warning"   *ngIf="
-                                transferForm?.get('amount').invalid &&
-                                (transferForm?.get('amount').touched ||
-                                transferForm?.get('amount').dirty)"> <div *ngIf="transferForm?.get('amount').hasError('required')">
-                                Amount is required
+                            </div>
+                         
+                          </div>
+                          <div class="row m-b-20">
+                            <div class="col-md-4">
+                              <label>Remark</label>
+                            </div>
+                            <div class="col-md-8">
+                              <textarea value="" id="deposit-remark" formControlName="remark"></textarea>
+              
+                            </div>
+                          </div>
+                          <div class="row m-b-20">
+                            <div class="col-md-4">
+                              <label>Transaction Password</label>
+                            </div>
+                            <div class="col-md-8">
+                              <input type="Password"  formControlName="password" />
+                              <div class="text-warning"   *ngIf="
+                              transferForm?.get('password').invalid &&
+                              (transferForm?.get('password').touched ||
+                              transferForm?.get('password').dirty)
+                            "
+                
+                          >
+                          <div *ngIf="transferForm?.get('password').hasError('required')">
+                            Password is required
+                          </div>
                               </div>
-                                  </div> -->
-                                  
                             </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Remark</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <textarea value="" id="deposit-remark" formControlName="remark"></textarea> 
-                                </div>
-                            </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Transaction Password</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="Password"  formControlName="password"  name="password" id="password" >
-                                    <!-- <div class="text-warning"   *ngIf="
-                                    transferForm?.get('password').invalid &&
-                                    (transferForm?.get('password').touched ||
-                                    transferForm?.get('password').dirty)">
-                                <div *ngIf="transferForm?.get('password').hasError('required')">
-                                  Password is required
-                                </div>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                          </div>
+                       </div>
+                   </div>
 
-                    <div class="modal-footer">
-                        <input type="hidden" name="uid" id="uid">
-                        <button type="button" class="btn btn-back" data-dismiss="modal" style="background-color: #00a358; color:#fff;"><i
-                                class="fas fa-undo" ></i>Back</button>
-                        <!-- <button type="submit" class="btn btn-submit" (click)="senddeposite()" style="background-color: #1e2040; color:#fff;">submit<i class="fas fa-sign-in-alt"></i></button>
-                         -->
-                         <button style="background-color: #1e2040; color:#fff;" type="submit" class="btn btn-submit" (click)="senddeposite()">
-                            submit<i class="fas fa-sign-in-alt"></i>
-                          </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                   <div class="modal-footer">
+                    <button style="background-color: #00a358; color:#fff;" type="button" class="btn btn-back" data-dismiss="modal">
+                      <i class="fas fa-undo"></i>Back
+                    </button>
+                    <button style="background-color: #1e2040; color:#fff;" type="submit" class="btn btn-submit" (click)="senddeposite()">
+                      submit<i class="fas fa-sign-in-alt"></i>
+                    </button>
+                  </div>
+               </form>
+           </div>
+       </div>
 
-    </div>
-
-
-    <div class="modal fade" id="withdrawamount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      
-        <div class="modal-dialog">
-            <div class="modal-content" >
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Withdraw</h4>
-                    <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
-                </div>
-                <form action="" id="WithdrawForm" method="post" autocomplete="off"
-                    onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
-
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label class="withdraw-user-first">Loading..</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span class="popup-box" id="withdraw-first">Loading..</span>
-                                    <span class="popup-box" id="withdraw-first-diff"></span>
-                                </div>
-                            </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label class="withdraw-user-second">Loading..</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span class="popup-box" id="withdraw-second">Loading..</span>
-                                    <span class="popup-box" id="withdraw-second-diff"></span>
-                                </div>
-                            </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Amount</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="number" class="text-right maxlength10" id="withdraw-amount"
-                                        onkeyup="if (!window.__cfRLUnblockHandlers) return false; changeSetWithdrawAmount()"
-                                        min="0" max="9999999999" step=".01">
-                                </div>
-                            </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Remark</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <textarea value="" id="withdraw-remark"></textarea>
-                                </div>
-                            </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Transaction Password</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="Password" name="" id="withdraw-mpassword" required="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <input type="hidden" name="uid" id="withdraw-uid">
-                        <button type="button" class="btn btn-back" data-dismiss="modal"><i
-                                class="fas fa-undo"></i>Back</button>
-                        <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
+   </div>
 
  <div class="modal fade" id="ex-limit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <!-- <div class="modal fade show" id="ex-limit" style="padding-right: 17px; display: block;"> -->
@@ -294,48 +234,78 @@
         <h4 class="modal-title">Exposure Limit</h4>
         <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
         </div>
-        <form action="" id="LimitForm" method="post" autocomplete="off" onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
-        
-        <div class="modal-body">
-        <div class="container-fluid">
-        <div class="row m-b-20">
-        <div class="col-md-4">
-        <label>Old Limit</label>
-        </div>
-        <div class="col-md-8">
-        <span class="popup-box popup-box-full" id="old-limit">0.00</span>
-        </div>
-        </div>
-        <div class="row m-b-20">
-        <div class="col-md-4">
-        <label>New Limit</label>
-        </div>
-        <div class="col-md-8">
-        <input type="number" class="text-right maxlength10" id="new-limit" required="" min="0" max="9999999999">
-        </div>
-        </div>
-        <div class="row m-b-20">
-        <div class="col-md-4">
-        <label>Transaction Password</label>
-        </div>
-        <div class="col-md-8">
-        <input type="Password" name="" id="mpasswprd-limit" required="">
-        </div>
-        </div>
-        </div>
-        </div>
-        
-        <div class="modal-footer">
-        <input type="hidden" name="uid" id="limit-uid" value="9033fd0c-4603-4e87-afdf-34bdc6c02a02">
-        <button type="button" class="btn btn-back" data-dismiss="modal"><i class="fas fa-undo"></i>Back</button>
-        <button type="submit" class="btn btn-submit">submit<i class="fas fa-sign-in-alt"></i></button>
-        </div>
+        <form   [formGroup]="changeExposureLimitForm"
+        (ngSubmit)="changeExposureLimit()"  autocomplete="off">
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row m-b-20">
+                <div class="col-md-4">
+                  <label>Old Limit</label>
+                </div>
+                <div class="col-md-8">
+                  <span class="popup-box popup-box-full" id="old-limit">0 - {{ currentUser?.exposureLimit | number: "0.2" }}</span>
+                </div>
+              </div>
+              <div class="row m-b-20">
+                <div class="col-md-4">
+                  <label>New Limit</label>
+                </div>
+                <div class="col-md-8">
+                  <input   formControlName="exposureLimit" class="text-right maxlength10" 
+                  />
+                  <div class="text-warning"   *ngIf="
+                  changeExposureLimitForm?.get('exposureLimit').invalid &&
+                  (changeExposureLimitForm?.get('exposureLimit').touched ||
+                  changeExposureLimitForm?.get('exposureLimit').dirty)
+                "
+    
+              >
+              <div *ngIf="changeExposureLimitForm?.get('exposureLimit').hasError('required')">
+                New Limit is required
+              </div>
+                  </div>
+               
+                    
+                    
+                </div>
+              </div>
+              <div class="row m-b-20">
+                <div class="col-md-4">
+                  <label>Transaction Password</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="Password"  formControlName="password" />
+                  <div class="text-warning"   *ngIf="
+                  changeExposureLimitForm?.get('password').invalid &&
+                  (changeExposureLimitForm?.get('password').touched ||
+                  changeExposureLimitForm?.get('password').dirty)
+                "
+    
+              >
+              <div *ngIf="changeExposureLimitForm?.get('password').hasError('required')">
+                Transaction Password is required
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <input type="hidden" name="uid" id="limit-uid" value="b2395f0d-dc13-4eb7-ae94-4c16590bb65a" />
+            <button type="button" class="btn btn-back" data-dismiss="modal" style="background-color: #00a358; color:#fff;">
+              <i class="fas fa-undo"></i>Back
+            </button>
+            <button type="submit" class="btn btn-submit" style="background-color: #1e2040; color:#fff;">
+              submit<i class="fas fa-sign-in-alt"></i>
+            </button>
+          </div>
         </form></div>
         
         </div>
         </div>
 
-    <div class="modal fade" id="credit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="credit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -385,10 +355,10 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
-    <div class="modal fade" id="password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -398,49 +368,112 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="" id="PasswordForm" method="post" autocomplete="off"
-                        onsubmit="if (!window.__cfRLUnblockHandlers) return false; return false">
+                    <form [formGroup]="changePassForm" (ngSubmit)="changePass()">
                         <div class="container-fluid">
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>New Password</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="Password" class="text-right" id="new-password" required=""
-                                        maxlength="20">
-                                </div>
+                          <div class="row m-b-20">
+                            <div class="col-md-4">
+                              <label>New Password</label>
                             </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Confirm Password</label>
+                            <div class="col-md-8">
+                              <input type="Password" formControlName="newpassword" class="" id="new-password" required="" maxlength="20"  />
+                              <span class="error">
+                                <div
+                                class="errors"
+                                *ngIf="
+                                  changePassForm.get('newpassword').invalid &&
+                                  (changePassForm.get('newpassword').touched ||
+                                    changePassForm.get('newpassword').dirty)
+                                "
+                              >
+                                <div *ngIf="changePassForm.get('newpassword').hasError('required')">
+                                  Password is required
                                 </div>
-                                <div class="col-md-8">
-                                    <input type="Password" class="text-right" id="confirm-password" required=""
-                                        maxlength="20">
+                    
+                                <div *ngIf="changePassForm.get('newpassword').errors['minlength']">
+                                  Password must be at least 8 characters
                                 </div>
+                    
+                                <div
+                                  class="error-text"
+                                  *ngIf="
+                                    changePassForm.get('newpassword').hasError('passwordStrength')
+                                  "
+                                >
+                                  {{ changePassForm.get("newpassword").errors["passwordStrength"] }}
+                                </div>
+                              </div>
+                              </span>
                             </div>
-                            <div class="row m-b-20">
-                                <div class="col-md-4">
-                                    <label>Transaction Password</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="Password" name="" id="password-mpassword" required="" maxlength="20">
-                                </div>
+                        
+                          </div>
+                          <div class="row m-b-20">
+                            <div class="col-md-4">
+                              <label>Confirm Password</label>
                             </div>
+                            <div class="col-md-8">
+                              <input type="Password"   formControlName="confirm" class="" id="confirm-password" required="" maxlength="20" />
+                              <span class="error">
+                                <div
+                                class="errors"
+                                *ngIf="
+                                  changePassForm.get('confirm').invalid &&
+                                  (changePassForm.get('confirm').touched ||
+                                    changePassForm.get('confirm').dirty)
+                                "
+                              >
+                                <div *ngIf="changePassForm.get('confirm').hasError('required')">
+                                  Confirm password is required
+                                </div>
+                              </div>
+                              <span
+                                *ngIf="
+                                  f?.get('confirm').invalid &&
+                                  f.get('confirm').hasError('isNotMatching')
+                                "
+                                class="error-text"
+                                >Passwords don't match
+                              </span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row m-b-20">
+                            <div class="col-md-4">
+                              <label>Transaction Password</label>
+                            </div>
+                            <div class="col-md-8">
+                              <input type="Password"  formControlName="password" name="" id="password-mpassword" required="" maxlength="20" />
+                              <span class="error">
+                                <div
+                                class="errors"
+                                *ngIf="
+                                  changePassForm.get('password').invalid &&
+                                  (changePassForm.get('password').touched ||
+                                    changePassForm.get('password').dirty)
+                                "
+                              >
+                                <div *ngIf="changePassForm.get('password').hasError('required')">
+                                  Transaction password is required
+                                </div>
+                              </div>
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                    </form>
+                      </form>
                 </div>
 
                 <div class="modal-footer">
-                    <input type="hidden" id="password-uid">
-                    <button type="button" class="btn btn-back" data-dismiss="modal"><i
-                            class="fas fa-undo" style="background-color: #00A358; color: white;"></i>Back</button>
-                    <button type="submit" class="btn btn-submit" style="background-color: #1E2040; color: white;">submit<i class="fas fa-sign-in-alt"></i></button>
-                </div>
+                    <button type="button" class="btn btn-back" data-dismiss="modal" style="background-color: #00a358; color:#fff;">
+                      <i class="fas fa-undo"></i>Back
+                    </button>
+                    <button type="submit" class="btn btn-submit" (click)="changePass()" style="background-color: #1e2040; color:#fff;">
+                      submit<i class="fas fa-sign-in-alt"></i>
+                    </button>
+                  </div>
 
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="modal fade" id="status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

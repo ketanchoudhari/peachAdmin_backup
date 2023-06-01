@@ -42,7 +42,7 @@ export class ActiveUsersComponent implements OnInit {
   totalBalance: number;
   userList: any = [];
   modalRef!: BsModalRef;
-  userid: number;
+  userid: number; //logedin userid
   result: any;
   user: User;
   statusUser?: User;
@@ -91,6 +91,8 @@ export class ActiveUsersComponent implements OnInit {
   formsDefaultVal = {};
   titletext: string;
   isChecked:any=this.userList.userStatus;
+  subUserId: any;
+  changeExposureLimitOpen: boolean = false;
 
   // userPassword: any;
   constructor(
@@ -112,42 +114,18 @@ export class ActiveUsersComponent implements OnInit {
     setTimeout(() => {
       this.formsDefaultVal = this.transferForm.value;
     });
+
     this.commonServices.apis$.subscribe((res) => {
       if (!environment.isProduction) {
         this.baseUrl = res.devAdminIp;
       } else {
         this.baseUrl = res.adminReport;
       }
+
       setTimeout(() => {
         this.userlist(this.userid);
       }, 1000);
 
-    });
-
-    this.userid = this.auth.currentUser.userId;
-    this.userName = this.auth.currentUser.userName;
-    this.commonServices.listAllHierarchy();
-
-    this.statusForm = this.formBuilder.group({
-      password: [, Validators.required],
-
-    });
-    this.creditRefForm = this.formBuilder.group({
-      password: [, Validators.required],
-
-      userId: [this.useridnew, Validators.required],
-      txnType: [3],
-      amount: [, Validators.required],
-
-    });
-    this.transferForm = this.formBuilder.group({
-      password: [, Validators.required],
-      userId: [this.useridnew, Validators.required],
-      txnType: [1],
-      amount: [, Validators.required],
-      key: [],
-      mainUserId: [this.currentUser.userId],
-      remark: []
     });
 
     this.changePassForm = this.formBuilder.group(
@@ -166,23 +144,19 @@ export class ActiveUsersComponent implements OnInit {
       },
       { validators: ActiveUsersComponent.confirm }
     );
-    this.changeShareForm = this.formBuilder.group({
-      userId: [, Validators.required],
-      sharePercent: [],
-      cricketSharing: [],
-      cricketFancySharing: [],
-      soccerSharing: [],
-      soccerGoalsSharing: [],
-      tennisSharing: [],
-      indianCasinoSharing: [],
+
+    this.userid = this.auth.currentUser.userId;
+    this.userName = this.auth.currentUser.userName;
+    this.commonServices.listAllHierarchy();
+
+    this.statusForm = this.formBuilder.group({
+      password: [, Validators.required],
+
     });
 
-    this.changeExposureLimitForm = this.formBuilder.group({
-      userId: [, Validators.required],
-      exposureLimit: [, Validators.required],
-      password: [, Validators.required],
-    });
-    this.selectedUid = this.route.parent.snapshot.params['userid'];
+
+  
+  
     this.auth.currentUser$.subscribe((currentUser) => {
       if (!!currentUser) {
         this.currentUser = currentUser;
@@ -201,94 +175,65 @@ export class ActiveUsersComponent implements OnInit {
         });
       }
     });
-
     
-    this.selectedUid = this.route.parent.snapshot.params['userid'];
-    this.currentUser = this.auth.currentUser;
-    this.shareUserService.user$.subscribe((user) => {
-      if (!!user) {
-        this.user = user;
-        // this.changePassForm.get('userId').setValue(user.userId);
-        // this.changeExposureLimitForm.get('userId').setValue(this.useridnew);
-        this.commonServices.hierarchyMap$.subscribe((list) => {
-          this.isClient = list.get(user.userType).name === 'client';
-          this.isWhitelabel = list.get(user.userType).name === 'whitelabel';
+    this.transferForm = this.formBuilder.group({
+      password: [, Validators.required],
+      userId: [this.useridnew, Validators.required],
+      txnType: [1],
+      amount: [, Validators.required],
+      key: [],
+      mainUserId: [this.currentUser.userId],
+      remark: []
+    });
+
+    this.changeExposureLimitForm = this.formBuilder.group({
+      userId: [, Validators.required],
+      exposureLimit: [, Validators.required],
+      password: [, Validators.required],
+    });
+    this.selectedUid = this.route.parent.snapshot.params['selectedUid'];
+    this.auth.currentUser$.subscribe((currentUser) => {
+      if (!!currentUser) {
+        this.currentUser = currentUser;
+        this.changePassForm.get('userId').setValue(this.useridnew);
+        this.changeExposureLimitForm.get('userId').setValue(this.useridnew);
+        this.commonServices.apis$.subscribe((res) => {
+          // this.listUser(false);
+          this.userService
+            .getUser(currentUser.userId)
+            .subscribe((res: GenericResponse<User[]>) => {
+              if (res.errorCode === 0) {
+                this.currentUserProfile = res.result[0];
+              }
+            });
+         
         });
       }
     });
 
-    this.userService.sharing$.subscribe((sharing) => {
-      this.sharingMap = sharing;
-    });
-
     this.currentUser = this.auth.currentUser;
-    this.searchField = new FormControl();
-    this.searchField.valueChanges
-      .pipe(debounceTime(400), distinctUntilChanged())
-      .subscribe((term) => {
-        this.userSearch.searchUserApi(term);
-      });
-    // console.log(this.currentUser);
-
     this.selectedUid = 0;
     this.userType = 0;
-    this.initUserRegForm();
-
-    this.addDefaultSharing();
-    this.addRollingCommission();
-    this.addAgentRollingCommission();
-    this.initDeleteUserForm();
-
-    this.userRegDefaultValues = this.userRegForm.value;
-
+   
   }
-
+// to show amount in other span
   onInputChange(event: any) {
     this.amountInput = event.target.value;
   }
   public onSave() {
     this.closebutton.nativeElement.click();
   }
-
   getuserid(u) {
-    this.userid = u;
-    localStorage.setItem('user', this.userid.toString());
-    console.log("", this.userid)
+    this.subUserId = u;
+    localStorage.setItem('user', this.subUserId.toString());
+    // console.log("", this.subUserId)
 
   }
-  initUserRegForm() {
-    this.userRegForm = this.formBuilder.group({
-      userName: ['', Validators.required],
-      password: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(8),
-          PasswordStrengthValidator,
-        ]),
-      ],
-      currency: [{ value: "", disabled: false }],
-      domain: [''],
-      fullName: [''],
-      creditRef: [0],
-      allowDomainAllocation: [0],
-      prepaid: [0],
-      allowRollingCommission: [0],
-      parentId: [this.currentUser.userId],
-      // sharePercent: [0, [Validators.required, Validators.max(100)]],
-    });
+  userDipo(userName,userId){
+    this.subUserName=userName;
+    this.subUserId=userId
   }
 
-  confirmDelete(user) {
-    this.selectedUser = user;
-    this.confirmDeleteModalOpen = true;
-    // });
-  }
-  initDeleteUserForm() {
-    this.deleteUserForm = this.formBuilder.group({
-      password: ['', Validators.required],
-    });
-  }
 
 
   userlist(userid: number) {
@@ -323,6 +268,119 @@ export class ActiveUsersComponent implements OnInit {
 
     }
   }
+  senddeposite(){
+    if (this.transferForm.invalid) {
+      // this.toastr.error("Invalid Input");
+      return;
+      
+    }
+
+
+  }
+  transfer() {
+    console.log("transfer sub userid",this.subUserId)
+    let data = {
+      password: this.transferForm.value.password,
+
+      users: ([{
+        userId: this.subUserId,
+        txnType: this.trntype,
+        amount: this.transferForm.value.amount,
+        key: 0,
+        mainUserId: this.currentUser.userId,
+        remark: this.transferForm.value.remark
+
+      }]),
+
+    }
+
+    this.bankingService.transfer(data)
+      .subscribe((res: GenericResponse<any>) => {
+        if (res && res.errorCode === 0) {
+         
+          res.result.forEach((user) => {
+            if (user.result === 'SUCCESS') {
+              this.userlist(this.userid);
+            
+              // this.toastr.success('Transaction Successful');
+              this.transferForm.reset();
+              this.onSave();
+            } else {
+              // this.toastr.error(`User: ${user.userName}; ${user.result}`);
+            }
+          });
+          this.commonServices.updateBalance();
+          this.validRow = 0;
+          this.searchTerm = "";
+        } else {
+          // this.toastr.error(res.errorDescription);
+        }
+        this.submitted = false;
+      });
+
+
+  }
+
+  selectTxType(user: User, type, u) {
+    setTimeout(() => {
+      user.selectDW = type;
+      this.userid = u;
+      this.trntype=type;
+      if(this.trntype==1){
+        this.titletext="Deposite"
+      }
+      else{
+        this.titletext="Withdrwal"
+      }
+      localStorage.setItem('user', this.userid.toString());
+      console.log("", this.userid)
+    });
+  }
+  getUser() {
+    this.userService
+      .getUser(this.user.userId)
+      .subscribe((res: GenericResponse<User[]>) => {
+        this.shareUserService.setUser(res.result[0]);
+      });
+  }
+  changeExposureLimit() {
+    if (this.changeExposureLimitForm.invalid) {
+      return;
+    }
+    if (this.changeExposureLimitForm) {
+      this.userService
+        .changePassword(this.changeExposureLimitForm.value)
+        .subscribe((res: GenericResponse<any>) => {
+          console.log(res);
+          if (res.errorCode === 0) {
+            // this.toastr.success('Exposure Limit Changed');
+            this.changeExposureLimitOpen = false;
+            this.changeExposureLimitForm.reset();
+            this.onSave();
+            this.getUser();
+          } else {
+            // this.toastr.error(res.errorDescription);
+          }
+        });
+    } else {
+      // this.toastr.error('Invalid Input');
+    }
+  }
+
+  get c() {
+    return this.changePassForm.get('confirm');
+  }
+
+  static confirm(formGroup: FormGroup) {
+    const newpassword = formGroup.get('newpassword');
+    const confirm = formGroup.get('confirm');
+
+    return confirm.dirty
+      ? !!newpassword.value && newpassword.value !== confirm.value
+        ? { isNotMatching: true }
+        : null
+      : null;
+  }
   changeStatus() {
     console.log("changeStatus function ", this.selectedStatus)
     if (this.statusForm.valid && this.selectedStatus !== null) {
@@ -351,219 +409,13 @@ export class ActiveUsersComponent implements OnInit {
     }
   }
 
-  changePass() {
-    if (this.changePassForm.invalid) {
-      return;
-    }
-    if (this.changePassForm) {
-      const { confirm, ...result } = this.changePassForm.value;
-      this.userService
-        .changePassword(result)
-        .subscribe((res: GenericResponse<any>) => {
-          console.log(res);
-          if (res?.errorCode === 0) {
-            // this.toastr.success('Password changed successfully');
-            this.changePassModalOpen = false;
-            this.f.controls['newpassword'].reset();
-            this.f.controls['password'].reset();
-            this.f.controls['confirm'].reset();
-            this.onSave();
-            // this.router.navigateByUrl('/login');
-            // $('#password').modal('hide');
-          } else {
-            console.log("some error")
-            // this.toastr.error(res.errorDescription);
-          }
-        });
-    } else {
-      if (this.f.errors && this.f.errors['isNotMatching']) {
-        // this.toastr.error("Passwords don't match");
-        return;
-      }
-      // this.toastr.error('Invalid Input');
-    }
-  }
-  static confirm(formGroup: FormGroup) {
-    const newpassword = formGroup.get('newpassword');
-    const confirm = formGroup.get('confirm');
-
-    return confirm.dirty
-      ? !!newpassword.value && newpassword.value !== confirm.value
-        ? { isNotMatching: true }
-        : null
-      : null;
-  }
-
-  get f() {
-    return this.changePassForm;
-  }
-  senddeposite() {
-    if (this.transferForm.invalid) {
-      console.log("senddeposite")
-      // this.toastr.error("Invalid Input");
-      return;
-
-    }
 
 
-  }
-  transfer() {
-    console.log("transfer func")
-    let data = {
-      password: this.transferForm.value.password,
-      
-      users: ([{
-        userId: this.userid,
-        txnType: this.trntype,
-        amount: this.transferForm.value.amount,
-        key: 0,
-        mainUserId: this.currentUser.userId,
-        remark: this.transferForm.value.remark
 
-      }]),
-
-    }
-console.log("form data ",  this.transferForm.value)
-    this.bankingService.transfer(data)
-      .subscribe((res: GenericResponse<any>) => {
-        if (res && res.errorCode === 0) {
-
-          res.result.forEach((user) => {
-            if (user.result === 'SUCCESS') {
-              this.userlist(this.userid);
-
-              // this.toastr.success('Transaction Successful');
-              this.transferForm.reset();
-              this.onSave();
-            } else {
-              // this.toastr.error(`User: ${user.userName}; ${user.result}`);
-            }
-          });
-          this.commonServices.updateBalance();
-          this.validRow = 0;
-          this.searchTerm = "";
-        } else {
-          // this.toastr.error(res.errorDescription);
-        }
-        this.submitted = false;
-      });
-
-
-  }
-  selectTxType(user: User, type, u) {
-    setTimeout(() => {
-      user.selectDW = type;
-      this.userid = u;
-      this.trntype = type;
-      if (this.trntype == 1) {
-        this.titletext = "Deposite"
-      }
-      else {
-        this.titletext = "Withdrwal"
-      }
-      localStorage.setItem('user', this.userid.toString());
-      console.log("", this.userid)
-    });
-  }
-  get usersArrayy() {
-    return this.transferForm.get('users') as FormArray;
-  }
-  timeouttransfer() {
-    this.submitted = true;
-    setTimeout(() => {
-      this.transfer();
-    }, 5000);
-  }
-
-  addDefaultSharing() {
-    this.userRegForm.addControl(
-      'sharePercent',
-      new FormControl(0, [
-        Validators.required,
-        Validators.min(0),
-        Validators.max(this.minMaxSharing),
-      ])
-    );
-    this.userRegForm.updateValueAndValidity();
-  }
-
-  addRollingCommission() {
-    let rollingComm = this.formBuilder.group({});
-    let currentUserRollingComm = this.currentUser?.rollingCommission;
-    rollingComm.addControl(
-      'fancy',
-      this.formBuilder.control(currentUserRollingComm?.fancy, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-    rollingComm.addControl(
-      'casino',
-      this.formBuilder.control(currentUserRollingComm?.casino, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-
-    rollingComm.addControl(
-      'exchange',
-      this.formBuilder.control(currentUserRollingComm?.exchange, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-
-    rollingComm.addControl(
-      'bookMaker',
-      this.formBuilder.control(currentUserRollingComm?.bookMaker, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-    this.userRegForm.addControl('rollingCommission', rollingComm);
-  }
-  addAgentRollingCommission() {
-    let rollingComm = this.formBuilder.group({});
-    let currentUserAgentRollingComm = this.currentUser?.agentRollingCommission;
-    rollingComm.addControl(
-      'fancy',
-      this.formBuilder.control(currentUserAgentRollingComm?.fancy, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-
-    rollingComm.addControl(
-      'casino',
-      this.formBuilder.control(currentUserAgentRollingComm?.casino, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-
-    rollingComm.addControl(
-      'exchange',
-      this.formBuilder.control(currentUserAgentRollingComm?.exchange, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-
-    rollingComm.addControl(
-      'bookMaker',
-      this.formBuilder.control(currentUserAgentRollingComm?.bookMaker, [
-        Validators.min(0),
-        Validators.max(100),
-      ])
-    );
-    this.userRegForm.addControl('agentRollingCommission', rollingComm);
-  }
   toggelDeposit() {
     this.depositShow = !this.depositShow;
   }
-  userDipo(userName){
-    this.subUserName=userName;
-  }
+ 
 
   //  openModal() {
   //   const modal = this.modalDeposit.nativeElement;
