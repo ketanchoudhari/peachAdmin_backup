@@ -11,70 +11,100 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="username">Client Name:</label>
-                  <input
-                    placeholder="Client Name"
-                    id="username"
-                    name="username"
-                    value=""
-                    onchange="if (!window.__cfRLUnblockHandlers) return false; checkUserName(this.value)"
-                    type="text"
-                    class="form-control"
-                    required=""
-                  />
-                  <span id="username-error" class="error" style="display: none"
-                    >Username already taken</span
-                  >
-                  <span id="username-required" class="error"></span>
+                  <input class="form-control" id="userName" type="text" placeholder="User Name" formControlName="userName"
+                  maxlength="20" appInputRestriction="noSpecialChars" required />
+
+                <span id="username-required" class="error">
+                  <div class="errors" *ngIf="
+                    userRegForm?.get('userName').invalid &&
+                    (userRegForm?.get('userName').touched ||
+                      userRegForm?.get('userName').dirty)
+                  ">
+                    <div *ngIf="userRegForm?.get('userName').hasError('required')">
+                      Username is required
+                    </div>
+                  </div>
+                </span>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="password">User password:</label>
-                  <input
-                    maxlength="45"
-                    placeholder="Transaction Password"
-                    id="password"
-                    name="password"
-                    value=""
-                    type="password"
-                    class="form-control"
-                    required=""
-                  />
-                  <span id="password-error" class="error"></span>
+                  <input class="form-control" id="userPassword" type="password" placeholder="Password"
+                    formControlName="password" maxlength="20" required />
+                  <span id="password-error" class="error">
+                    <div class="errors" *ngIf="
+                      userRegForm?.get('password').invalid &&
+                      (userRegForm?.get('password').touched ||
+                        userRegForm?.get('password').dirty)
+                    ">
+                      <div *ngIf="userRegForm?.get('password').hasError('required')">
+                        Password is required
+                      </div>
+  
+                      <div *ngIf="userRegForm?.get('password').errors['minlength']">
+                        Password must be at least 8 characters
+                      </div>
+  
+                      <div class="error-text" *ngIf="
+                        userRegForm?.get('password').hasError('passwordStrength')
+                      ">
+                        {{ userRegForm?.get("password").errors["passwordStrength"] }}
+                      </div>
+                    </div>
+                  </span>
                 </div>
               </div>
+              <ng-template [ngIf]="showCurrencyDropdown">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="username">Select Currency</label>
+                    <select class="form-control" id="currencyCode" type="" placeholder="Enter" formControlName="currency">
+                      <option value="">Select Currency</option>
+                      <option [ngValue]="currency" *ngFor="let currency of currencyMap">
+                        {{ currency.name }}
+                      </option>
+                    </select>
+                    <span id="username-error" class="error" style="display: none">Username already taken</span>
+                    <span id="username-required" class="error"></span>
+                  </div>
+                </div>
+              </ng-template>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="password_confirmation">Retype password:</label>
-                  <input
-                    maxlength="45"
-                    placeholder="Retype Password"
-                    id="password_confirmation"
-                    name="password_confirmation"
-                    value=""
-                    type="password"
-                    class="form-control"
-                    required=""
-                  />
-                  <span id="password_confirmation-error" class="error"></span>
+                  <label for="password_confirmation">Full Name:</label>
+                  <input class="form-control" id="firstName" type="text" placeholder="Full Name" maxlength="50"
+                  formControlName="fullName" />
+                <span id="fullname-error" class="error"></span>
                 </div>
               </div>
+              <ng-template [ngIf]="showDomainInput">
               <div class="col-md-6">
-                <div class="form-group">
-                  <label for="fullname">Full Name:</label>
-                  <input
-                    placeholder="Full Name"
-                    name="fullname"
-                    id="fullname"
-                    value=""
-                    type="text"
-                    class="form-control"
-                    required=""
-                  />
-                  <span id="fullname-error" class="error"></span>
+                <div class="form-group" >
+                  <label for="fullname">Domain Name:</label>
+                  <input class="form-control" id="firstName" type="text" placeholder="Enter" maxlength="50"
+                  formControlName="domain" />
+                <span id="fullname-error" class="error"></span>
                 </div>
               </div>
-              <div class="col-md-6">
+              </ng-template>
+              <div class="col-md-3">
+                <ng-template [ngIf]="showDomainCheckbox">
+                  <tr>
+                    <th>
+                      <label class="diffshare" for="allowDomainAllocation">Allow Domain Allocation
+                        <span></span>
+                      </label>
+                    </th>
+                    <td>
+                      <input id="domainAllocation" type="checkbox" placeholder="Enter"
+                        formControlName="allowDomainAllocation" />
+                    </td>
+                  </tr>
+                </ng-template>
+              </div>
+              
+              <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="city">City:</label>
                   <input
@@ -103,7 +133,7 @@
                   />
                   <span id="phone-error" class="error"></span>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-6 account-detail">
@@ -125,21 +155,24 @@
                   <span id="accounttype-error" class="error"></span>
                 </div>
               </div>
-              <div class="col-md-6">
+              <ng-template [ngIf]="!isClient && !isDifferentSharingOpen && !isprepaidOpen">
+              <div class="col-md-6" *ngIf="!isDifferentSharingOpen">
                 <div class="form-group">
-                  <label for="credit_ref">Credit Reference:</label>
-                  <input
-                    class="form-control"
-                    placeholder="Credit Reference"
-                    name="credit_ref"
-                    id="credit_ref"
-                    value=""
-                    required=""
-                    type="number"
-                  />
+                  <label for="credit_ref">Share(%):</label>
+                  <input class="form-control" placeholder="Enter" name="credit_ref" id="credit_ref" value="" max="100"
+                  type="number" formControlName="sharePercent" (keypress)="
+                  ($event.charCode == 8 || $event.charCode == 0
+                    ? null
+                    : ($event.charCode >= 48 && $event.charCode <= 57) ||
+                      $event.charCode === 13)
+                " numberRange />
+                <small style="display: block; color: #5f5f5f;text-align: right;">0 - {{ minMaxSharing }}%
+                </small>
                   <span id="creit-error" class="error"></span>
                 </div>
               </div>
+              </ng-template>
+
               <div class="col-md-6">
                 <div class="form-group" id="exposer-limit">
                   <label for="exposerlimit">Exposer Limit:</label>
@@ -158,165 +191,8 @@
             </div>
           </div>
         </div>
-        <div class="row m-t-20" id="commission-div">
-          <div class="col-md-12">
-            <h4 class="m-b-20 col-md-12">Commission Settings</h4>
-            <table class="table table-striped table-bordered">
-              <tbody>
-                <tr>
-                  <td>Upline</td>
-                  <td id="taxcommition0-upline">0</td>
-                </tr>
-                <tr>
-                  <td>Downline</td>
-                  <td>
-                    <input
-                      name="commission[]"
-                      class="tdcommission"
-                      id="taxcommition0"
-                      placeholder="0"
-                      value=""
-                      disabled="disabled"
-                      type="number"
-                    />
-                    <span class="error"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Our</td>
-                  <td id="taxcommition0-d">0</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row m-t-20" id="partnership-div">
-          <div class="col-md-12">
-            <h4 class="m-b-20 col-md-12">Partnership</h4>
-            <table class="table table-striped table-bordered">
-              <tbody>
-                <tr>
-                  <td>Upline</td>
-                  <th id="taxpartnership0-upline">0</th>
-                </tr>
-                <tr>
-                  <td>Downline</td>
-                  <td>
-                    <input
-                      class="partnership"
-                      name="partnership[]"
-                      id="taxpartnership0"
-                      placeholder="0"
-                      value=""
-                      disabled="disabled"
-                      type="number"
-                    />
-                    <span class="error"></span>
-                    <input
-                      type="hidden"
-                      name="partnership_text[]"
-                      value="Cricket"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Our</td>
-                  <td id="taxpartnership0-d">0</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row m-t-20" id="min-max-bet-div">
-          <div class="col-md-12">
-            <h4 class="m-b-20 col-md-12">Min Max Bet</h4>
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>
-                    <input
-                      type="hidden"
-                      name="minmaxGamename[0]"
-                      value="Cricket"
-                    />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td rowspan="2">Min Bet</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input
-                      id="minbettext0"
-                      class="minbet"
-                      name="minbettext[]"
-                      placeholder="100"
-                      value="100"
-                      type="number"
-                    />
-                    <span class="error"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td rowspan="2">Max Bet</td>
-                  <td>5000000</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input
-                      id="maxbettext0"
-                      class="maxbet"
-                      name="maxbettext[]"
-                      placeholder="5000000"
-                      value="5000000"
-                      type="number"
-                    />
-                    <span class="error"></span>
-                  </td>
-                </tr>
-                <tr>
-                  <td rowspan="2">Delay</td>
-                  <td>5.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input
-                      id="delaytext0"
-                      class="delay"
-                      name="delaytext[]"
-                      placeholder="5.00"
-                      value="5.00"
-                      type="number"
-                    />
-                    <span class="error"></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row m-t-20">
-          <div class="col-md-12">
-            <div class="form-group col-md-3 float-right">
-              <label for="m_pwd">Transaction Password:</label>
-              <input
-                required=""
-                maxlength="15"
-                placeholder="Transaction Password"
-                name="m_pwd"
-                id="m_pwd"
-                value=""
-                type="password"
-                class="form-control"
-              />
-              <span id="m_pwd-error" class="error"></span>
-            </div>
-          </div>
-        </div>
+
+
         <div class="row m-t-20">
           <div class="col-md-12">
             <div class="float-right">
@@ -334,82 +210,4 @@
       </form>
     </div>
   </div>
-  <script type="text/javascript">
-    var csrf = $("meta[name=csrf-token]").attr("content");
-    var path = $("meta[name=path]").attr("content");
-    var token = $("meta[name=token]").attr("content");
-    function checkUserName(username) {
-      $.ajax({
-        url: path + "/check-username/" + token,
-        type: "post",
-        data: { username: username, _token: csrf },
-        success: function (data) {
-          if (data == 0) {
-            $("#username").val("");
-            $("#username").focus();
-            $("#username-error").show();
-          } else {
-            $("#username-error").hide();
-          }
-        },
-      });
-    }
-  </script>
-  <script type="text/javascript">
-    $(function () {
-      $("#accounttype").on("change", function (event) {
-        if ($("#accounttype").val() != "User") {
-          $("#taxpartnership0").attr("required", true);
-          $("#taxpartnership0").attr("max", "0");
-          $("#taxpartnership0").attr("min", "0");
-
-          $("#taxcommition0").attr("required", true);
-          $("#taxcommition0").attr("max", "0");
-          $("#taxcommition0").attr("min", "0");
-        } else {
-          $("#minbettext0").attr("required", true);
-          $("#minbettext0").attr("max", "5000000");
-          $("#minbettext0").attr("min", "100");
-
-          $("#maxbettext0").attr("required", true);
-          $("#maxbettext0").attr("max", "5000000");
-          $("#maxbettext0").attr("min", "100");
-
-          $("#delaytext0").attr("required", true);
-          $("#delaytext0").attr("min", "5.00");
-        }
-        return;
-        event.preventDefault();
-      });
-    });
-  </script>
-  <script type="text/javascript">
-    $(".partnership, .tdcommission").bind("keyup mouseup", function () {
-      var id = $(this).attr("id");
-      var upline = parseInt($("#" + id + "-upline").text());
-      if ($(this).val() == "" || $(this).val() < 0 || $(this).val() > upline) {
-        $(this).val("");
-      }
-      $("#" + id + "-d").text(upline - $(this).val());
-    });
-  </script>
-  <script type="text/javascript">
-    $(function () {
-      $("#accounttype").change(function () {
-        acctype = $("#accounttype").val();
-        if (acctype == "User") {
-          $("#commission-div").find(":input").prop("disabled", "disabled");
-          $("#partnership-div").find(":input").prop("disabled", "disabled");
-          $("#min-max-bet-div").show();
-          $("#exposer-limit").show();
-        } else {
-          $("#commission-div").find(":input").prop("disabled", false);
-          $("#partnership-div").find(":input").prop("disabled", false);
-          $("#min-max-bet-div").hide();
-          $("#exposerlimit").val(0);
-          $("#exposer-limit").hide();
-        }
-      });
-    });
-  </script>
 </div>

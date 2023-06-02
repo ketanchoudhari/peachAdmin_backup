@@ -144,6 +144,16 @@ export class ActiveUsersComponent implements OnInit {
       },
       { validators: ActiveUsersComponent.confirm }
     );
+    this.changeShareForm = this.formBuilder.group({
+      userId: [, Validators.required],
+      sharePercent: [],
+      cricketSharing: [],
+      cricketFancySharing: [],
+      soccerSharing: [],
+      soccerGoalsSharing: [],
+      tennisSharing: [],
+      indianCasinoSharing: [],
+    });
 
     this.userid = this.auth.currentUser.userId;
     this.userName = this.auth.currentUser.userName;
@@ -155,12 +165,17 @@ export class ActiveUsersComponent implements OnInit {
     });
 
 
-  
+    this.changeExposureLimitForm = this.formBuilder.group({
+      userId: [, Validators.required],
+      exposureLimit: [, Validators.required],
+      password: [, Validators.required],
+    });
+    this.selectedUid = this.route.parent.snapshot.params['userid'];
   
     this.auth.currentUser$.subscribe((currentUser) => {
       if (!!currentUser) {
         this.currentUser = currentUser;
-        this.changePassForm.get('userId').setValue(this.useridnew);
+        this.changePassForm.get('subUserId').setValue(this.useridnew);
         this.changeExposureLimitForm.get('userId').setValue(this.useridnew);
         this.commonServices.apis$.subscribe((res) => {
           // this.listUser(false);
@@ -186,12 +201,7 @@ export class ActiveUsersComponent implements OnInit {
       remark: []
     });
 
-    this.changeExposureLimitForm = this.formBuilder.group({
-      userId: [, Validators.required],
-      exposureLimit: [, Validators.required],
-      password: [, Validators.required],
-    });
-    this.selectedUid = this.route.parent.snapshot.params['selectedUid'];
+  
     this.auth.currentUser$.subscribe((currentUser) => {
       if (!!currentUser) {
         this.currentUser = currentUser;
@@ -343,6 +353,57 @@ export class ActiveUsersComponent implements OnInit {
         this.shareUserService.setUser(res.result[0]);
       });
   }
+  get c() {
+    return this.changePassForm.get('confirm');
+  }
+
+  static confirm(formGroup: FormGroup) {
+    const newpassword = formGroup.get('newpassword');
+    const confirm = formGroup.get('confirm');
+
+    return confirm.dirty
+      ? !!newpassword.value && newpassword.value !== confirm.value
+        ? { isNotMatching: true }
+        : null
+      : null;
+  }
+  get f() {
+    return this.changePassForm;
+  }
+
+  changePass() {
+    console.log("change password")
+    if (this.changePassForm.invalid) {
+      return;
+    }
+    if (this.changePassForm) {
+      const { confirm, ...result } = this.changePassForm.value;
+      this.userService
+        .changePassword(result)
+        .subscribe((res: GenericResponse<any>) => {
+          console.log(res);
+          if (res?.errorCode === 0) {
+            // this.toastr.success('Password changed successfully');
+            this.changePassModalOpen = false;
+            this.f.controls['newpassword'].reset();
+            this.f.controls['password'].reset();
+            this.f.controls['confirm'].reset();
+            this.onSave();
+            // this.router.navigateByUrl('/login');
+            // $('#password').modal('hide');
+          } else {
+            // this.toastr.error(res.errorDescription);
+          }
+        });
+    } else {
+      if (this.f.errors && this.f.errors['isNotMatching']) {
+        // this.toastr.error("Passwords don't match");
+        return;
+      }
+      // this.toastr.error('Invalid Input');
+    }
+  }
+
   changeExposureLimit() {
     if (this.changeExposureLimitForm.invalid) {
       return;
@@ -367,20 +428,9 @@ export class ActiveUsersComponent implements OnInit {
     }
   }
 
-  get c() {
-    return this.changePassForm.get('confirm');
-  }
 
-  static confirm(formGroup: FormGroup) {
-    const newpassword = formGroup.get('newpassword');
-    const confirm = formGroup.get('confirm');
 
-    return confirm.dirty
-      ? !!newpassword.value && newpassword.value !== confirm.value
-        ? { isNotMatching: true }
-        : null
-      : null;
-  }
+  
   changeStatus() {
     console.log("changeStatus function ", this.selectedStatus)
     if (this.statusForm.valid && this.selectedStatus !== null) {
