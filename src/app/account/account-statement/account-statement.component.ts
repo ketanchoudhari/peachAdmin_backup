@@ -12,7 +12,7 @@ import { IUserLog } from '../models/user-log';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import * as html2pdf from 'html2pdf.js'
 
-  
+
 
 
 
@@ -23,7 +23,7 @@ import * as html2pdf from 'html2pdf.js'
   styleUrls: ['./account-statement.component.css']
 })
 export class AccountStatementComponent {
-  
+
   currentUser: CurrentUser;
   userLogs: any;
   listCount:number;
@@ -56,8 +56,8 @@ export class AccountStatementComponent {
     {id: 4, label: 'Option 4'},
     {id: 5, label: 'Option 5'}
   ];
-  
-  
+
+
   // fromDateOptions = {
   //   dateFormat: 'mm/dd/yyyy',
   //   minYear: 1900,
@@ -177,7 +177,7 @@ export class AccountStatementComponent {
     this.p = 1;
     this.n = +numberOfRows.value;
     this.getaccount();
-    
+
   }
 
   pageChanged(event:any){

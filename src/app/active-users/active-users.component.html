@@ -12,9 +12,9 @@
         </div>
         <div class="table-responsive data-table">
             <a class="btn buttons-pdf"
-                href="">PDF</a>
+            (click)="exportPdf()">PDF</a>
             <a class="btn buttons-excel"
-                href="">Excel</a>
+            (click)="exportExcel()">Excel</a>
             <div></div>
             <table id="clientListTable" class="table table-striped table-bordered dataTable no-footer"
                 style="width:100%">
@@ -44,8 +44,8 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                      
-                      
+
+
                         <td style="width: 200px">
                         </td>
                         <td></td>
@@ -55,7 +55,7 @@
                             <a href="javascript:void(0)" title="roman">{{user.userName}}</a>
                             <p ></p>
                         </td>
-              
+
                         <td class="crf text-right">{{user.creditRef}}</td>
                         <td class="crf text-right">{{user.balance}}</td>
                         <td class="exlimit text-right">{{user.availableBalance}}</td>
@@ -81,8 +81,8 @@
                             {{user.playerBalance}}
                         </td>
                         <td class="actions text-left">
-                            
-                            
+
+
                             <!-- Button trigger modal -->
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId);selectTxType(user, 1,user.userId)">D</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (click)="userDipo(user.userName,user.userId);selectTxType(user, 2,user.userId)">W</button>
@@ -91,12 +91,12 @@
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#password" data-bs-whatever="@getbootstrap" (click)="getuserid(user.userId)">P</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#status" data-bs-whatever="@getbootstrap"  (click)="openChangeStatusModal(user)">S</button>
                             <button type="button" class="btn-pop btn-primary" data-bs-toggle="modal" data-bs-target="#Casinodetails" data-bs-whatever="@getbootstrap">MORE</button>
-                            
-                            
+
+
 
                         </td>
-                   
-             
+
+
                 </tbody>
             </table>
         </div>
@@ -116,7 +116,7 @@
         </div>
     </div>
 
-  
+
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div  class="modal-dialog">
@@ -171,14 +171,14 @@
                             (transferForm?.get('amount').touched ||
                             transferForm?.get('amount').dirty)
                           "
-              
+
                         >
                         <div *ngIf="transferForm?.get('amount').hasError('required')">
                           Amount is required
                         </div>
                             </div>
                             </div>
-                         
+
                           </div>
                           <div class="row m-b-20">
                             <div class="col-md-4">
@@ -186,7 +186,7 @@
                             </div>
                             <div class="col-md-8">
                               <textarea value="" id="deposit-remark" formControlName="remark"></textarea>
-              
+
                             </div>
                           </div>
                           <div class="row m-b-20">
@@ -200,7 +200,7 @@
                               (transferForm?.get('password').touched ||
                               transferForm?.get('password').dirty)
                             "
-                
+
                           >
                           <div *ngIf="transferForm?.get('password').hasError('required')">
                             Password is required
@@ -229,7 +229,7 @@
     <!-- <div class="modal fade show" id="ex-limit" style="padding-right: 17px; display: block;"> -->
         <div class="modal-dialog">
         <div class="modal-content">
-        
+
         <div class="modal-header">
         <h4 class="modal-title">Exposure Limit</h4>
         <button type="button" class="close" #closebutton data-bs-dismiss="modal" >×</button>
@@ -251,22 +251,22 @@
                   <label>New Limit</label>
                 </div>
                 <div class="col-md-8">
-                  <input   formControlName="exposureLimit" class="text-right maxlength10" 
+                  <input   formControlName="exposureLimit" class="text-right maxlength10"
                   />
                   <div class="text-warning"   *ngIf="
                   changeExposureLimitForm?.get('exposureLimit').invalid &&
                   (changeExposureLimitForm?.get('exposureLimit').touched ||
                   changeExposureLimitForm?.get('exposureLimit').dirty)
                 "
-    
+
               >
               <div *ngIf="changeExposureLimitForm?.get('exposureLimit').hasError('required')">
                 New Limit is required
               </div>
                   </div>
-               
-                    
-                    
+
+
+
                 </div>
               </div>
               <div class="row m-b-20">
@@ -280,7 +280,7 @@
                   (changeExposureLimitForm?.get('password').touched ||
                   changeExposureLimitForm?.get('password').dirty)
                 "
-    
+
               >
               <div *ngIf="changeExposureLimitForm?.get('password').hasError('required')">
                 Transaction Password is required
@@ -290,7 +290,7 @@
               </div>
             </div>
           </div>
-  
+
           <div class="modal-footer">
             <input type="hidden" name="uid" id="limit-uid" value="b2395f0d-dc13-4eb7-ae94-4c16590bb65a" />
             <button type="button" class="btn btn-back" data-dismiss="modal" style="background-color: #00a358; color:#fff;">
@@ -301,7 +301,7 @@
             </button>
           </div>
         </form></div>
-        
+
         </div>
         </div>
 
@@ -388,11 +388,11 @@
                                 <div *ngIf="changePassForm.get('newpassword').hasError('required')">
                                   Password is required
                                 </div>
-                    
+
                                 <div *ngIf="changePassForm.get('newpassword').errors['minlength']">
                                   Password must be at least 8 characters
                                 </div>
-                    
+
                                 <div
                                   class="error-text"
                                   *ngIf="
@@ -404,7 +404,7 @@
                               </div>
                               </span>
                             </div>
-                        
+
                           </div>
                           <div class="row m-b-20">
                             <div class="col-md-4">
@@ -473,7 +473,7 @@
 
             </div>
         </div>
-    </div> 
+    </div>
 
 
     <div class="modal fade" id="status" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -562,8 +562,8 @@
                       </li>
                     </ul>
                   </div>
-                  
-                  
+
+
 
                 <div class="modal-body m-t-20">
                     <form id="StatusForm" [formGroup]="statusForm" (ngSubmit)="changeStatus()" >

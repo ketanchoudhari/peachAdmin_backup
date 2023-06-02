@@ -25,7 +25,9 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { ShareUserService } from '../services/share-user.service';
 import { ISharing } from '../shared/types/sharing';
 import { UserSearchService } from '../services/user-search.service';
-
+import * as html2pdf from 'html2pdf.js'
+import { ETransactionType } from '../shared/types/transactions-type';
+import { ExportService } from '../services/export-as.service';
 
 
 
@@ -93,6 +95,16 @@ export class ActiveUsersComponent implements OnInit {
   isChecked:any=this.userList.userStatus;
   subUserId: any;
   changeExposureLimitOpen: boolean = false;
+  userLogs: any;
+  transactionType = ETransactionType;
+  depositUpline: number;
+  depositDownline: number;
+  withdrawUpline: number;
+  withdrawDownline: number;
+  totalDepositDownline : any = 0;
+  totalDepositUpline : any = 0;
+  totalWithdrawUpline : any = 0;
+  totalWithdrawDownline : any = 0;
 
   // userPassword: any;
   constructor(
@@ -106,11 +118,12 @@ export class ActiveUsersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private shareUserService: ShareUserService,
     private userSearch: UserSearchService,
+    private exportService: ExportService,
   ) {
     this.useridnew = localStorage.getItem('user')
   }
   ngOnInit(): void {
- 
+
     setTimeout(() => {
       this.formsDefaultVal = this.transferForm.value;
     });
@@ -171,7 +184,7 @@ export class ActiveUsersComponent implements OnInit {
       password: [, Validators.required],
     });
     this.selectedUid = this.route.parent.snapshot.params['userid'];
-  
+
     this.auth.currentUser$.subscribe((currentUser) => {
       if (!!currentUser) {
         this.currentUser = currentUser;
@@ -190,7 +203,7 @@ export class ActiveUsersComponent implements OnInit {
         });
       }
     });
-    
+
     this.transferForm = this.formBuilder.group({
       password: [, Validators.required],
       userId: [this.useridnew, Validators.required],
@@ -201,7 +214,7 @@ export class ActiveUsersComponent implements OnInit {
       remark: []
     });
 
-  
+
     this.auth.currentUser$.subscribe((currentUser) => {
       if (!!currentUser) {
         this.currentUser = currentUser;
@@ -216,7 +229,7 @@ export class ActiveUsersComponent implements OnInit {
                 this.currentUserProfile = res.result[0];
               }
             });
-         
+
         });
       }
     });
@@ -224,7 +237,7 @@ export class ActiveUsersComponent implements OnInit {
     this.currentUser = this.auth.currentUser;
     this.selectedUid = 0;
     this.userType = 0;
-   
+
   }
 // to show amount in other span
   onInputChange(event: any) {
@@ -282,7 +295,7 @@ export class ActiveUsersComponent implements OnInit {
     if (this.transferForm.invalid) {
       // this.toastr.error("Invalid Input");
       return;
-      
+
     }
 
 
@@ -307,11 +320,11 @@ export class ActiveUsersComponent implements OnInit {
     this.bankingService.transfer(data)
       .subscribe((res: GenericResponse<any>) => {
         if (res && res.errorCode === 0) {
-         
+
           res.result.forEach((user) => {
             if (user.result === 'SUCCESS') {
               this.userlist(this.userid);
-            
+
               // this.toastr.success('Transaction Successful');
               this.transferForm.reset();
               this.onSave();
@@ -430,7 +443,7 @@ export class ActiveUsersComponent implements OnInit {
 
 
 
-  
+
   changeStatus() {
     console.log("changeStatus function ", this.selectedStatus)
     if (this.statusForm.valid && this.selectedStatus !== null) {
@@ -465,7 +478,7 @@ export class ActiveUsersComponent implements OnInit {
   toggelDeposit() {
     this.depositShow = !this.depositShow;
   }
- 
+
 
   //  openModal() {
   //   const modal = this.modalDeposit.nativeElement;
@@ -474,11 +487,90 @@ export class ActiveUsersComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
   isCheckboxChecked(userStatus): boolean {
-    
+
     if (userStatus==1) {
       return true;
   }
   return false;
-    
+
+  }
+
+  exportPdf() {
+    var element = document.getElementById('example');
+    console.log(this.exportPdf,"exe")
+    var opt = {
+      margin: 1,
+      filename: 'Activity Statement_'+new Date().toDateString(),
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+    html2pdf().from(element).set(opt).save();
+  }
+
+  udt;
+  edata = [];
+  exportExcel() {
+    this.udt = {
+      data: [
+        { A: 'Account Statement' }, // title
+        {
+          A: 'Date/Time',
+          B: 'Deposite By Upline',
+          C: 'Deposite By Downline',
+          D: 'Withdraw By Upline',
+          E: 'Withdraw By Downline',
+          F: 'Balance',
+          G: 'Remark',
+          H: 'From/TO'
+        }, // table header
+      ],
+      skipHeader: true,
+    };
+    this.userLogs.forEach((x) => {
+      if (x.type == this.transactionType.DEPOSIT_UPLINE) {
+        this.depositUpline = x.amount;
+      }
+      else {
+        this.depositUpline = 0;
+      }
+      if (x.type == this.transactionType.DEPOSIT_DOWNLINE) {
+        this.depositDownline = x.amount;
+      }
+      else {
+        this.depositDownline = 0;
+      }
+      if (x.type == this.transactionType.WITHDRAW_UPLINE) {
+        this.withdrawUpline = x.amount;
+      }
+      else {
+        this.withdrawUpline = 0;
+      }
+      if (x.type == this.transactionType.WITHDRAW_DOWNLINE) {
+        this.withdrawDownline = x.amount;
+      }
+      else {
+        this.withdrawDownline = 0;
+      }
+      this.udt.data.push({
+        A: x.dateTime,
+        B: this.depositUpline,
+        C: this.depositDownline,
+        D: this.withdrawUpline,
+        E: this.withdrawDownline,
+        F: x.balance,
+        G: x.description,
+        H: 'From ' + x.from + ' To ' + x.to
+      });
+    });
+    this.udt.data.push({
+      A: 'Total',
+      B: this.totalDepositUpline,
+      C: this.totalDepositDownline,
+      D: this.totalWithdrawUpline,
+      E: this.totalWithdrawDownline
+    });
+    this.edata.push(this.udt);
+    this.exportService.exportJsonToExcel(this.edata.slice(-1), 'Activity Statement_'+new Date().toDateString());
   }
 }
